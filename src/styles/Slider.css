@@ -1,0 +1,32 @@
+/* Hide slick's default arrows */
+.slick-prev,
+.slick-next {
+  display: none !important;
+}
+
+/* Style your custom arrows */
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  cursor: pointer;
+  font-size: 44px;
+  color: #0369a1;
+  background-color: transparent;
+  z-index: inherit;
+}
+
+.custom-prev {
+  left: -15px;
+  z-index: 99;
+}
+
+.custom-next {
+  right: -15px;
+  z-index: 99;
+}
+
+.custom-arrow:hover {
+  color: #035f90;
+}
