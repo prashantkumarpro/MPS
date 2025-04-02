@@ -5,8 +5,6 @@ import library from '../assets/LIBRARY.jpg'
 import MR from '../assets/MR.jpeg'
 import OFFICE from '../assets/OFFICE.jpg'
 import Playground from '../assets/Playground.jpeg'
-import Pr1 from '../assets/Pr1.jpeg'
-import Pr3 from '../assets/Pr3.jpeg'
 import T1 from '../assets/T1.jpeg'
 import T2 from '../assets/T2.jpeg'
 import T3 from '../assets/T3.jpeg'
@@ -16,6 +14,7 @@ import T6 from '../assets/T6.jpeg'
 import ClassFront from '../assets/ClassFront.jpg'
 import Slider from 'react-slick'
 import '../styles/Slider.css'
+import WhatsappBtn from './WhatsappBtn'
 
 const CustomPrevArrow = ({ onClick }) => (
   <div className='custom-arrow custom-prev' onClick={onClick}>
@@ -41,9 +40,7 @@ const Gallery = () => {
     T5,
     T6,
     Playground,
-    ClassFront,
-    Pr3,
-    Pr1
+    ClassFront
   ]
 
   const settings = {
@@ -52,7 +49,7 @@ const Gallery = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
     prevArrow: <CustomPrevArrow />, // Use custom previous arrow
     nextArrow: <CustomNextArrow />, // Use custom next arrow
@@ -90,6 +87,8 @@ const Gallery = () => {
           </div>
         ))}
       </Slider>
+
+      <WhatsappBtn />
     </section>
   )
 }
