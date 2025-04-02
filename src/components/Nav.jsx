@@ -22,13 +22,13 @@ const Nav = () => {
         </button>
 
         <ul
-          className={`h-screen md:h-auto flex flex-col md:flex-row items-end  py-10 gap-5 text-black md:text-white font-semibold text-xl absolute md:static bg-gray-50 md:bg-transparent  md:w-auto top-0 right-0 md:top-16   md:py-0 ${
+          className={`h-screen md:h-auto flex flex-col md:flex-row items-end  py-10 gap-5 text-black md:text-white font-light text-xl absolute md:static bg-gray-50 md:bg-transparent  md:w-auto top-0 right-0 md:top-16   md:py-0 ${
             isOpen ? 'block w-80 px-5 transition-all' : 'hidden md:flex'
           }`}
         >
           <li>
             <a href='#' className='hover:text-gray-300'>
-              Home
+              Home                     
             </a>
           </li>
           <li>
