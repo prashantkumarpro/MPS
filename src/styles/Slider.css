@@ -2,6 +2,7 @@
 .slick-prev,
 .slick-next {
   display: none !important;
+  z-index: inherit;
 }
 
 /* Style your custom arrows */
@@ -9,7 +10,6 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1000;
   cursor: pointer;
   font-size: 44px;
   color: #0369a1;
@@ -19,12 +19,12 @@
 
 .custom-prev {
   left: -15px;
-  z-index: 99;
+  z-index: 2;
 }
 
 .custom-next {
   right: -15px;
-  z-index: 99;
+  z-index: 2;
 }
 
 .custom-arrow:hover {
