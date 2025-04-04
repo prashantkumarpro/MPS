@@ -1,47 +1,32 @@
-import React, { useState } from 'react'
-// import '../styles/MobileBottomHeader.css'
-// import Social from './Social';
 import logo from '../assets/logo.png'
 
 const MobileBottomHeader = () => {
-  const [isMenu, setIsMenu] = useState(false)
-
-  const handleMenu = () => {
-    if (isMenu) {
-      setIsMenu(false)
-      const sideNav = document.querySelector('.sideNav')
-      sideNav.classList.remove('open')
-    } else {
-      setIsMenu(true)
-      const sideNav = document.querySelector('.sideNav')
-      sideNav.classList.add('open')
-    }
-  }
   return (
     <>
-      <div className='w-full flex items-center justify-between px-8 gap-5 fixed bottom-0 left-0 z-50 shadow-md bg-white '>
-        
-        <div className='flex items-center flex-col gap-1'>
+      <div className='w-full flex md:hidden items-center justify-between px-4  fixed bottom-0 left-0 z-50 shadow-lg bg-white '>
+        <a
+          href='tel:+919006756153'
+          className='flex items-center flex-col gap-0'
+        >
           <div className='text-xl text-[#0369A1]'>
-            {' '}
-            <i className='fa-solid fa-user-plus'></i>
+            <i className='ri-phone-fill'></i>
           </div>
-          <p>Phone</p>
-        </div>
+          <p className='text-sm text-gray-700'>Phone</p>
+        </a>
         <div className='flex items-center flex-col'>
-          <img src={`${logo}`} className='size-10' alt='MPS logo' />
-          Home
+          <img src={`${logo}`} className='size-8' alt='MPS logo' />
+          <p className='text-sm text-gray-700'>Home</p>
         </div>
-        <div className='flex items-center flex-col gap-1'>
+        <a
+          href='mailto:schoolmaxpublic@email.com?subject=Hello&body=I want to contact you'
+          className='flex items-center flex-col gap-0'
+        >
           <div className='text-xl text-[#0369A1]'>
-            {' '}
-            <i className='fa-solid fa-user-plus'></i>
+            <i className='ri-mail-line'></i>
           </div>
-          <p>WhatsApp</p>
-        </div>
+          <p className='text-sm text-gray-700'>Email</p>
+        </a>
       </div>
-
-      
     </>
   )
 }

@@ -4,7 +4,7 @@ import './App.css'
 import Welcome from './components/Welcome'
 import Gallery from './components/Gallery'
 import MobileBottomHeader from './components/MobileBottomHeder'
-
+import Footer from './pages/Footer'
 function App () {
   return (
     <>
@@ -12,6 +12,7 @@ function App () {
       <Home />
       <Welcome />
       <Gallery />
+      <Footer />
       <MobileBottomHeader />
     </>
   )
