@@ -5,12 +5,14 @@ import Welcome from './components/Welcome'
 import Gallery from './components/Gallery'
 import MobileBottomHeader from './components/MobileBottomHeder'
 import Footer from './pages/Footer'
+import MarqueeDownload from './components/MarqueeDownload '
 function App () {
   return (
     <>
       <Header />
       <Home />
       <Welcome />
+      <MarqueeDownload />
       <Gallery />
       <Footer />
       <MobileBottomHeader />
