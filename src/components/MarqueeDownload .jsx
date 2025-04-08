@@ -5,11 +5,9 @@ const MarqueeDownload = () => {
   const marqueeRef = useRef(null)
   const handlePause = () => {
     marqueeRef.current.style.animationPlayState = 'paused' // Pause scrolling
-    console.log(marqueeRef)
   }
   const handleResume = () => {
     marqueeRef.current.style.animationPlayState = 'running' // Resume scrolling
-    console.log(marqueeRef)
   }
 
   return (
