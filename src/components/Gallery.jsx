@@ -14,7 +14,7 @@ import T6 from '../assets/T6.png'
 import ClassFront from '../assets/ClassFront.jpg'
 import Slider from 'react-slick'
 import '../styles/Slider.css'
-import WhatsappBtn from './WhatsappBtn'
+
 
 const CustomPrevArrow = ({ onClick }) => (
   <div className='custom-arrow custom-prev' onClick={onClick}>
@@ -70,25 +70,25 @@ const Gallery = () => {
   }
 
   return (
-    <section className='py-16 px-4'>
-      <h2 className='text-3xl font-bold text-center text-gray-800 mb-8'>
+    <section className='py-8 px-3 sm:px-4'>
+      <h2 className='text-3xl px-2 sm:text-center font-bold text-left text-gray-800 mb-12'>
         Gallery
       </h2>
       <Slider {...settings}>
         {images.map((src, index) => (
           <div key={index} className='px-2'>
-            <div className='overflow-hidden h-80 rounded-lg shadow-lg '>
+            <div className='overflow-hidden h-80 rounded-md shadow-lg'>
               <img
                 src={src}
                 alt={`Gallery Image ${index + 1}`}
-                className='w-full h-full object-cover  rounded-lg transform transition duration-300 ease-in-out hover:scale-105'
+                className='w-full h-full object-cover  rounded-md transform transition duration-300 ease-in-out hover:scale-105'
               />
             </div>
           </div>
         ))}
       </Slider>
 
-      <WhatsappBtn />
+      {/* <WhatsappBtn /> */}
     </section>
   )
 }
