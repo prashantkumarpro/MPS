@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <>
-      <div className='m-auto mt-36 md:mt-40 px-2 py-8 md:text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-slate-600 font-extrabold leading-tight md:px-4'>
+      <div className='m-auto  px-2 py-8 md:text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-slate-600 font-extrabold leading-tight md:px-4'>
         <h3 className='text-center md:text-left'>
           "MPS, Mohanpur – A place where little minds grow big dreams!"
         </h3>
