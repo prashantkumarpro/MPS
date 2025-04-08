@@ -10,9 +10,9 @@ function App () {
   return (
     <>
       <Header />
+      <MarqueeDownload />
       <Home />
       <Welcome />
-      <MarqueeDownload />
       <Gallery />
       <Footer />
       <MobileBottomHeader />
