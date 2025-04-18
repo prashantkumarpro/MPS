@@ -87,8 +87,6 @@ const Gallery = () => {
           </div>
         ))}
       </Slider>
-
-      {/* <WhatsappBtn /> */}
     </section>
   )
 }
