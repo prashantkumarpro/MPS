@@ -2,7 +2,7 @@ import React from 'react'
 
 const Welcome = () => {
   return (
-    <div className='w-full pb-8 px-4 md:p-8'>
+    <div id='about' className='w-full pb-8 px-4 md:p-8'>
       <div className='bg-white m-auto shadow-lg rounded-md px-2 md:px-8 py-10 w-full max-w-7xl'>
         <h1 className='text-[25px] md:text-4xl font-bold text-sky-700 mb-4'>
           Welcome to Our School

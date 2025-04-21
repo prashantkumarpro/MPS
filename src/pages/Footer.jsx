@@ -70,7 +70,7 @@ const Footer = () => {
           <div className='mt-4 space-y-3'>
             <p className='flex items-center space-x-3'>
               <FaPhoneAlt className='text-[#0369A1]' />
-              <span>+91-xxxxxxxxxx</span>
+              <span>+91-6206293108</span>
             </p>
             <p className='flex items-center space-x-3'>
               <FaEnvelope className='text-[#0369A1]' />

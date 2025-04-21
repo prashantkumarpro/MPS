@@ -27,37 +27,37 @@ const Nav = () => {
           }`}
         >
           <li>
-            <a href='#' className='hover:text-gray-300'>
+            <a href='#home' className='hover:text-gray-300'>
               Home                     
             </a>
           </li>
           <li>
-            <a href='#' className='hover:text-gray-300'>
+            <a href='#about' className='hover:text-gray-300'>
               The School
             </a>
           </li>
           <li>
-            <a href='#' className='hover:text-gray-300'>
+            <a href='#contact' className='hover:text-gray-300'>
               Admission
             </a>
           </li>
           <li>
-            <a href='#' className='hover:text-gray-300'>
+            <a href='#result' className='hover:text-gray-300'>
               Result
             </a>
           </li>
           <li>
-            <a href='#' className='hover:text-gray-300'>
+            <a href='#notice' className='hover:text-gray-300'>
               Notice
             </a>
           </li>
           <li>
-            <a href='#' className='hover:text-gray-300'>
+            <a href='#members' className='hover:text-gray-300'>
               Members
             </a>
           </li>
           <li>
-            <a href='#' className='hover:text-gray-300'>
+            <a href='#contact' className='hover:text-gray-300'>
               Contact
             </a>
           </li>

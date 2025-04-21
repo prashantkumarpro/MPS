@@ -70,7 +70,9 @@ const Gallery = () => {
   }
 
   return (
-    <section className='py-8 px-3 sm:px-4'>
+    <section 
+    id='gallery'
+    className='py-8 px-3 sm:px-4'>
       <h2 className='text-3xl px-2 sm:text-center font-bold text-left text-gray-800 mb-12'>
         Gallery
       </h2>

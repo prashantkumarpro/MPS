@@ -11,7 +11,7 @@ const MarqueeDownload = () => {
   }
 
   return (
-    <div
+    <div id='notice'
       className='w-full flex flex-col mt-24 md:mt-48 overflow-hidden bg-gray-100 py-4'
       onMouseEnter={handlePause}
       onMouseLeave={handleResume}
