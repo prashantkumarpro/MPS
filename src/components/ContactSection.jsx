@@ -44,10 +44,13 @@ const ContactSection = () => {
             <p>schoolmaxpublic@gmail.com</p>
           </div>
 
-          <div className='mt-8'>
+          <div className='flex felx-col items-start '>
+            <div></div>
+            <div></div>
+            <div></div>
             <a
-              href='tel:+916283552938'
-              className='bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-semibold'
+              href='tel:+91-6283552938'
+              className='my-2 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-semibold'
             >
               QUICK ENQUIRY
             </a>

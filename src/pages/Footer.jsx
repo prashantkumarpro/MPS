@@ -103,7 +103,7 @@ const Footer = () => {
           <FaWhatsapp />
         </a>
         <a
-          href='tel:+6206293108'
+          href='tel:+916206293108'
           className='bg-blue-500 p-3 rounded-full text-white text-xl shadow-lg hover:bg-blue-600 transition'
         >
           <FaPhoneAlt />
