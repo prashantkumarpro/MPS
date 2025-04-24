@@ -8,6 +8,7 @@ import { LiaChalkboardTeacherSolid } from 'react-icons/lia'
 import { TfiGallery } from 'react-icons/tfi'
 import { GrGallery } from 'react-icons/gr'
 import { useState } from 'react'
+import { Link } from 'react-router'
 
 const MobileBottomHeader = () => {
   const [activeTab, setActiveTab] = useState('home')
@@ -15,8 +16,8 @@ const MobileBottomHeader = () => {
     <>
       <div className='w-full flex md:hidden items-center justify-between px-4 py-2 fixed bottom-0 left-0 z-50 shadow-lg bg-white'>
         {/* Home */}
-        <a
-          href='#home'
+        <Link
+          to='/'
           onClick={() => setActiveTab('home')}
           className='flex items-center flex-col gap-0'
         >
@@ -24,7 +25,7 @@ const MobileBottomHeader = () => {
             {activeTab === 'home' ? <RiHome3Fill /> : <RiHome3Line />}
           </div>
           <p className='text-[8px] text-gray-700'>Home</p>
-        </a>
+        </Link>
 
         {/* Teachers */}
         <a
@@ -59,8 +60,8 @@ const MobileBottomHeader = () => {
         </a>
 
         {/* Gellary */}
-        <a
-          href='#gallery'
+        <Link
+          to='allgallery'
           onClick={() => setActiveTab('gallery')}
           className='flex items-center flex-col gap-0'
         >
@@ -68,7 +69,7 @@ const MobileBottomHeader = () => {
             {activeTab === 'gallery' ? <GrGallery /> : <TfiGallery />}
           </div>
           <p className='text-[8px] text-gray-700'>Gellary</p>
-        </a>
+        </Link>
       </div>
     </>
   )

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router'
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,9 +28,9 @@ const Nav = () => {
           }`}
         >
           <li>
-            <a href='#home' className='hover:text-gray-300'>
+            <Link to='/' className='hover:text-gray-300'>
               Home                     
-            </a>
+            </Link>
           </li>
           <li>
             <a href='#about' className='hover:text-gray-300'>

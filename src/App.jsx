@@ -1,24 +1,19 @@
-import Header from './components/Header'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import Home from './pages/Home'
 import './App.css'
-import Welcome from './components/Welcome'
-import Gallery from './components/Gallery'
-import MobileBottomHeader from './components/MobileBottomHeder'
-import Footer from './pages/Footer'
-import MarqueeDownload from './components/MarqueeDownload '
-import ContactSection from './components/ContactSection'
+import AllGallery from './pages/AllGallery'
+import Root from './Root'
+
 function App () {
   return (
-    <div className='scroll-smooth'>
-      <Header />
-      <MarqueeDownload />
-      <Home />
-      <Welcome />
-      <Gallery />
-      <ContactSection />
-      <Footer />
-      <MobileBottomHeader />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Root />}>
+          <Route index element={<Home />} />
+          <Route path='/allgallery' element={<AllGallery />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

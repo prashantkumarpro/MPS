@@ -14,7 +14,7 @@ import T6 from '../assets/T6.png'
 import ClassFront from '../assets/ClassFront.jpg'
 import Slider from 'react-slick'
 import '../styles/Slider.css'
-
+import { Link } from 'react-router'
 
 const CustomPrevArrow = ({ onClick }) => (
   <div className='custom-arrow custom-prev' onClick={onClick}>
@@ -70,11 +70,12 @@ const Gallery = () => {
   }
 
   return (
-    <section 
-    id='gallery'
-    className='py-8 px-3 sm:px-4'>
-      <h2 className='text-3xl px-2 sm:text-center font-bold text-left text-gray-800 mb-12'>
-        Gallery
+    <section id='gallery' className='py-8 px-3 sm:px-4'>
+      <h2 className='text-3xl px-2 font-light text-left text-gray-800 mb-12'>
+        Gallery{' '}
+        <Link to='allgallery' className='text-sm text-blue-600'>
+          veiw more
+        </Link>
       </h2>
       <Slider {...settings}>
         {images.map((src, index) => (

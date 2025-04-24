@@ -1,10 +1,17 @@
 import React from 'react'
 import Slider from 'react-slick'
+import Welcome from '../components/Welcome'
+import Gallery from '../components/Gallery'
+import MobileBottomHeader from '../components/MobileBottomHeder'
+import Footer from '../pages/Footer'
+import MarqueeDownload from '../components/MarqueeDownload '
+import ContactSection from '../components/ContactSection'
 import OFFICE from '../assets/OFFICE.jpg'
 import Playground from '../assets/Playground.jpeg'
 import classFront from '../assets/ClassFront.jpg'
+
 const Home = () => {
-  const images = [ classFront, OFFICE, Playground]
+  const images = [classFront, OFFICE, Playground]
   const settings = {
     dots: true,
     infinite: true,
@@ -12,13 +19,16 @@ const Home = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
-  
+    autoplaySpeed: 3000
   }
 
   return (
     <>
-      <div id='home' className='m-auto  px-4 py-8 md:text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-slate-600 font-extrabold leading-tight md:px-4'>
+      <MarqueeDownload />
+      <div
+        id='home'
+        className='m-auto  px-4 py-8 md:text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-slate-600 font-extrabold leading-tight md:px-4'
+      >
         <h3 className='text-center md:text-left'>
           "MPS, Mohanpur – A place where little minds grow big dreams!"
         </h3>
@@ -36,6 +46,11 @@ const Home = () => {
           </div>
         ))}
       </Slider>
+      <Welcome />
+      <Gallery />
+      <MobileBottomHeader />
+      <ContactSection />
+      <Footer />
     </>
   )
 }
