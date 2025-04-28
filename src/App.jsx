@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import './App.css'
 import AllGallery from './pages/AllGallery'
 import Root from './Root'
+import Profile from './components/Profile'
 
 function App () {
   return (
@@ -10,6 +11,7 @@ function App () {
       <Routes>
         <Route path='/' element={<Root />}>
           <Route index element={<Home />} />
+          <Route path='/teachers' element={<Profile />} />
           <Route path='/allgallery' element={<AllGallery />} />
         </Route>
       </Routes>

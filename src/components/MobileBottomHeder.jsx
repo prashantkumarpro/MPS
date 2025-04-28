@@ -28,8 +28,8 @@ const MobileBottomHeader = () => {
         </Link>
 
         {/* Teachers */}
-        <a
-          href='#contact'
+        <Link
+          to='/teachers'
           onClick={() => setActiveTab('teachers')}
           className='flex items-center flex-col gap-0'
         >
@@ -41,7 +41,7 @@ const MobileBottomHeader = () => {
             )}
           </div>
           <p className='text-[8px] text-gray-700'>Teachers</p>
-        </a>
+        </Link>
 
         {/* Notice */}
         <a

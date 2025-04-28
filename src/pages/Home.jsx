@@ -9,6 +9,8 @@ import ContactSection from '../components/ContactSection'
 import OFFICE from '../assets/OFFICE.jpg'
 import Playground from '../assets/Playground.jpeg'
 import classFront from '../assets/ClassFront.jpg'
+import Profile from '../components/Profile'
+import TeacherSlider from '../components/TeacherSlider'
 
 const Home = () => {
   const images = [classFront, OFFICE, Playground]
@@ -25,6 +27,7 @@ const Home = () => {
   return (
     <>
       <MarqueeDownload />
+
       <div
         id='home'
         className='m-auto  px-4 py-8 md:text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-slate-600 font-extrabold leading-tight md:px-4'
@@ -47,9 +50,10 @@ const Home = () => {
         ))}
       </Slider>
       <Welcome />
+      <TeacherSlider />
       <Gallery />
-      <MobileBottomHeader />
       <ContactSection />
+      <MobileBottomHeader />
       <Footer />
     </>
   )
