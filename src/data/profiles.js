@@ -24,7 +24,7 @@ const profiles = [
     id: 8,
     name: 'Tribhuvan Malakar',
     role: 'Teacher',
-    image: '/teachers/Imran_khan.png'
+    image: '/teachers/Amanpreet.png'
   },
   {
     id: 9,
@@ -60,7 +60,7 @@ const profiles = [
     id: 5,
     name: 'Amresh Pandey',
     role: 'Teacher',
-    image: '/teachers/Ashish_kumar.png'
+    image: '/teachers/Amresh_pandey.png'
   },
 
 
