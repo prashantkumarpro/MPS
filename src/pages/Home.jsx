@@ -10,7 +10,7 @@ import classFront from '../assets/ClassFront.jpg'
 import Profile from '../components/Profile'
 import TeacherSlider from '../components/TeacherSlider'
 import FeaturesSection from '../components/Feature'
-import ContactForm from '../components/contactForm'
+import ContactForm from '../components/Contact'
 
 const Home = () => {
   const images = [classFront, OFFICE, Playground]
