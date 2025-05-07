@@ -4,15 +4,13 @@ import Welcome from '../components/Welcome'
 import Gallery from '../components/Gallery'
 import MobileBottomHeader from '../components/MobileBottomHeder'
 import Footer from '../pages/Footer'
-import MarqueeDownload from '../components/MarqueeDownload '
-import ContactSection from '../components/ContactSection'
 import OFFICE from '../assets/OFFICE.jpg'
 import Playground from '../assets/Playground.jpeg'
 import classFront from '../assets/ClassFront.jpg'
 import Profile from '../components/Profile'
 import TeacherSlider from '../components/TeacherSlider'
-import ContactForm from '../components/contactForm'
 import FeaturesSection from '../components/Feature'
+import ContactForm from '../components/contactForm'
 
 const Home = () => {
   const images = [classFront, OFFICE, Playground]
