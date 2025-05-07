@@ -70,8 +70,8 @@ const Gallery = () => {
   }
 
   return (
-    <section id='gallery' className='py-8 px-3 sm:px-4'>
-      <h2 className='text-3xl px-2 font-light text-left text-gray-800 mb-12'>
+    <section id='gallery' className='py-8 px-3 sm:px-8'>
+      <h2 className='text-2xl px-2 font-light text-left text-gray-800 mb-12'>
         Gallery{' '}
         <Link to='allgallery' className='text-sm text-blue-600'>
           veiw more

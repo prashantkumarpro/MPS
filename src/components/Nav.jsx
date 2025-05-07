@@ -6,15 +6,15 @@ const Nav = () => {
 
   return (
     <>
-      <nav className='md:w-full md:bg-sky-900 py-2 px-2  flex  items-center justify-center'>
+      <nav className='lg:w-full py-2 px-2 flex items-center justify-center'>
         <button
-          className='md:hidden mr-5 text-slate-600 font-extrabold leading-tight md:text-white text-4xl'
+          className='lg:hidden text-dark-text-gray font-extrabold leading-tight text-4xl'
           onClick={() => setIsOpen(!isOpen)}
         >
           ☰
         </button>
         <button
-          className={`absolute top-6 right-64 z-10 text-slate-600 font-extrabold leading-tight text-4xl ${
+          className={`absolute top-6 right-64 z-10 text-dark-text-gray font-extrabold leading-tight text-4xl ${
             isOpen ? 'block' : 'hidden'
           }`}
           onClick={() => setIsOpen(!isOpen)}
@@ -23,42 +23,42 @@ const Nav = () => {
         </button>
 
         <ul
-          className={`h-screen md:h-auto flex flex-col md:flex-row items-end  py-10 gap-5 text-black md:text-white font-light text-xl absolute md:static bg-gray-50 md:bg-transparent  md:w-auto top-0 right-0 md:top-16   md:py-0 ${
-            isOpen ? 'block w-80 px-5 transition-all' : 'hidden md:flex'
+          className={`h-screen md:h-auto flex flex-col md:flex-row items-end py-10 gap-5 text-dark-text-gray font-light text-xl absolute md:static bg-light-gray md:bg-transparent md:w-auto top-0 right-0 md:top-16 md:py-0 ${
+            isOpen ? 'block w-80 px-5 transition-all' : 'hidden lg:flex'
           }`}
         >
           <li>
-            <Link to='/' className='hover:text-gray-300'>
-              Home                     
+            <Link to='/' className='hover:text-primary-blue'>
+              Home
             </Link>
           </li>
           <li>
-            <a href='#about' className='hover:text-gray-300'>
+            <a href='#about' className='hover:text-primary-blue'>
               The School
             </a>
           </li>
           <li>
-            <a href='#contact' className='hover:text-gray-300'>
+            <a href='#contact' className='hover:text-primary-blue'>
               Admission
             </a>
           </li>
           <li>
-            <a href='#result' className='hover:text-gray-300'>
+            <a href='#result' className='hover:text-primary-blue'>
               Result
             </a>
           </li>
           <li>
-            <a href='#notice' className='hover:text-gray-300'>
+            <a href='#notice' className='hover:text-primary-blue'>
               Notice
             </a>
           </li>
           <li>
-            <a href='#members' className='hover:text-gray-300'>
+            <a href='#members' className='hover:text-primary-blue'>
               Members
             </a>
           </li>
           <li>
-            <a href='#contact' className='hover:text-gray-300'>
+            <a href='#contact' className='hover:text-primary-blue'>
               Contact
             </a>
           </li>

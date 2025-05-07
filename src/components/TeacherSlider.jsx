@@ -30,8 +30,8 @@ export default function TeacherSlider () {
   }
 
   return (
-    <section id='teachers' className='py-8 px-3 sm:px-4 bg-gray-100'>
-      <h2 className='text-3xl px-2 font-light text-left text-gray-800 mb-12'>
+    <section id='teachers' className='py-8 px-8 bg-gray-50'>
+      <h2 className='text-2xl px-2 font-light text-left text-gray-800 mb-12'>
         Meet Our Educators{' '}
         <Link to='/teachers' className='text-sm text-blue-400'>
           View All
@@ -41,7 +41,7 @@ export default function TeacherSlider () {
       <Slider {...settings}>
         {profiles.map(profile => (
           <div key={profile.id} className='px-2'>
-            <div className='bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition border border-blue-800'>
+            <div className='bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition border'>
               <div className='overflow-hidden rounded-full w-32 h-32 mx-auto mb-4'>
                 <img
                   src={profile.image}

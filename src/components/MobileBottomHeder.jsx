@@ -44,8 +44,8 @@ const MobileBottomHeader = () => {
         </Link>
 
         {/* Notice */}
-        <a
-          href='#notice'
+        <Link
+          to='/notification'
           onClick={() => setActiveTab('notice')}
           className='flex items-center flex-col'
         >
@@ -57,7 +57,7 @@ const MobileBottomHeader = () => {
             )}
           </div>
           <p className='text-[8px] text-gray-700'>Notice</p>
-        </a>
+        </Link>
 
         {/* Gellary */}
         <Link

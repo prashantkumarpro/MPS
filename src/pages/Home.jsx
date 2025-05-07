@@ -11,6 +11,8 @@ import Playground from '../assets/Playground.jpeg'
 import classFront from '../assets/ClassFront.jpg'
 import Profile from '../components/Profile'
 import TeacherSlider from '../components/TeacherSlider'
+import ContactForm from '../components/contactForm'
+import FeaturesSection from '../components/Feature'
 
 const Home = () => {
   const images = [classFront, OFFICE, Playground]
@@ -26,33 +28,47 @@ const Home = () => {
 
   return (
     <>
-      <MarqueeDownload />
-
-      <div
-        id='home'
-        className='m-auto  px-4 py-8 md:text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-slate-600 font-extrabold leading-tight md:px-4'
-      >
-        <h3 className='text-center md:text-left'>
-          "MPS, Mohanpur – A place where little minds grow big dreams!"
-        </h3>
-      </div>
-      <Slider {...settings}>
+      {/* <Slider {...settings}>
         {images.map((src, index) => (
           <div key={index} className='py-5 my-5'>
-            <div className='w-full  md:min-h-[100vh] lg:min-h-screen '>
+            <div className='w-full h-[80vh]'>
               <img
                 src={src}
                 alt={`Gallery Image ${index + 1}`}
-                className='size-full object-cover   rounded-lg transform transition duration-300 ease-in-out hover:scale-105'
+                className='w-full h-full object-cover rounded-lg transform transition duration-300 ease-in-out hover:scale-105'
               />
             </div>
           </div>
         ))}
-      </Slider>
+      </Slider> */}
       <Welcome />
+      {/* <div className='max-w-6xl mx-auto text-center'>
+        <h2 className='text-3xl md:text-4xl font-bold text-blue-900 mb-6'>
+          About Us
+        </h2>
+        <p className='text-gray-700 text-md md:text-lg leading-relaxed'>
+          Max Public School is an English Medium institution dedicated to the
+          holistic development of children from Nursery to Class 8. Established
+          with a vision to nurture young minds through value-based education and
+          innovative teaching practices, we strive to create a joyful and safe
+          learning environment.
+          <br />
+          <br />
+          Our experienced and passionate teachers ensure each child receives
+          personal attention and encouragement. We integrate modern technology
+          with traditional teaching methods to empower students with knowledge,
+          confidence, and skills for life.
+          <br />
+          <br />
+          At Max Public School, education is not just about academics—it's about
+          building character, fostering creativity, and preparing responsible
+          citizens for tomorrow.
+        </p>
+      </div> */}
+      <FeaturesSection />
+      <ContactForm />
       <TeacherSlider />
       <Gallery />
-      <ContactSection />
       <MobileBottomHeader />
       <Footer />
     </>

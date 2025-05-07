@@ -63,8 +63,6 @@ const profiles = [
     image: '/teachers/Amresh_pandey.png'
   },
 
-
-
   {
     id: 10,
     name: 'Bittu Kumar',
@@ -82,8 +80,10 @@ const profiles = [
     name: 'Prashant Kumar',
     role: 'Teacher',
     image: '/teachers/Prashant.jpg'
-  },
+  }
   // ...keep adding up to 15
 ]
+
+
 
 export default profiles
