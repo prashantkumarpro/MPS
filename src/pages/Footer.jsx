@@ -22,9 +22,7 @@ const Footer = () => {
       <div className='container mx-auto px-6 grid md:grid-cols-3 gap-8'>
         {/* Left Section */}
         <div>
-          <h2 className='text-xl font-semibold'>
-            Max Public School Mohanpur Bazar
-          </h2>
+          <h2 className='text-xl font-semibold'>Max Public School Mohanpur</h2>
           <div className='flex space-x-4 mt-4'>
             <a href='#' className='text-gray-300 hover:text-white text-xl'>
               <FaFacebookF />
@@ -50,7 +48,7 @@ const Footer = () => {
               'Holiday list',
               'Notice',
               'Members',
-              'Contact',
+              'Contact'
             ].map((item, index) => (
               <li key={index}>
                 <a

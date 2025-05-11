@@ -42,8 +42,11 @@ const AllGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
   return (
-    <div className='mt-24 md:mt-48'>
+    <div className='mt-24 md:mt-42'>
       {/* Fullscreen Image Viewer */}
+      <h1 className='mx-auto text-2xl md:text-4xl font-semibold md:font-bold text-dark-text-gray px-4 md:px-10'>
+        Welcome to our Gallery
+      </h1>
       {selectedImage ? (
         <div className='fixed inset-0 bg-black z-50 flex flex-col items-center justify-center'>
           <button
@@ -70,6 +73,7 @@ const AllGallery = () => {
               <img
                 src={`/gallery/${filename}`}
                 alt={`Gallery ${filename}`}
+                loading='lazy'
                 onClick={() => setSelectedImage(filename)}
                 className='w-full h-auto rounded-lg hover:opacity-90 transition cursor-pointer'
               />
