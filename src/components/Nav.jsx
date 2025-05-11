@@ -33,7 +33,7 @@ const Nav = () => {
             </Link>
           </li>
           <li>
-            <a href='#about' className='hover:text-primary-blue'>
+            <a href='#the_school' className='hover:text-primary-blue'>
               The School
             </a>
           </li>
@@ -48,14 +48,14 @@ const Nav = () => {
             </a>
           </li>
           <li>
-            <a href='#notice' className='hover:text-primary-blue'>
+            <Link to='/notification' className='hover:text-primary-blue'>
               Notice
-            </a>
+            </Link>
           </li>
           <li>
-            <a href='#members' className='hover:text-primary-blue'>
+            <Link to='/teachers' className='hover:text-primary-blue'>
               Members
-            </a>
+            </Link>
           </li>
           <li>
             <a href='#contact' className='hover:text-primary-blue'>
