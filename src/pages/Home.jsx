@@ -6,6 +6,7 @@ import MobileBottomHeader from '../components/MobileBottomHeder'
 import Footer from '../pages/Footer'
 import ContactForm from '../components/Contact'
 import GallerySection from '../components/GallerySection'
+import CoursesAndPrograms from '../components/CoursesAndPrograms'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <HomeBanner />
       <WelcomeText />
       <FeaturesSection />
+      <CoursesAndPrograms />
       <Teachers />
       <GallerySection />
       <ContactForm />
