@@ -69,14 +69,14 @@ const GallerySection = () => {
             <SwiperSlide key={index}>
               <div
                 onClick={() => openModal(img)}
-                className='aspect-[4/3] overflow-hidden rounded-xl shadow-md hover:shadow-lg cursor-pointer transition duration-300'
+                className='aspect-16/9 overflow-hidden rounded-xl shadow-md hover:shadow-lg cursor-pointer transition duration-300'
               >
                 <img
                   src={img}
                   alt={`Gallery image ${index + 1}`}
                   loading='lazy'
                   width='400'
-                  height='256'
+                  height='400'
                   className='w-full h-64 object-cover hover:scale-105 transition-transform duration-300'
                 />
               </div>

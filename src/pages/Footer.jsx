@@ -18,7 +18,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className='bg-[#0F2C3D] text-white py-10'>
+    <footer className='bg-[#0F2C3D] text-white md:py-10 pb-20 pt-10'>
       <div className='container mx-auto px-6 grid md:grid-cols-3 gap-8'>
         {/* Left Section */}
         <div>
@@ -83,7 +83,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className='border-t border-gray-700 mt-10 pt-6 text-center text-gray-400'>
+      <div className='border-t border-gray-700 mt-10 pt-6 text-center px-5 text-gray-400'>
         <p>
           Copyright © Max Public School Mohanpur Bazar 2025. All rights
           reserved.

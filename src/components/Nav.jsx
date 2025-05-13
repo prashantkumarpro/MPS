@@ -23,7 +23,7 @@ const Nav = () => {
         </button>
 
         <ul
-          className={`h-screen md:h-auto flex flex-col md:flex-row items-end py-10 gap-5 text-dark-text-gray font-light text-xl absolute md:static bg-light-gray md:bg-transparent md:w-auto top-0 right-0 md:top-16 md:py-0 ${
+          className={`h-screen lg:h-auto flex flex-col lg:flex-row items-end py-10 gap-5 text-dark-text-gray font-light text-xl absolute lg:static bg-light-gray lg:bg-transparent lg:w-auto top-0 right-0 lg:top-16 lg:py-0 ${
             isOpen ? 'block w-80 px-5 transition-all' : 'hidden lg:flex'
           }`}
         >
