@@ -10,13 +10,13 @@ import {
 } from 'lucide-react'
 
 const categoryIcons = {
-  Languages: <Languages className='text-blue-600' />,
-  Mathematics: <BookOpen className='text-green-600' />,
-  Science: <Atom className='text-purple-600' />,
-  'Social Studies': <Globe className='text-yellow-600' />,
-  'Computer & Tech': <Code className='text-pink-600' />,
-  'Creative & Co-curricular': <Palette className='text-orange-500' />,
-  'Physical & Life Skills': <Dumbbell className='text-teal-600' />
+  Languages: <Languages className='text-blue-600 animate-bounce' />,
+  Mathematics: <BookOpen className='text-green-600 animate-bounce' />,
+  Science: <Atom className='text-purple-600 animate-bounce' />,
+  'Social Studies': <Globe className='text-yellow-600 animate-bounce' />,
+  'Computer & Tech': <Code className='text-pink-600 animate-bounce' />,
+  'Creative & Co-curricular': <Palette className='text-orange-500 animate-bounce' />,
+  'Physical & Life Skills': <Dumbbell className='text-teal-600 animate-bounce' />
 }
 
 const subjects = [
