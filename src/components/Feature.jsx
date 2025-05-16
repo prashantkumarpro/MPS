@@ -1,7 +1,7 @@
 const FeatureCard = ({ icon, title, description }) => (
   <div className='bg-white rounded-xl shadow-md p-6 text-center border hover:shadow-lg transition duration-300 ease-in-out'>
     <div className='bg-gradient-to-r from-blue-600 to-purple-600 w-16 h-16 mx-auto rounded-full flex items-center justify-center text-white text-2xl mb-4'>
-      {icon}
+      <div className="animate-bounce">{icon}</div>
     </div>
     <h3 className='text-lg font-semibold text-gray-800 mb-2'>{title}</h3>
     <p className='text-sm text-gray-600'>{description}</p>

@@ -91,18 +91,18 @@ const Footer = () => {
       </div>
 
       {/* Floating Buttons */}
-      <div className='fixed bottom-20 md:bottom-5 right-4 flex space-x-3 z-50'>
+      <div className='fixed bottom-20 md:bottom-5 right-4 flex space-x-3 z-50 '>
         <a
           href='https://wa.me/6283552938'
           target='_blank'
           rel='noopener noreferrer'
-          className='bg-green-500 p-3 rounded-full text-white text-xl shadow-lg hover:bg-green-600 transition'
+          className='bg-green-500 p-3 rounded-full text-white text-xl shadow-lg hover:bg-green-600 transition animate-pulse'
         >
           <FaWhatsapp />
         </a>
         <a
           href='tel:+916206293108'
-          className='bg-blue-500 p-3 rounded-full text-white text-xl shadow-lg hover:bg-blue-600 transition'
+          className='bg-blue-500 p-3 rounded-full text-white text-xl shadow-lg hover:bg-blue-600 transition animate-pulse'
         >
           <FaPhoneAlt />
         </a>

@@ -28,7 +28,7 @@ const ContactForm = () => {
 
           <a
             href='tel:+916206293108'
-            className='inline-block mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow transition-all'
+            className='inline-block mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow transition-all animate-bounce'
           >
             Quick Enquiry
           </a>
