@@ -18,7 +18,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className='bg-[#0F2C3D] text-white md:py-10 pb-20 pt-10'>
+    <footer className='bg-[#0369A1] text-white md:py-10 pb-20 pt-10'>
       <div className='container mx-auto px-6 grid md:grid-cols-3 gap-8'>
         {/* Left Section */}
         <div>
@@ -41,21 +41,21 @@ const Footer = () => {
           <h2 className='text-xl font-semibold'>Quick Links</h2>
           <ul className='mt-4 space-y-2'>
             {[
-              'Home',
-              'The School',
-              'Admission',
-              'Result',
-              'Holiday list',
-              'Notice',
-              'Members',
-              'Contact'
-            ].map((item, index) => (
-              <li key={index}>
+              { id: 1, name: 'Home', go: '/' },
+              { id: 2, name: 'The School', go: '#the_school' },
+              { id: 3, name: 'Admission', go: '#contact' },
+              { id: 4, name: 'Result', go: '/' },
+              { id: 5, name: 'Holiday list', go: '/' },
+              { id: 6, name: 'Notice', go: 'notification' },
+              { id: 7, name: 'Members', go: 'teachers' },
+              { id: 8, name: 'Contact', go: '#contact' }
+            ].map(({ id, name, go }) => (
+              <li key={id}>
                 <a
-                  href='#'
+                  href={go}
                   className='text-gray-300 hover:text-white transition duration-300'
                 >
-                  {item}
+                  {name}
                 </a>
               </li>
             ))}
@@ -67,15 +67,15 @@ const Footer = () => {
           <h2 className='text-xl font-semibold'>Contact</h2>
           <div className='mt-4 space-y-3'>
             <p className='flex items-center space-x-3'>
-              <FaPhoneAlt className='text-[#0369A1]' />
+              <FaPhoneAlt className='text-[#ffffff]' />
               <span>+91-6206293108</span>
             </p>
             <p className='flex items-center space-x-3'>
-              <FaEnvelope className='text-[#0369A1]' />
+              <FaEnvelope className='text-[#ffffff]' />
               <span>schoolmaxpublic@gmail.com</span>
             </p>
             <p className='flex items-center space-x-3'>
-              <FaMapMarkerAlt className='text-[#0369A1]' />
+              <FaMapMarkerAlt className='text-[#ffffff]' />
               <span>Purnia, Bihar - 853204</span>
             </p>
           </div>
@@ -83,11 +83,12 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className='border-t border-gray-700 mt-10 pt-6 text-center px-5 text-gray-400'>
+      <div className='border-t border-gray-300 mt-10 pt-6 text-center px-5 text-gray-200'>
         <p>
           Copyright © Max Public School Mohanpur Bazar 2025. All rights
           reserved.
         </p>
+        <p className='mt-2 text-sm'>Design & Developed by <a href="https://myportfolio-swart-ten.vercel.app/" target='_blank' className='border-b border-gray-200  text-white'>Prashant Kumar</a> </p>
       </div>
 
       {/* Floating Buttons */}

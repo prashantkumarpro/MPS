@@ -7,7 +7,7 @@ export default function Header () {
   return (
     <>
       <div className='w-full fixed top-0 left-0 z-50 bg-white flex justify-between whitespace-nowrap items-center shadow-lg md:px-5'>
-        <a href='#' className='w-full flex items-center'>
+        <a href='/' className='w-full flex items-center'>
           <img
             src={logo}
             alt='logo'

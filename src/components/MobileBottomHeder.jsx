@@ -61,7 +61,7 @@ const MobileBottomHeader = () => {
 
         {/* Gellary */}
         <Link
-          to='allgallery'
+          to='/allgallery'
           onClick={() => setActiveTab('gallery')}
           className='flex items-center flex-col gap-0'
         >

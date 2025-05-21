@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
+import { Navigation, Autoplay, Pagination } from 'swiper/modules'
 import '../styles/Swipper.css'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -45,7 +45,7 @@ const GallerySection = () => {
   ]
 
   return (
-    <section className='gallery_section bg-white py-14 px-4'>
+    <section className='w-full gallery_section bg-white py-14 px-4'>
       <div className='max-w-7xl mx-auto'>
         <div className='max-w-6xl py-2 mb-10'>
           <h2 className='text-2xl md:text-4xl  font-semibold text-gray-800'>
@@ -54,7 +54,7 @@ const GallerySection = () => {
         </div>
 
         <Swiper
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay, Pagination]}
           spaceBetween={20}
           slidesPerView={1}
           navigation
