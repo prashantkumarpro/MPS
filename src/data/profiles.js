@@ -6,25 +6,25 @@ const profiles = [
     id: 13,
     name: 'Alok Ratn',
     role: 'Mnaging Director',
-    image: '/teachers/Alok_Ratn.png'
+    image: '/teachers/Alok_Ratn.webp'
   },
   {
     id: 6,
     name: 'Shohel Akhtar',
     role: 'Principal',
-    image: '/teachers/Shohel_Akhtar.png'
+    image: '/teachers/Shohel_Akhtar.webp'
   },
   {
     id: 12,
     name: 'Rajesh Ranjan',
     role: 'Teacher',
-    image: '/teachers/Rajesh.png'
+    image: '/teachers/Rajesh.webp'
   },
   {
     id: 8,
     name: 'Tribhuvan Malakar',
     role: 'Teacher',
-    image: '/teachers/Amanpreet.png'
+    image: '/teachers/Amanpreet.webp'
   },
   {
     id: 9,
@@ -36,31 +36,31 @@ const profiles = [
     id: 1,
     name: 'Kanchan Kumari',
     role: 'Teacher',
-    image: '/teachers/kanchan.png'
+    image: '/teachers/kanchan.webp'
   },
   {
     id: 2,
     name: 'Meena Kumari',
     role: 'Teacher',
-    image: '/teachers/Meena_kumari.png'
+    image: '/teachers/Meena_kumari.webp'
   },
   {
     id: 3,
     name: 'Imaran Khan',
     role: 'Teacher',
-    image: '/teachers/Imran_khan.png'
+    image: '/teachers/Imran_khan.webp'
   },
   {
     id: 4,
     name: 'Bipin Kumar',
     role: 'Teacher',
-    image: '/teachers/Bipin_kumar.png'
+    image: '/teachers/Bipin_kumar.webp'
   },
   {
     id: 5,
     name: 'Amresh Pandey',
     role: 'Teacher',
-    image: '/teachers/Amresh_pandey.png'
+    image: '/teachers/Amresh_pandey.webp'
   },
 
   {
@@ -73,15 +73,15 @@ const profiles = [
     id: 11,
     name: 'Ashish Kumar',
     role: 'Teacher',
-    image: '/teachers/Ashish_kumar.png'
+    image: '/teachers/Ashish_kumar.webp'
   },
   {
     id: 7,
     name: 'Prashant Kumar',
     role: 'Teacher',
-    image: '/teachers/Prashant.jpg'
+    image: '/teachers/Prashant.webp'
   }
-  // ...keep adding up to 15
+ 
 ]
 
 

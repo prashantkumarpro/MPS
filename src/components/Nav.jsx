@@ -91,6 +91,19 @@ const Nav = () => {
           </li>
           <li>
             <Link
+              to='/allgallery'
+              onClick={() => setActiveItem('allgallery')}
+              className={`${
+                activeItem === 'allgallery'
+                  ? 'border-b-2 border-sky-500 pb-2'
+                  : ''
+              }`}
+            >
+              Gallery
+            </Link>
+          </li>
+          <li>
+            <Link
               to='/teachers'
               onClick={() => setActiveItem('teachers')}
               className={`${

@@ -1,42 +1,42 @@
 import React, { useState } from 'react'
 
 const imageFilenames = [
-  '01.png',
-  '02.png',
-  '03.jpg',
-  '04.png',
-  '05.jpg',
-  '06.jpg',
-  '07.png',
-  '08.jpg',
-  '09.jpg',
-  '10.png',
-  '11.png',
-  '12.jpg',
-  '13.jpg',
-  '14.jpg',
-  '15.png',
-  '16.png',
-  '17.png',
-  '18.png',
-  '19.png',
-  '20.png',
-  '21.jpg',
-  '22.jpg',
-  '23.jpeg',
-  '24.jpg',
-  '25.jpg',
-  '26.jpeg',
-  '27.jpg',
-  '28.jpeg',
-  '29.jpg',
-  '30.jpeg',
-  '31.jpeg',
-  '32.png',
-  '33.png',
-  '34.png',
-  '35.png',
-  '36.png'
+  '01.webp',
+  '02.webp',
+  '03.webp',
+  '04.webp',
+  '05.webp',
+  '06.webp',
+  '07.webp',
+  '08.webp',
+  '09.webp',
+  '10.webp',
+  '11.webp',
+  '12.webp',
+  '13.webp',
+  '14.webp',
+  '15.webp',
+  '16.webp',
+  '17.webp',
+  '18.webp',
+  '19.webp',
+  '20.webp',
+  '21.webp',
+  '22.webp',
+  '23.webp',
+  '24.webp',
+  '25.webp',
+  '26.webp',
+  '27.webp',
+  '28.webp',
+  '29.webp',
+  '30.webp',
+  '31.webp',
+  '32.webp',
+  '33.webp',
+  '34.webp',
+  '35.webp',
+  '36.webp'
 ]
 const AllGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null)
@@ -64,7 +64,7 @@ const AllGallery = () => {
         </div>
       ) : (
         // Masonry-style Gallery
-        <div className='container mx-auto px-2 pt-10 columns-2 md:columns-3 lg:columns-4 xl:columns-5 2xl:columns-6 gap-4'>
+        <div className='container mx-auto px-2 pt-10 columns-2 md:columns-3 lg:columns-4 xl:columns-5 2xl:columns-6 gap-4 mb-5'>
           {imageFilenames.map((filename, index) => (
             <div
               key={index}
