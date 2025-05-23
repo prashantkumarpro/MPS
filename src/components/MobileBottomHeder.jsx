@@ -1,6 +1,6 @@
-import logo from '../assets/logo.png'
+
 import { RiHome3Fill, RiHome3Line } from 'react-icons/ri'
-import { PiPhoneDuotone, PiPhoneFill } from 'react-icons/pi'
+
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoNotifications } from 'react-icons/io5'
 import { GiTeacher } from 'react-icons/gi'

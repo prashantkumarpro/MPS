@@ -1,7 +1,5 @@
-import React from 'react'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.webp'
 import Nav from './Nav'
-import { Link } from 'react-router'
 
 export default function Header () {
   return (

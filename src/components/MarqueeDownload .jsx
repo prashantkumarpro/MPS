@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import '../styles/Marquee.css'
-import routineImg from '../assets/Routine.jpg'
+import routineImg from '../assets/Routine.webp'
 const MarqueeDownload = () => {
   const marqueeRef = useRef(null)
   const handlePause = () => {
