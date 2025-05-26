@@ -1,6 +1,4 @@
-Here’s a professional and well-structured `README.md` file for the **Max Public School** website:
 
----
 
 ```markdown
 # 📘 Max Public School – Official Website
