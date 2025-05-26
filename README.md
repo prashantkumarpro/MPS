@@ -60,7 +60,6 @@ Max Public School’s website is built to reflect the school’s values of **exc
    ```bash
    git clone https://github.com/your-username/max-public-school.git
    cd max-public-school
-````
 
 2. **Install dependencies**
 
