@@ -1,6 +1,4 @@
 
-
-```markdown
 # 📘 Max Public School – Official Website
 
 Welcome to the official repository of **Max Public School's** website – a modern, responsive, and easy-to-navigate platform that connects parents, students, and educators.
@@ -114,5 +112,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 > Developed with ❤️ by \[Prashant Kumar]
 
-```
 
