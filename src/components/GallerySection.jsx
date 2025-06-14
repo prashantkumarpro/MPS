@@ -13,6 +13,8 @@ import T3 from '../assets/T3.webp'
 import T4 from '../assets/T4.webp'
 import T5 from '../assets/T5.webp'
 import T6 from '../assets/T6.webp'
+import St1 from '../assets/37.webp'
+import St2 from '../assets/38.webp'
 import ClassFront from '../assets/ClassFront.webp'
 import { useState } from 'react'
 
@@ -35,6 +37,8 @@ const GallerySection = () => {
     T2,
     T5,
     T3,
+    St1,
+    St2,
     MR,
     OFFICE,
     library,

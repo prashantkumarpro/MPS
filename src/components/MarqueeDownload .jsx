@@ -23,7 +23,7 @@ const MarqueeDownload = () => {
         href='/routine.pdf'
         download='routine.pdf'
       >
-        📄 Download Routine
+        📄 Download Routine <i className="fa-solid fa-circle-arrow-down size-6 animate-bounce"></i>
       </a>
       <div
         ref={marqueeRef}

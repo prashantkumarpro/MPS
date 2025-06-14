@@ -36,7 +36,16 @@ const imageFilenames = [
   '33.webp',
   '34.webp',
   '35.webp',
-  '36.webp'
+  '36.webp',
+  '37.webp',
+  '38.webp',
+  '39.webp',
+  '40.webp',
+  '41.webp',
+  '42.webp',
+  '43.webp',
+  '44.webp',
+  '45.webp'
 ]
 const AllGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null)

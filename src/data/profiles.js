@@ -79,7 +79,7 @@ const profiles = [
     id: 7,
     name: 'Prashant Kumar',
     role: 'Teacher',
-    image: '/teachers/Prashant.webp'
+    image: '/teachers/Imran_khan.webp'
   }
  
 ]

@@ -17,7 +17,7 @@ const ContactForm = () => {
               <p>F4P5+7PV, Vijay Mohanpur, Bihar – 853204</p>
             </div>
             <div className='flex items-start gap-3'>
-              <i className='fas fa-phone-alt text-blue-600 mt-1'></i>
+              <i className='fa-solid fa-phone text-blue-600 mt-1'></i>
               <p>+91 62835 52938</p>
             </div>
             <div className='flex items-start gap-3'>

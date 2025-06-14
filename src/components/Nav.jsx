@@ -65,7 +65,7 @@ const Nav = () => {
               Admission
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               href='#result'
               onClick={() => setActiveItem('#result')}
@@ -75,7 +75,7 @@ const Nav = () => {
             >
               Result
             </a>
-          </li>
+          </li> */}
           <li>
             <Link
               to='/notification'
@@ -115,17 +115,17 @@ const Nav = () => {
               Members
             </Link>
           </li>
-          <li>
+          <li className='flex items-start gap-2'>
+            <span>
+              {' '}
+              <i className='fa-solid fa-phone text-blue-600'></i>
+            </span>
             <a
-              href='#contact'
+              href='tel:+916206293108'
               onClick={() => setActiveItem('#contact')}
-              className={`hover:text-primary-blue ${
-                activeItem === '#contact'
-                  ? 'border-b-2 border-sky-500 pb-2'
-                  : ''
-              }`}
+              className='hover:text-primary-blue text-[16px] no-underline font-medium'
             >
-              Contact
+              +91-6283522938
             </a>
           </li>
         </ul>
