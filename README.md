@@ -83,7 +83,7 @@ Max Public School’s website is built to reflect the school’s values of **exc
 
 ## 🔗 Live Website
 
-[Visit Max Public School Website](https://your-deployed-link.com)
+[Visit Max Public School Website](https://maxpublicschool.site/)
 
 ---
 
