@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update:browserlist": "npx update-browserslist-db@latest"
   },
   "dependencies": {
     "lucide-react": "^0.510.0",
