@@ -5,6 +5,14 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeItem, setActiveItem] = useState('/')
 
+  const handleNavClick = path => {
+    setActiveItem(path)
+
+    if (window.innerWidth < 1024) {
+      setIsOpen(false)
+    }
+  }
+
   return (
     <>
       <nav className='lg:w-full py-2 px-2 flex items-center justify-center'>
@@ -28,10 +36,9 @@ const Nav = () => {
             isOpen ? 'block w-80 px-5 transition-all' : 'hidden lg:flex'
           }`}
         >
-          <li>
+          <li onClick={() => handleNavClick('/')}>
             <Link
               to='/'
-              onClick={() => setActiveItem('/')}
               className={`hover:text-primary-blue ${
                 activeItem === '/' ? 'border-b-2 border-sky-500 pb-2' : ''
               }`}
@@ -39,10 +46,9 @@ const Nav = () => {
               Home
             </Link>
           </li>
-          <li>
+          <li onClick={() => handleNavClick('#the_school')}>
             <a
               href='#the_school'
-              onClick={() => setActiveItem('#the_school')}
               className={`hover:text-primary-blue ${
                 activeItem === '#the_school'
                   ? 'border-b-2 border-sky-500 pb-2'
@@ -52,10 +58,9 @@ const Nav = () => {
               The School
             </a>
           </li>
-          <li>
+          <li onClick={() => handleNavClick('#contact-button')}>
             <a
               href='#contact'
-              onClick={() => setActiveItem('#contact-button')}
               className={`hover:text-primary-blue ${
                 activeItem === '#contact-button'
                   ? 'border-b-2 border-sky-500 pb-2'
@@ -76,10 +81,9 @@ const Nav = () => {
               Result
             </a>
           </li> */}
-          <li>
+          <li onClick={() => handleNavClick('notification')}>
             <Link
               to='/notification'
-              onClick={() => setActiveItem('notification')}
               className={`hover:text-primary-blue ${
                 activeItem === 'notification'
                   ? 'border-b-2 border-sky-500 pb-2'
@@ -89,10 +93,9 @@ const Nav = () => {
               Notice
             </Link>
           </li>
-          <li>
+          <li onClick={() => handleNavClick('allgallery')}>
             <Link
               to='/allgallery'
-              onClick={() => setActiveItem('allgallery')}
               className={`hover:text-primary-blue ${
                 activeItem === 'allgallery'
                   ? 'border-b-2 border-sky-500 pb-2'
@@ -102,10 +105,9 @@ const Nav = () => {
               Gallery
             </Link>
           </li>
-          <li>
+          <li onClick={() => handleNavClick('teachers')}>
             <Link
               to='/teachers'
-              onClick={() => setActiveItem('teachers')}
               className={`hover:text-primary-blue ${
                 activeItem === 'teachers'
                   ? 'border-b-2 border-sky-500 pb-2'
@@ -115,14 +117,16 @@ const Nav = () => {
               Members
             </Link>
           </li>
-          <li className='flex items-start gap-2'>
+          <li
+            onClick={() => handleNavClick('#contact')}
+            className='flex items-start gap-2'
+          >
             <span>
               {' '}
               <i className='fa-solid fa-phone text-blue-600'></i>
             </span>
             <a
               href='tel:+916206293108'
-              onClick={() => setActiveItem('#contact')}
               className='hover:text-primary-blue text-[16px] no-underline font-medium'
             >
               +91-6283522938
