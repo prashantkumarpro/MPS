@@ -83,6 +83,8 @@ const AllGallery = () => {
                 src={`/gallery/${filename}`}
                 alt={`Gallery ${filename}`}
                 loading='lazy'
+                height={200}
+                width={200}
                 onClick={() => setSelectedImage(filename)}
                 className='w-full h-auto rounded-lg hover:opacity-90 transition cursor-pointer'
               />
