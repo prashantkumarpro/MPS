@@ -8,9 +8,11 @@ import { TfiGallery } from 'react-icons/tfi'
 import { GrGallery } from 'react-icons/gr'
 import { useState } from 'react'
 import { Link } from 'react-router'
+import ShareButton from './ShareButton'
 
 const MobileBottomHeader = () => {
   const [activeTab, setActiveTab] = useState('home')
+
   return (
     <>
       <div className='w-full flex md:hidden items-center justify-between px-4 py-2 fixed bottom-0 left-0 z-50 shadow-lg bg-white border-t border-gray-200'>
@@ -81,6 +83,7 @@ const MobileBottomHeader = () => {
             Gellary
           </div>
         </Link>
+        <ShareButton />
       </div>
     </>
   )

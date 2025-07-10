@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router'
+import ShareButton from './ShareButton'
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -131,6 +132,9 @@ const Nav = () => {
             >
               +91-6283522938
             </a>
+          </li>
+          <li>
+            <ShareButton />
           </li>
         </ul>
       </nav>
