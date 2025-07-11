@@ -12,7 +12,7 @@ const HomeBanner = () => {
         <div className='w-full'>
           <Image
             image={'/images/welcome3.webp'}
-            alt={'Smiling student'}
+            name={'Smiling student'}
             className={'max-w-md object-contain mx-auto'}
           />
         </div>

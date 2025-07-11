@@ -24,13 +24,25 @@ const Footer = () => {
         <div>
           <h2 className='text-xl font-semibold'>Max Public School Mohanpur</h2>
           <div className='flex space-x-4 mt-4'>
-            <a href='#' className='text-gray-300 hover:text-white text-xl'>
+            <a
+              href='#'
+              aria-label='Facebook'
+              className='text-gray-300 hover:text-white text-xl'
+            >
               <FaFacebookF />
             </a>
-            <a href='#' className='text-gray-300 hover:text-white text-xl'>
+            <a
+              href='#'
+              aria-label='Instagram'
+              className='text-gray-300 hover:text-white text-xl'
+            >
               <FaInstagram />
             </a>
-            <a href='#' className='text-gray-300 hover:text-white text-xl'>
+            <a
+              href='#'
+              aria-label='Twitter'
+              className='text-gray-300 hover:text-white text-xl'
+            >
               <FaTwitter />
             </a>
           </div>
@@ -67,15 +79,15 @@ const Footer = () => {
           <h2 className='text-xl font-semibold'>Contact</h2>
           <div className='mt-4 space-y-3'>
             <p className='flex items-center space-x-3'>
-              <FaPhoneAlt className='text-[#ffffff]' />
+              <FaPhoneAlt className='text-[#ffffff]' aria-hidden='true' />
               <span>+91-6206293108</span>
             </p>
             <p className='flex items-center space-x-3'>
-              <FaEnvelope className='text-[#ffffff]' />
+              <FaEnvelope className='text-[#ffffff]' aria-hidden='true' />
               <span>schoolmaxpublic@gmail.com</span>
             </p>
             <p className='flex items-center space-x-3'>
-              <FaMapMarkerAlt className='text-[#ffffff]' />
+              <FaMapMarkerAlt className='text-[#ffffff]' aria-hidden='true' />
               <span>Purnia, Bihar - 853204</span>
             </p>
           </div>
@@ -88,7 +100,16 @@ const Footer = () => {
           Copyright © Max Public School Mohanpur Bazar 2025. All rights
           reserved.
         </p>
-        <p className='mt-2 text-sm'>Design & Developed by <a href="https://myportfolio-swart-ten.vercel.app/" target='_blank' className='border-b border-gray-200  text-white'>Prashant Kumar</a> </p>
+        <p className='mt-2 text-sm'>
+          Design & Developed by{' '}
+          <a
+            href='https://myportfolio-swart-ten.vercel.app/'
+            target='_blank'
+            className='border-b border-gray-200  text-white'
+          >
+            Prashant Kumar
+          </a>{' '}
+        </p>
       </div>
 
       {/* Floating Buttons */}
@@ -97,12 +118,14 @@ const Footer = () => {
           href='https://wa.me/6283552938'
           target='_blank'
           rel='noopener noreferrer'
+          aria-label='WhatsApp'
           className='bg-green-500 p-3 rounded-full text-white text-xl shadow-lg hover:bg-green-600 transition animate-pulse'
         >
           <FaWhatsapp />
         </a>
         <a
           href='tel:+916206293108'
+          aria-label='Phone'
           className='bg-blue-500 p-3 rounded-full text-white text-xl shadow-lg hover:bg-blue-600 transition animate-pulse'
         >
           <FaPhoneAlt />
@@ -110,6 +133,7 @@ const Footer = () => {
         <a
           ref={topRef}
           onClick={scrollToTop}
+          aria-label='Arrow Up'
           className='bg-[#0f5e8b] p-3 rounded-full text-white text-xl shadow-lg hover:bg-[#3285b5] transition'
         >
           <FaArrowUp />
