@@ -16,7 +16,7 @@ const Nav = () => {
 
   return (
     <>
-      <nav className='lg:w-full py-2 px-2 flex items-center justify-center'>
+      <nav className='font-able font-normal leading-[100%] uppercase lg:w-full py-2 px-2 flex items-center justify-center'>
         <button
           className='lg:hidden text-dark-text-gray font-extrabold leading-tight text-4xl'
           onClick={() => setIsOpen(!isOpen)}
@@ -33,15 +33,15 @@ const Nav = () => {
         </button>
 
         <ul
-          className={`h-screen lg:h-auto flex flex-col lg:flex-row items-start py-5 gap-10 text-dark-text-gray font-light text-xl absolute lg:static bg-light-gray lg:bg-transparent lg:w-auto top-0 right-0 lg:top-16 lg:py-0 ${
+          className={`h-screen lg:h-auto flex flex-col lg:flex-row items-start py-5 gap-4 text-[#393E46] font-normal text-lg absolute lg:static bg-light-gray lg:bg-transparent lg:w-auto top-0 right-0 lg:top-16 lg:py-0 ${
             isOpen ? 'block w-80 px-5 transition-all' : 'hidden lg:flex'
           }`}
         >
           <li onClick={() => handleNavClick('/')}>
             <Link
               to='/'
-              className={`hover:text-primary-blue ${
-                activeItem === '/' ? 'border-b-2 border-sky-500 pb-2' : ''
+              className={`hover:text-blue-700 ${
+                activeItem === '/' ? 'border-b-4 border-blue-500 pb-2' : ''
               }`}
             >
               Home
@@ -50,9 +50,9 @@ const Nav = () => {
           <li onClick={() => handleNavClick('#the_school')}>
             <a
               href='#the_school'
-              className={`hover:text-primary-blue ${
+              className={`hover:text-blue-700 ${
                 activeItem === '#the_school'
-                  ? 'border-b-2 border-sky-500 pb-2'
+                  ? 'border-b-4 border-blue-500 pb-2'
                   : ''
               }`}
             >
@@ -62,9 +62,9 @@ const Nav = () => {
           <li onClick={() => handleNavClick('#contact-button')}>
             <a
               href='#contact'
-              className={`hover:text-primary-blue ${
+              className={`hover:text-blue-700 ${
                 activeItem === '#contact-button'
-                  ? 'border-b-2 border-sky-500 pb-2'
+                  ? 'border-b-4 border-blue-500 pb-2'
                   : ''
               }`}
             >
@@ -75,8 +75,8 @@ const Nav = () => {
             <a
               href='#result'
               onClick={() => setActiveItem('#result')}
-              className={`hover:text-primary-blue ${
-                activeItem === '#result' ? 'border-b-2 border-sky-500 pb-2' : ''
+              className={`hover:text-blue-700 ${
+                activeItem === '#result' ? 'border-b-4 border-blue-500 pb-2' : ''
               }`}
             >
               Result
@@ -85,9 +85,9 @@ const Nav = () => {
           <li onClick={() => handleNavClick('notification')}>
             <Link
               to='/notification'
-              className={`hover:text-primary-blue ${
+              className={`hover:text-blue-700 ${
                 activeItem === 'notification'
-                  ? 'border-b-2 border-sky-500 pb-2'
+                  ? 'border-b-4 border-blue-500 pb-2'
                   : ''
               }`}
             >
@@ -97,9 +97,9 @@ const Nav = () => {
           <li onClick={() => handleNavClick('allgallery')}>
             <Link
               to='/allgallery'
-              className={`hover:text-primary-blue ${
+              className={`hover:text-blue-700 ${
                 activeItem === 'allgallery'
-                  ? 'border-b-2 border-sky-500 pb-2'
+                  ? 'border-b-4 border-blue-500 pb-2'
                   : ''
               }`}
             >
@@ -109,9 +109,9 @@ const Nav = () => {
           <li onClick={() => handleNavClick('teachers')}>
             <Link
               to='/teachers'
-              className={`hover:text-primary-blue ${
+              className={`hover:text-blue-700 ${
                 activeItem === 'teachers'
-                  ? 'border-b-2 border-sky-500 pb-2'
+                  ? 'border-b-4 border-blue-500 pb-2'
                   : ''
               }`}
             >
@@ -128,7 +128,7 @@ const Nav = () => {
             </span>
             <a
               href='tel:+916206293108'
-              className='hover:text-primary-blue text-[16px] no-underline font-medium'
+              className='hover:text-blue-700 text-[16px] no-underline font-medium'
             >
               +91-6283522938
             </a>

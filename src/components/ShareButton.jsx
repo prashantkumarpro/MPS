@@ -15,12 +15,9 @@ const ShareButton = () => {
   }
 
   return (
-    <button
-      onClick={handleShare}
-      className='relative group text-sky-600 hover:text-sky-800'
-    >
-      <div className='text-2xl text-[#0369A1]'>
-        <MdOutlineShare />
+    <button onClick={handleShare} className='relative group '>
+      <div>
+        <MdOutlineShare className='text-lg text-blue-600 hover:text-primary-blue' />
       </div>
       <span className='sr-only'>Share</span>
       <div className='absolute bottom-full mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition'>

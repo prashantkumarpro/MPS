@@ -22,7 +22,9 @@ const Footer = () => {
       <div className='container mx-auto px-6 grid md:grid-cols-3 gap-8'>
         {/* Left Section */}
         <div>
-          <h2 className='text-xl font-semibold'>Max Public School Mohanpur</h2>
+          <h2 className='font-alkatra uppercase font-extrabold tracking-wider text-2xl leading-5'>
+            Max Public School Mohanpur
+          </h2>
           <div className='flex space-x-4 mt-4'>
             <a
               href='#'
@@ -50,8 +52,10 @@ const Footer = () => {
 
         {/* Center Section */}
         <div>
-          <h2 className='text-xl font-semibold'>Quick Links</h2>
-          <ul className='mt-4 space-y-2'>
+          <h2 className='text-xl font-able font-medium uppercase leading-[100%]'>
+            Quick Links
+          </h2>
+          <ul className='mt-4 space-y-2 font-alumni font-normal tracking-wider leading-7 text-xl text-dark-text-gray mb-6  uppercase'>
             {[
               { id: 1, name: 'Home', go: '/' },
               { id: 2, name: 'The School', go: '#the_school' },
@@ -76,17 +80,19 @@ const Footer = () => {
 
         {/* Right Section */}
         <div>
-          <h2 className='text-xl font-semibold'>Contact</h2>
+          <h2 className='text-xl font-able font-medium uppercase leading-[100%]'>
+            Contact
+          </h2>
           <div className='mt-4 space-y-3'>
-            <p className='flex items-center space-x-3'>
+            <p className='flex items-center space-x-3 font-poppins tracking-wider'>
               <FaPhoneAlt className='text-[#ffffff]' aria-hidden='true' />
               <span>+91-6206293108</span>
             </p>
-            <p className='flex items-center space-x-3'>
+            <p className='flex items-center space-x-3 font-poppins tracking-wider'>
               <FaEnvelope className='text-[#ffffff]' aria-hidden='true' />
               <span>schoolmaxpublic@gmail.com</span>
             </p>
-            <p className='flex items-center space-x-3'>
+            <p className='flex items-center space-x-3 font-poppins tracking-wider'>
               <FaMapMarkerAlt className='text-[#ffffff]' aria-hidden='true' />
               <span>Purnia, Bihar - 853204</span>
             </p>
@@ -96,7 +102,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className='border-t border-gray-300 mt-10 pt-6 text-center px-5 text-gray-200'>
-        <p>
+        <p className='text-white font-poppins leading-relaxed text-xs md:text-sm text-center tracking-wider'>
           Copyright © Max Public School Mohanpur Bazar 2025. All rights
           reserved.
         </p>
@@ -105,7 +111,7 @@ const Footer = () => {
           <a
             href='https://myportfolio-swart-ten.vercel.app/'
             target='_blank'
-            className='border-b border-gray-200  text-white'
+            className='border-b border-gray-200 text-white font-poppins leading-relaxed text-xs md:text-sm text-center tracking-wider'
           >
             Prashant Kumar
           </a>{' '}

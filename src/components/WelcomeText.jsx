@@ -5,13 +5,13 @@ const WelcomeText = () => {
       className='w-full py-10 px-4 md:px-10 flex flex-col md:flex-row items-center gap-10 mb-10'
     >
       <div className='w-full text-left'>
-        <h2 className='text-2xl md:text-4xl font-bold text-primary-blue mb-4'>
+        <h2 className='uppercase font-alumni text-3xl md:text-4xl font-bold text-primary-blue mb-4'>
           Welcome to Max Public School
         </h2>
-        <h3 className='text-xl font-semibold text-secondary-blue mb-4'>
+        <h3 className='font-alumni text-xl font-semibold text-secondary-blue mb-4'>
           A Home of Learning for Nursery to Class 8
         </h3>
-        <p className='text-dark-text-gray text-md leading-relaxed'>
+        <p className='text-[#0D0D0D] text-justify font-poppins font-normal leading-6 tracking-wider'>
           At Max Public School, we believe every child is unique and capable of
           achieving greatness. Our nurturing environment, experienced faculty,
           and activity-based curriculum ensure a joyful and meaningful

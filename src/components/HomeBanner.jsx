@@ -5,9 +5,9 @@ const HomeBanner = () => {
   return (
     <section
       id='/'
-      className='w-full px-4 pb-16 md:px-8 bg-background-white'
+      className='w-full px-4 pb-4 md:px-8 bg-background-white'
     >
-      <div className='md:px-3 py-16 md:py-24 mt-12 flex flex-col-reverse md:flex-row items-start justify-between gap-12'>
+      <div className='md:px-3 py-16 md:py-24 mt-12 md:mt-6 flex flex-col-reverse md:flex-row items-start justify-between gap-12'>
         <HomeText />
         <div className='w-full'>
           <Image

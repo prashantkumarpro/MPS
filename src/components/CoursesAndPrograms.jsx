@@ -15,8 +15,12 @@ const categoryIcons = {
   Science: <Atom className='text-purple-600 animate-bounce' />,
   'Social Studies': <Globe className='text-yellow-600 animate-bounce' />,
   'Computer & Tech': <Code className='text-pink-600 animate-bounce' />,
-  'Creative & Co-curricular': <Palette className='text-orange-500 animate-bounce' />,
-  'Physical & Life Skills': <Dumbbell className='text-teal-600 animate-bounce' />
+  'Creative & Co-curricular': (
+    <Palette className='text-orange-500 animate-bounce' />
+  ),
+  'Physical & Life Skills': (
+    <Dumbbell className='text-teal-600 animate-bounce' />
+  )
 }
 
 const subjects = [
@@ -51,10 +55,10 @@ const CoursesAndPrograms = () => {
   return (
     <section className='bg-gray-50 py-16 px-4 sm:px-6 lg:px-10'>
       <div className=' mx-auto text-left mb-10'>
-        <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4'>
+        <h2 className='font-alumni text-3xl md:text-4xl font-semibold text-[#44444E]  tracking-wider text-left'>
           Courses & Programs
         </h2>
-        <p className='text-gray-600'>
+        <p className='text-[#0D0D0D] text-justify font-poppins font-normal leading-6 tracking-wider'>
           Discover the wide range of subjects we offer to nurture every child's
           potential.
         </p>
@@ -84,14 +88,16 @@ const CoursesAndPrograms = () => {
             key={i}
             className='bg-white border rounded-xl shadow-md p-4 flex items-center gap-4 hover:shadow-lg transition duration-300 hover:scale-[1.02]'
           >
-            <div className='text-2xl shrink-0'>
+            <div className='font-abel text-[#44444E] text-2xl md:text-2xl  text-center h-fit shrink-0'>
               {categoryIcons[subject.category]}
             </div>
             <div>
-              <h3 className='text-base sm:text-lg font-semibold text-gray-800'>
+              <h3 className='text-[#0D0D0D] text-lg font-poppins font-normal leading-6 tracking-wider'>
                 {subject.name}
               </h3>
-              <p className='text-sm text-gray-500'>{subject.category}</p>
+              <p className='font-poppins text-sm  sm:text-sm md:text-md lg:text-lg font-light text-[#44444E]  text-balance text-left'>
+                {subject.category}
+              </p>
             </div>
           </div>
         ))}

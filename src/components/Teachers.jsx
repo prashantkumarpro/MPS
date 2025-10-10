@@ -11,7 +11,7 @@ const Teachers = () => {
   return (
     <section className='bg-gray-50 py-14 px-4'>
       <div className='max-w-6xl  text-left mb-10'>
-        <h2 className='text-2xl px-2 md:px-6 md:text-4xl font-semibold text-gray-800'>
+        <h2 className='font-alumni text-3xl md:text-4xl font-semibold text-[#44444E]  tracking-wider text-left'>
           Meet Our Educators
         </h2>
       </div>

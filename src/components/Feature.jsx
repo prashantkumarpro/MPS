@@ -1,10 +1,14 @@
 const FeatureCard = ({ icon, title, description }) => (
   <div className='bg-white rounded-xl shadow-md p-6 text-center border hover:shadow-lg transition duration-300 ease-in-out'>
     <div className='bg-gradient-to-r from-blue-600 to-purple-600 w-16 h-16 mx-auto rounded-full flex items-center justify-center text-white text-2xl mb-4'>
-      <div className="animate-bounce">{icon}</div>
+      <div className='animate-bounce'>{icon}</div>
     </div>
-    <h3 className='text-lg font-semibold text-gray-800 mb-2'>{title}</h3>
-    <p className='text-sm text-gray-600'>{description}</p>
+    <h3 className='font-abel text-[#44444E] text-2xl md:text-2xl  text-center h-fit'>
+      {title}
+    </h3>
+    <p className='font-poppins text-sm  sm:text-sm md:text-md font-light text-[#44444E] text-center text-balance'>
+      {description}
+    </p>
   </div>
 )
 
@@ -33,10 +37,10 @@ const FeaturesSection = () => {
   return (
     <section className='bg-gray-50 py-12'>
       <div className='max-w-6xl py-2 px-4 md:px-10 mb-10'>
-        <h2 className='text-2xl md:text-4xl font-semibold text-gray-800 mb-4'>
+        <h2 className='uppercase font-alumni text-3xl md:text-4xl font-semibold text-primary-blue mb-4'>
           Why Choose Max Public School?
         </h2>
-        <p className='text-gray-600'>
+        <p className='text-[#0D0D0D] text-justify font-poppins font-normal leading-6 tracking-wider'>
           We don’t just teach — we empower young minds to dream, explore, and
           succeed in every walk of life.
         </p>

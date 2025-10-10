@@ -52,7 +52,7 @@ const GallerySection = () => {
     <section className='w-full gallery_section bg-white py-14 px-4'>
       <div className='max-w-7xl mx-auto'>
         <div className='max-w-6xl py-2 mb-10'>
-          <h2 className='text-2xl md:text-4xl  font-semibold text-gray-800'>
+          <h2 className='font-alumni text-3xl md:text-4xl font-semibold text-[#44444E]  tracking-wider text-left'>
             Gallery
           </h2>
         </div>

@@ -4,32 +4,36 @@ const ContactForm = () => {
       <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
         {/* Contact Info */}
         <div className='space-y-6 -mt-10 md:-mt-20'>
-          <h2 className='text-2xl md:text-4xl font-semibold text-[#2C3E50]'>
+          <h2 className='font-alumni text-3xl md:text-4xl font-semibold text-[#44444E]  tracking-wider text-left'>
             Get in Touch
           </h2>
-          <p className='text-gray-600 text-lg'>
+          <p className='text-[#0D0D0D] text-justify font-poppins font-normal leading-6 tracking-wider'>
             Have a question or want to learn more? We're here to help!
           </p>
 
-          <div className='space-y-4 text-gray-700 text-base'>
+          <div className='space-y-4 font-poppins tracking-wider text-base'>
             <div className='flex items-start gap-3'>
-              <i className='fas fa-map-marker-alt text-blue-600 mt-1'></i>
-              <p>F4P5+7PV, Vijay Mohanpur, Bihar – 853204</p>
+              <i className='fas fa-map-marker-alt text-blue-600 mt-2 md:mt-1'></i>
+              <p className='text-[#44444E] leading-relaxed'>
+                F4P5+7PV, Vijay Mohanpur, Bihar – 853204
+              </p>
             </div>
             <div className='flex items-start gap-3'>
               <i className='fa-solid fa-phone text-blue-600 mt-1'></i>
-              <p>+91 62835 52938</p>
+              <p className='text-[#44444E] leading-relaxed'>+91 62835 52938</p>
             </div>
             <div className='flex items-start gap-3'>
               <i className='fas fa-envelope text-blue-600 mt-1'></i>
-              <p>schoolmaxpublic@gmail.com</p>
+              <p className='text-[#44444E] leading-relaxed'>
+                schoolmaxpublic@gmail.com
+              </p>
             </div>
           </div>
 
           <a
             href='tel:+916206293108'
             id='contact-button'
-            className='inline-block mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow transition-all'
+            className='font-abel tracking-wider inline-block mt-6 bg-accent-purple hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition-all'
           >
             Quick Enquiry
           </a>
