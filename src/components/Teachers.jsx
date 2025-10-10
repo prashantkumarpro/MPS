@@ -9,7 +9,7 @@ import TeacherCard from './TeacherCard'
 
 const Teachers = () => {
   return (
-    <section className='bg-gray-50 py-14 px-4'>
+    <section className='bg-gray-50 py-16 px-4 sm:px-6 lg:px-10'>
       <div className='max-w-6xl  text-left mb-10'>
         <h2 className='font-alumni text-3xl md:text-4xl font-semibold text-[#44444E]  tracking-wider text-left'>
           Meet Our Educators

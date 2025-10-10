@@ -109,7 +109,7 @@ const Footer = () => {
         <p className='mt-2 text-sm'>
           Design & Developed by{' '}
           <a
-            href='https://myportfolio-swart-ten.vercel.app/'
+            href='https://prashantkumar.dev/'
             target='_blank'
             className='border-b border-gray-200 text-white font-poppins leading-relaxed text-xs md:text-sm text-center tracking-wider'
           >
