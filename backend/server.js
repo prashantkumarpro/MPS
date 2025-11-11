@@ -1,22 +1,100 @@
 import express from 'express'
 import cors from 'cors'
+import dotenv from 'dotenv'
+
+// Load environment variables
+dotenv.config()
 
 const app = express()
-const PORT = 8000
+const PORT = process.env.PORT || 3001
 
-// Middleware
-app.use(cors())
+// Middleware - allow your frontend domain
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173', // Development
+      'https://maxpublicschool.site', // Your production domain
+      'https://www.maxpublicschool.site' // With www subdomain
+    ],
+    credentials: true
+  })
+)
+
 app.use(express.json())
 
-// Correct route with leading slash
-app.get('/api/test', (req, res) => {
+// Health check route
+app.get('/api/health', (req, res) => {
   res.json({
-    message: 'MP5 Backend is running!',
-    timestamp: new Date().toISOString()
+    message: 'MPS Backend is running on Railway!',
+    timestamp: new Date().toISOString(),
+    status: 'healthy',
+    allowedOrigins: [
+      'https://maxpublicschool.site',
+      'https://www.maxpublicschool.site'
+    ]
   })
 })
 
-// Correct listen method - only port number
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`)
+// Test data route
+app.get('/api/test', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Backend is connected successfully to maxpublicschool.site!',
+    data: {
+      features: ['Contact Form', 'API Data', 'Real-time Updates'],
+      status: 'operational'
+    }
+  })
+})
+
+// Contact form endpoint
+app.post('/api/contact', (req, res) => {
+  try {
+    const { name, email, message } = req.body
+
+    console.log('Contact form received from maxpublicschool.site:', {
+      name,
+      email,
+      message
+    })
+
+    // Simulate processing
+    // Add your database logic here
+
+    res.json({
+      success: true,
+      message: 'Thank you for your message! We will get back to you soon.',
+      received: { name, email, message }
+    })
+  } catch (error) {
+    console.error('Contact form error:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error. Please try again.'
+    })
+  }
+})
+
+// 404 handler 
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route ${req.originalUrl} not found`
+  })
+})
+
+// Error handler
+app.use((error, req, res, next) => {
+  console.error('🔥 Server error:', error)
+  res.status(500).json({
+    success: false,
+    message: 'Internal server error'
+  })
+})
+
+// Start server
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`MPS Backend Server running on port ${PORT}`)
+  console.log(`Configured for: maxpublicschool.site`)
+  console.log(`Health: http://localhost:${PORT}/api/health`)
 })
