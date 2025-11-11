@@ -4,6 +4,7 @@
   "description": "Welcome to the official repository of **Max Public School's** website – a modern, responsive, and easy-to-navigate platform that connects parents, students, and educators.",
   "type": "module",
   "scripts": {
+    "start": "cd backend && npm start",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && npm run dev",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
