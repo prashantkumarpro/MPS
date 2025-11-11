@@ -6,6 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true, // 👈 enables access from mobile devices
-    port: 5173 // optional, default is 5173
+    port: 5173, // optional, default is 5173
+
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true
+      }
+    }
   }
 })
