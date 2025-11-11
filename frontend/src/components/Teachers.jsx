@@ -1,0 +1,42 @@
+// Import Swiper styles and modules
+import { Swiper, SwiperSlide } from 'swiper/react'
+import profiles from '../data/profiles'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import TeacherCard from './TeacherCard'
+
+const Teachers = () => {
+  return (
+    <section className='bg-gray-50 py-16 px-4 sm:px-6 lg:px-10'>
+      <div className='max-w-6xl  text-left mb-10'>
+        <h2 className='font-alumni text-3xl md:text-4xl font-semibold text-[#44444E]  tracking-wider text-left'>
+          Meet Our Educators
+        </h2>
+      </div>
+
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={30}
+        slidesPerView={1}
+        navigation
+        autoplay={{ delay: 4000 }}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 }
+        }}
+        className='max-w-[80rem] mx-auto'
+      >
+        {profiles.map((t, i) => (
+          <SwiperSlide key={i}>
+            <TeacherCard {...t} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
+  )
+}
+
+export default Teachers
