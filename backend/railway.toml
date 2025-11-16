@@ -1,6 +1,9 @@
 [build]
 builder = "railpack"
-buildCommand = "npm install"
 
 [deploy]
 startCommand = "npm start"
+
+[[services]]
+type = "web"
+name = "backend"
