@@ -1,9 +1,0 @@
-{
-  "build": {
-    "command": "npm install",
-    "output": "node_modules"
-  },
-  "start": {
-    "command": "npm start"
-  }
-}
