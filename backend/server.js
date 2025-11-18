@@ -1,6 +1,6 @@
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
 // Load environment variables
 dotenv.config()
@@ -75,7 +75,7 @@ app.post('/api/contact', (req, res) => {
   }
 })
 
-// 404 handler 
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,
