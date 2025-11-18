@@ -4,20 +4,18 @@
   "description": "Welcome to the official repository of **Max Public School's** website – a modern, responsive, and easy-to-navigate platform that connects parents, students, and educators.",
   "type": "module",
   "scripts": {
-    "start": "cd backend && npm start",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run dev",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "build:frontend": "cd frontend && npm run build",
-    "install:all": "cd frontend && npm install && cd ../backend && npm install"
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "preview": "cd frontend && npm run preview",
+    "install:deps": "cd frontend && npm install"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
   },
   "keywords": [
-    "fullstack",
     "react",
-    "nodejs"
+    "vite",
+    "frontend"
   ],
   "author": "",
   "license": "ISC"
