@@ -1,22 +1,14 @@
 {
   "name": "mps-fullstack",
-  "version": "1.0.0",
-  "description": "Welcome to the official repository of **Max Public School's** website – a modern, responsive, and easy-to-navigate platform that connects parents, students, and educators.",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "cd frontend && npm run dev",
-    "build": "cd frontend && npm run build",
-    "preview": "cd frontend && npm run preview",
-    "install:deps": "cd frontend && npm install"
+    "dev": "concurrently \"npm --prefix frontend run dev\" \"npm --prefix backend run dev\"",
+    "frontend": "npm --prefix frontend run dev",
+    "backend": "npm --prefix backend run dev",
+    "build": "npm --prefix frontend run build",
+    "server": "npm --prefix backend run start"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
-  },
-  "keywords": [
-    "react",
-    "vite",
-    "frontend"
-  ],
-  "author": "",
-  "license": "ISC"
+  }
 }
