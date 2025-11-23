@@ -5,19 +5,24 @@ import AllGallery from './pages/AllGallery'
 import Root from './Root'
 import Profile from './components/Profile'
 import Notification from './pages/Notification'
+import ResultPage from './pages/resutlPage'
+import { ReportProvider } from './context/ReportContext'
 
 function App () {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Root />}>
-          <Route index element={<Home />} />
-          <Route path='/teachers' element={<Profile />} />
-          <Route path='/notification' element={<Notification />} />
-          <Route path='/allgallery' element={<AllGallery />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ReportProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Root />}>
+            <Route index element={<Home />} />
+            <Route path='/teachers' element={<Profile />} />
+            <Route path='/notification' element={<Notification />} />
+            <Route path='/allgallery' element={<AllGallery />} />
+            <Route path='/result' element={<ResultPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ReportProvider>
   )
 }
 

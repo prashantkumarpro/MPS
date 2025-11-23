@@ -7,24 +7,16 @@ import Footer from '../pages/Footer'
 import ContactForm from '../components/Contact'
 import GallerySection from '../components/GallerySection'
 import CoursesAndPrograms from '../components/CoursesAndPrograms'
-import { useEffect } from 'react'
+import ViewReportForm from '../components/ViewReportForm'
 
 const Home = () => {
-  useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL
-
-    fetch(`${API_URL}/api/health`)
-      .then(res => res.json())
-      .then(data => console.log('Backend response:', data))
-      .catch(err => console.error('Connection failed:', err))
-  }, [])
-
 
 
   return (
     <>
       <HomeBanner />
       <WelcomeText />
+      <ViewReportForm />
       <FeaturesSection />
       <CoursesAndPrograms />
       <Teachers />
