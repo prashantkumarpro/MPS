@@ -15,6 +15,7 @@ app.use(express.json())
 // CORS SETUP
 const allowedOrigins = [
   'https://maxpublicschool.site',
+  'https://mps-mohanpur.vercel.app',
   'http://localhost:5173' // for testing
 ]
 

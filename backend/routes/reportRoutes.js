@@ -82,7 +82,7 @@ router.post('/view', async (req, res) => {
 
     // Find student by class + roll number
     const student = await Student.findOne({
-      class: studentClass,
+      class: studentClass.toUpperCase(),
       rollNumber: rollNumber
     })
 
