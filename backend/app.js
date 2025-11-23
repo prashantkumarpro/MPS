@@ -1,14 +1,30 @@
 import express from 'express'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
-
 import studentRoutes from './routes/studentRoutes.js'
 import reportRoutes from './routes/reportRoutes.js'
 
 dotenv.config()
 
 const app = express()
+
+// JSON parser
 app.use(express.json())
+
+// CORS SETUP
+const allowedOrigins = [
+  'https://maxpublicschool.site',
+  'http://localhost:5173' // for testing
+]
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  })
+)
 
 // Connect DB
 connectDB()
