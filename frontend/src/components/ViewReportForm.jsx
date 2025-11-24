@@ -6,20 +6,23 @@ import { fetchReport } from '../api'
 export default function ViewReportForm () {
   const [studentClass, setStudentClass] = useState('')
   const [rollNumber, setRollNumber] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const { setStudent, setReport } = useContext(ReportContext)
   const navigate = useNavigate()
 
   const handleSubmit = async e => {
     e.preventDefault()
+    setLoading(true)
 
     const result = await fetchReport({ studentClass, rollNumber })
+
+    setLoading(false)
 
     if (result.success) {
       setStudent(result.student)
       setReport(result.report)
-
-      navigate('/result') // redirect to result page
+      navigate('/result')
     } else {
       alert('Invalid class or roll number!')
     }
@@ -52,9 +55,19 @@ export default function ViewReportForm () {
 
       <button
         type='submit'
-        className='w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg'
+        disabled={loading}
+        className={`w-full py-3 rounded-lg text-lg text-white flex justify-center items-center
+          ${
+            loading
+              ? 'bg-blue-400 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700'
+          }`}
       >
-        See Result
+        {loading ? (
+          <div className='h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin'></div>
+        ) : (
+          'See Result'
+        )}
       </button>
     </form>
   )
