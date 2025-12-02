@@ -20,6 +20,7 @@ const reportSchema = new mongoose.Schema(
     totalMarks: Number,
     percentage: Number,
     grade: String,
+    division: String,
 
     attendance: String,
     remarks: String

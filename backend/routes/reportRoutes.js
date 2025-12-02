@@ -15,6 +15,7 @@ router.post('/add', async (req, res) => {
       science,
       socialStudies,
       gk,
+      art,
       attendance,
       remarks
     } = req.body
@@ -38,6 +39,13 @@ router.post('/add', async (req, res) => {
     else if (percentage >= 45) grade = 'C'
     else grade = 'D'
 
+    // Division calculation
+    let division = ''
+    if (percentage >= 60) division = 'First'
+    else if (percentage >= 45) division = 'Second'
+    else if (percentage >= 33) division = 'Third'
+    else division = 'Fail'
+
     const report = new Report({
       studentId,
       english,
@@ -46,9 +54,11 @@ router.post('/add', async (req, res) => {
       science,
       socialStudies,
       gk,
+      art,
       totalMarks,
       percentage,
       grade,
+      division,
       attendance,
       remarks
     })
