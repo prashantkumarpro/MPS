@@ -31,6 +31,7 @@ export default function ViewReportForm () {
   return (
     <form
       onSubmit={handleSubmit}
+      id='checkresult'
       className='w-full max-w-md mx-auto mt-10 bg-white shadow-lg rounded-xl p-8 flex flex-col gap-5'
     >
       <h2 className='text-2xl font-semibold text-gray-800 text-center'>
