@@ -22,7 +22,9 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
         <p className='text-xl text-sky-600 uppercase'>
           “An English Medium Co-Educational School”
         </p>
-        <h2 className='text-xl font-semibold text-sky-600 uppercase'>Class Progress Report</h2>
+        <h2 className='text-xl font-semibold text-sky-600 uppercase'>
+          Class Progress Report
+        </h2>
         <p className='text-lg font-semibold uppercase text-sky-600'>
           2 <sup>nd</sup> Term 2025–26
         </p>
@@ -60,7 +62,9 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
         <thead>
           <tr className='bg-[#ccffcc] border border-black'>
             <th className='border border-black p-2 uppercase'>SUBJECT</th>
-            <th className='border border-black p-2 uppercase'>Obtained marks</th>
+            <th className='border border-black p-2 uppercase'>
+              Obtained marks
+            </th>
             <th className='border border-black p-2 uppercase'>Full marks</th>
           </tr>
         </thead>
@@ -73,7 +77,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
             ['GENERAL KNOWLEDGE', report.gk, 50],
             ['SOCIAL STUDIES', report.socialStudies, 50],
             ['SCIENCE', report.science, 50],
-            ['EVS/ART', 'A', '-']
+            ['EVS/ART', report.art, '-']
           ].map((row, i) => (
             <tr key={i}>
               <td className='border border-black p-2 bg-[#ccffcc] font-semibold'>
@@ -88,7 +92,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
             ['TOTAL OBTAINED MARK', `${report.totalMarks}`],
             ['TOTAL FULL MARKS', '300'],
             ['PERCENTAGE (%)', report.percentage.toFixed(2)],
-            ['DEVISION', ''],
+            ['DEVISION', report.division],
             ['GRADE', report.grade],
             ['POSITION', ''],
             ['ATTENDANCE', report.attendance],
