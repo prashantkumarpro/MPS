@@ -6,6 +6,7 @@ import Root from './Root'
 import Profile from './components/Profile'
 import Notification from './pages/Notification'
 import ResultPage from './pages/resutlPage'
+import AdminLayout from './pages/admin/Dashboard'
 import { ReportProvider } from './context/ReportContext'
 
 function App () {
@@ -19,6 +20,7 @@ function App () {
             <Route path='/notification' element={<Notification />} />
             <Route path='/allgallery' element={<AllGallery />} />
             <Route path='/result' element={<ResultPage />} />
+            <Route path='/admin' element={<AdminLayout />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -24,7 +24,7 @@ export default function ResultBanner() {
   return (
     <section
       className={`w-full bg-gradient-to-r from-primary-blue via-secondary-blue to-accent-purple
-        text-white font-montserrat shadow-md sticky top-20 z-50 transition-transform duration-500
+        text-white font-montserrat shadow-md sticky top-20 z-10 transition-transform duration-500
         ${show ? "translate-y-0" : "-translate-y-full"}`}
     >
       <div className="max-w-6xl mx-auto py-6 px-4 flex flex-col md:flex-row items-center justify-between">

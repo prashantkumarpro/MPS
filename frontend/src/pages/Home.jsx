@@ -8,12 +8,12 @@ import ContactForm from '../components/Contact'
 import GallerySection from '../components/GallerySection'
 import CoursesAndPrograms from '../components/CoursesAndPrograms'
 import ViewReportForm from '../components/ViewReportForm'
+import ResultBanner from '../components/ResultBanner'
 
 const Home = () => {
-
-
   return (
     <>
+      <ResultBanner />
       <HomeBanner />
       <WelcomeText />
       <ViewReportForm />
