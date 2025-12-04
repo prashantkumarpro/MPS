@@ -6,7 +6,7 @@ import PrintableReport from '../components/PrintableReport'
 export default function ResultPage () {
   const { student, report } = useContext(ReportContext)
   const printRef = useRef()
-
+  console.log(report)
   if (!student || !report) return <p>No data found.</p>
 
   const handlePrint = useReactToPrint({

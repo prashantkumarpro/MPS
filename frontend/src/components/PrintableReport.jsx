@@ -1,6 +1,32 @@
 import React, { forwardRef } from 'react'
 import logo from '../assets/logo.webp'
+
 const PrintableReport = forwardRef(({ student, report }, ref) => {
+  // KG subjects
+  const kgSubjects = [
+    ['ENGLISH', report.english, 50],
+    ['MATH', report.math, 50],
+    ['HINDI', report.hindi, 50],
+    ['TABLE', report.table, 50],
+    ['RHYMES', report.rhymes, 50],
+    ['GENERAL KNOWLEDGE', report.gk, 50],
+    ['ART/EVS', report.art, '-']
+  ]
+
+  // Primary subjects
+  const primarySubjects = [
+    ['ENGLISH', report.english, 50],
+    ['MATH', report.math, 50],
+    ['HINDI', report.hindi, 50],
+    ['SCIENCE', report.science, 50],
+    ['SOCIAL STUDIES', report.socialStudies, 50],
+    ['GENERAL KNOWLEDGE', report.gk, 50],
+    ['ART/EVS', report.art, '-']
+  ]
+
+  // Decide table based on classType
+  const subjectRows = report.classType === 'KG' ? kgSubjects : primarySubjects
+
   return (
     <div
       ref={ref}
@@ -16,6 +42,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
           loading='lazy'
         />
       </div>
+
       {/* School Header */}
       <div className='text-center mb-0'>
         <h1 className='text-2xl font-bold text-sky-700'>MAX PUBLIC SCHOOL</h1>
@@ -26,7 +53,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
           Class Progress Report
         </h2>
         <p className='text-lg font-semibold uppercase text-sky-600'>
-          2 <sup>nd</sup> Term 2025–26
+          2<sup>nd</sup> Term 2025–26
         </p>
       </div>
 
@@ -52,7 +79,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
         </p>
       </div>
 
-      {/* Record */}
+      {/* Title */}
       <p className='text-center font-semibold text-red-600 mb-2 underline'>
         Record of Academic Performance
       </p>
@@ -63,22 +90,15 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
           <tr className='bg-[#ccffcc] border border-black'>
             <th className='border border-black p-2 uppercase'>SUBJECT</th>
             <th className='border border-black p-2 uppercase'>
-              Obtained marks
+              OBTAINED MARKS
             </th>
-            <th className='border border-black p-2 uppercase'>Full marks</th>
+            <th className='border border-black p-2 uppercase'>FULL MARKS</th>
           </tr>
         </thead>
 
         <tbody>
-          {[
-            ['ENGLISH', report.english, 50],
-            ['MATH', report.math, 50],
-            ['HINDI', report.hindi, 50],
-            ['GENERAL KNOWLEDGE', report.gk, 50],
-            ['SOCIAL STUDIES', report.socialStudies, 50],
-            ['SCIENCE', report.science, 50],
-            ['EVS/ART', report.art, '-']
-          ].map((row, i) => (
+          {/* SUBJECT ROWS */}
+          {subjectRows.map((row, i) => (
             <tr key={i}>
               <td className='border border-black p-2 bg-[#ccffcc] font-semibold'>
                 {row[0]}
@@ -88,11 +108,12 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
             </tr>
           ))}
 
+          {/* COMMON DETAILS */}
           {[
             ['TOTAL OBTAINED MARK', `${report.totalMarks}`],
             ['TOTAL FULL MARKS', '300'],
             ['PERCENTAGE (%)', report.percentage.toFixed(2)],
-            ['DEVISION', report.division],
+            ['DIVISION', report.division],
             ['GRADE', report.grade],
             ['POSITION', ''],
             ['ATTENDANCE', report.attendance],
