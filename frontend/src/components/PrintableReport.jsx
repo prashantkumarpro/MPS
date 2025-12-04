@@ -30,7 +30,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
   return (
     <div
       ref={ref}
-      className='bg-white pb-4 px-10 border border-black shadow-lg text-[15px]'
+      className='bg-white pb-4  px-4 border border-black shadow-lg text-[15px]'
     >
       <div>
         <img
