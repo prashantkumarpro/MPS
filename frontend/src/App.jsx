@@ -7,8 +7,8 @@ import Profile from './components/Profile'
 import Notification from './pages/Notification'
 import ResultPage from './pages/resutlPage'
 import AdminLayout from './pages/admin/Dashboard'
-import { ReportProvider } from './context/ReportContext'
 import CheckResult from './pages/checkResult'
+import { ReportProvider } from './context/ReportContext'
 
 function App () {
   return (
