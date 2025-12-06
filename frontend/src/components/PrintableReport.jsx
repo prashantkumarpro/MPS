@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react'
 import logo from '../assets/logo.webp'
-
+import { useNavigate } from 'react-router'
 const PrintableReport = forwardRef(({ student, report }, ref) => {
+  const navigate = useNavigate()
   // KG subjects
   const kgSubjects = [
     ['ENGLISH', report.english, 50],
@@ -28,6 +29,16 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
   const subjectRows = report.classType === 'KG' ? kgSubjects : primarySubjects
 
   return (
+  <>
+
+  <div className="flex justify-center my-4">
+      <button
+        onClick={() => navigate('/')}
+        className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition"
+      >
+        Check Another Result
+      </button>
+    </div>
     <div
       ref={ref}
       className='bg-white pb-4  px-4 border border-black shadow-lg text-[15px]'
@@ -141,6 +152,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
         </p>
       </div>
     </div>
+  </>
   )
 })
 

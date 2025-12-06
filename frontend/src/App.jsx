@@ -8,6 +8,7 @@ import Notification from './pages/Notification'
 import ResultPage from './pages/resutlPage'
 import AdminLayout from './pages/admin/Dashboard'
 import { ReportProvider } from './context/ReportContext'
+import CheckResult from './pages/checkResult'
 
 function App () {
   return (
@@ -19,6 +20,7 @@ function App () {
             <Route path='/teachers' element={<Profile />} />
             <Route path='/notification' element={<Notification />} />
             <Route path='/allgallery' element={<AllGallery />} />
+            <Route path='/check-result' element={<CheckResult />} />
             <Route path='/result' element={<ResultPage />} />
             <Route path='/admin' element={<AdminLayout />} />
           </Route>

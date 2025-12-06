@@ -15,7 +15,7 @@ const MobileBottomHeader = () => {
 
   return (
     <>
-      <div className='w-full flex md:hidden items-center justify-between px-4 py-2 fixed bottom-0 left-0 z-50 shadow-lg bg-white border-t border-gray-200'>
+      <div className='w-full flex md:hidden items-center justify-between px-4 py-4 fixed bottom-0 left-0 z-50 shadow-lg bg-white border-t border-gray-200'>
         {/* Home */}
         <Link
           to='/'
@@ -54,9 +54,9 @@ const MobileBottomHeader = () => {
         <Link
           to='/notification'
           onClick={() => setActiveTab('notice')}
-          className='relative group text-sky-600 hover:text-sky-800'
+          className='relative group animate-bounce text-sky-600 hover:text-sky-800'
         >
-          <div className='text-2xl text-[#0369A1]'>
+          <div className='text-3xl text-[#0369A1]'>
             {activeTab === 'notice' ? (
               <IoNotifications />
             ) : (

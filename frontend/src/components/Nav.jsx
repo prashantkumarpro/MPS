@@ -18,7 +18,7 @@ const Nav = () => {
     <>
       <nav className='font-able font-normal leading-[100%] uppercase lg:w-full py-2 px-2 flex items-center justify-center'>
         <button
-          className='lg:hidden text-dark-text-gray font-extrabold leading-tight text-4xl'
+          className='hidden  md:block lg:hidden text-dark-text-gray font-extrabold leading-tight text-4xl'
           onClick={() => setIsOpen(!isOpen)}
         >
           ☰

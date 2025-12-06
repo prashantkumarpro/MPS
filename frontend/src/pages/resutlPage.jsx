@@ -2,12 +2,15 @@ import React, { useContext, useRef } from 'react'
 import { ReportContext } from '../context/ReportContext'
 import { useReactToPrint } from 'react-to-print'
 import PrintableReport from '../components/PrintableReport'
+import { Navigate } from 'react-router'
 
 export default function ResultPage () {
   const { student, report } = useContext(ReportContext)
   const printRef = useRef()
-  console.log(report)
-  if (!student || !report) return <p>No data found.</p>
+  // Redirect if no data
+  if (!student || !report) {
+    return <Navigate to='/' replace />
+  }
 
   const handlePrint = useReactToPrint({
     contentRef: printRef, // <-- v3 uses contentRef
@@ -23,7 +26,7 @@ export default function ResultPage () {
       {/* Printable Component */}
       <PrintableReport ref={printRef} student={student} report={report} />
       {/* Download Button */}
-      <div className='text-right mb-4 mt-4'>
+      <div className='text-right mb-16 lg:mb-4 mt-4'>
         <button
           onClick={handlePrint}
           className='bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700'

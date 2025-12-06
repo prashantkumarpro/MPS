@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { ReportContext } from '../context/ReportContext'
 import { fetchReport } from '../api'
 
-export default function ViewReportForm () {
+const CheckResult = () => {
   const [studentClass, setStudentClass] = useState('')
   const [rollNumber, setRollNumber] = useState('')
   const [loading, setLoading] = useState(false)
@@ -32,7 +32,9 @@ export default function ViewReportForm () {
     <form
       onSubmit={handleSubmit}
       id='checkresult'
-      className='w-full max-w-md mx-auto mt-10 bg-white shadow-lg rounded-xl p-8 flex flex-col gap-5'
+      className='absolute top-0 bottom-0 left-0 right-0 
+               m-auto w-full max-w-md h-fit
+               bg-white shadow-lg rounded-xl p-8 flex flex-col gap-5'
     >
       <h2 className='text-2xl font-semibold text-gray-800 text-center'>
         Check Your Result
@@ -73,3 +75,5 @@ export default function ViewReportForm () {
     </form>
   )
 }
+
+export default CheckResult
