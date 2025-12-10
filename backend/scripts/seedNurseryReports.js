@@ -456,9 +456,9 @@ const nurseryReports = [
 
   {
     rollNumber: 49,
-    english: null,
+    english: 35,
     math: 46,
-    hindi: null,
+    hindi: 26,
     table: 47,
     rhymes: 32,
     art: 'B+',
@@ -616,10 +616,10 @@ async function seedNurseryReports () {
       continue
     }
 
-    // 2️⃣ GK should always be null or 0 for Nursery
+    // 2️⃣ GK always null/0
     r.gk = r.gk ?? 0
 
-    // 3️⃣ Total marks for Nursery (5 subjects)
+    // 3️⃣ Total marks (Nursery = 5 subjects)
     const totalMarks =
       (r.english || 0) +
       (r.math || 0) +
@@ -630,59 +630,52 @@ async function seedNurseryReports () {
     // 4️⃣ Percentage (out of 250)
     const percentage = (totalMarks / 250) * 100
 
-    // 5️⃣ Grade calculation
+    // 5️⃣ Grade
     let grade = ''
     if (percentage >= 80) grade = 'A'
     else if (percentage >= 60) grade = 'B'
     else if (percentage >= 45) grade = 'C'
     else grade = 'D'
 
-    // 6️⃣ Division calculation
+    // 6️⃣ Division
     let division = ''
     if (percentage >= 60) division = 'First'
     else if (percentage >= 45) division = 'Second'
     else if (percentage >= 33) division = 'Third'
     else division = 'Fail'
 
-    // 7️⃣ Fail rule → any subject < 15
-    const subjects = [
-      r.english,
-      r.math,
-      r.hindi,
-      r.table,
-      r.rhymes
-    ]
-
+    // 7️⃣ Fail rule
+    const subjects = [r.english, r.math, r.hindi, r.table, r.rhymes]
     const hasFailMarks = subjects.some(mark => (mark || 0) < 15)
+    if (hasFailMarks) division = 'Fail'
 
-    if (hasFailMarks) {
-      division = 'Fail'
-    }
+    // ✅ 8️⃣ UPDATE or INSERT report
+    const saved = await Report.findOneAndUpdate(
+      { studentId: student._id },
+      {
+        studentId: student._id,
+        english: r.english,
+        math: r.math,
+        hindi: r.hindi,
+        table: r.table,
+        rhymes: r.rhymes,
+        gk: null,
+        art: r.art,
+        attendance: r.attendance,
+        remarks: r.remarks,
+        totalMarks,
+        percentage,
+        grade,
+        division,
+        classType: 'KG'
+      },
+      { upsert: true, new: true }
+    )
 
-    // 8️⃣ Save report
-    const newReport = new Report({
-      studentId: student._id,
-      english: r.english,
-      math: r.math,
-      hindi: r.hindi,
-      table: r.table,
-      rhymes: r.rhymes,
-      gk: null, // ⭐ always null for Nursery
-      art: r.art,
-      attendance: r.attendance,
-      remarks: r.remarks,
-      totalMarks,
-      percentage,
-      grade,
-      division,
-      classType: 'KG' // ⭐ important
-    })
-
-    const saved = await newReport.save()
     insertedReports.push(saved)
   }
 
-  console.log(`🎉 Successfully inserted ${insertedReports.length} Nursery reports!`)
+  console.log(`🎉 Successfully UPDATED ${insertedReports.length} Nursery reports!`)
   process.exit()
 }
 

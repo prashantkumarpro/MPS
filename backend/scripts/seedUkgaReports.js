@@ -14,7 +14,7 @@ const ukgaReports = [
     english: 46,
     math: 50,
     hindi: 48,
-    table: 42,
+    table: 46,
     rhymes: 39,
     gk: 45,
     art: 'B',
@@ -26,7 +26,7 @@ const ukgaReports = [
     english: 48,
     math: 50,
     hindi: 39,
-    table: 42,
+    table: 40,
     rhymes: 40,
     gk: 48,
     art: 'B',
@@ -35,10 +35,10 @@ const ukgaReports = [
   },
   {
     rollNumber: 3,
-    english: 0,
+    english: 49,
     math: 40,
-    hindi: 0,
-    table: 34,
+    hindi: 38,
+    table: 44,
     rhymes: 25,
     gk: 33,
     art: 'A+',
@@ -50,7 +50,7 @@ const ukgaReports = [
     english: 50,
     math: 47,
     hindi: 40,
-    table: 39,
+    table: 43,
     rhymes: 37,
     gk: 34,
     art: 'A+',
@@ -62,7 +62,7 @@ const ukgaReports = [
     english: 37,
     math: 48,
     hindi: 42,
-    table: 37,
+    table: 40,
     rhymes: 45,
     gk: 21,
     art: 'A',
@@ -73,7 +73,7 @@ const ukgaReports = [
     rollNumber: 6,
     english: 48,
     math: 46,
-    hindi: 0,
+    hindi: 45,
     table: 37,
     rhymes: 45,
     gk: 42,
@@ -112,7 +112,7 @@ const ukgaReports = [
     hindi: 47,
     table: 49,
     rhymes: 45,
-    gk: 42,
+    gk: 44,
     art: 'B',
     attendance: '54',
     remarks: ''
@@ -123,7 +123,7 @@ const ukgaReports = [
     english: 47,
     math: 33,
     hindi: 30,
-    table: 0,
+    table: 38,
     rhymes: 42,
     gk: 22,
     art: 'A',
@@ -244,7 +244,7 @@ const ukgaReports = [
     english: 48,
     math: 46,
     hindi: 40,
-    table: 0,
+    table: 42,
     rhymes: 39,
     gk: 34,
     art: 'B',
@@ -256,8 +256,8 @@ const ukgaReports = [
     english: 48,
     math: 15,
     hindi: 30,
-    table: 0,
-    rhymes: 0,
+    table: 35,
+    rhymes: 38,
     gk: 20,
     art: 'A+',
     attendance: '63',
@@ -269,7 +269,7 @@ const ukgaReports = [
     math: 38,
     hindi: 30,
     table: 46,
-    rhymes: 0,
+    rhymes: 40,
     gk: 33,
     art: 'A+',
     attendance: '36',
@@ -279,7 +279,7 @@ const ukgaReports = [
     rollNumber: 29,
     english: 46,
     math: 49,
-    hindi: 0,
+    hindi: 40,
     table: 47,
     rhymes: 45,
     gk: 24,
@@ -305,7 +305,7 @@ const ukgaReports = [
     math: 43,
     hindi: 29,
     table: 41,
-    rhymes: 0,
+    rhymes: 45,
     gk: 43,
     art: 'A',
     attendance: '60',
@@ -340,7 +340,7 @@ const ukgaReports = [
     rollNumber: 37,
     english: 37,
     math: 45,
-    hindi: 0,
+    hindi: 38,
     table: 40,
     rhymes: 45,
     gk: 32,
@@ -357,10 +357,10 @@ async function seedUkgaReports () {
   await connectDB()
   console.log('MongoDB Connected ✔')
 
-  let insertedReports = []
+  let updatedReports = []
 
   for (const r of ukgaReports) {
-    // 1️⃣ Find student using class + roll number
+    // 1️⃣ Find student
     const student = await Student.findOne({
       class: 'UKGA',
       rollNumber: r.rollNumber
@@ -368,10 +368,13 @@ async function seedUkgaReports () {
 
     if (!student) {
       console.log(`⚠ Student not found → Roll No: ${r.rollNumber}`)
-      continue // Skip this entry
+      continue
     }
 
-    // 2️⃣ Calculate total marks for KG (6 subjects)
+    // 2️⃣ Ensure GK exists
+    r.gk = r.gk ?? 0
+
+    // 3️⃣ Total marks (UKG = 6 subjects)
     const totalMarks =
       (r.english || 0) +
       (r.math || 0) +
@@ -380,58 +383,59 @@ async function seedUkgaReports () {
       (r.rhymes || 0) +
       (r.gk || 0)
 
+    // 4️⃣ Percentage (out of 300)
     const percentage = (totalMarks / 300) * 100
 
-    // 3️⃣ Grade calculation
+    // 5️⃣ Grade
     let grade = ''
     if (percentage >= 80) grade = 'A'
     else if (percentage >= 60) grade = 'B'
     else if (percentage >= 45) grade = 'C'
     else grade = 'D'
 
-    // 4️⃣ Division calculation
+    // 6️⃣ Division
     let division = ''
     if (percentage >= 60) division = 'First'
     else if (percentage >= 45) division = 'Second'
     else if (percentage >= 33) division = 'Third'
     else division = 'Fail'
 
-    // 5️⃣ NEW RULE → If any subject is less than 15 → FAIL
+    // 7️⃣ Fail rule (UKG)
     const subjects = [r.english, r.math, r.hindi, r.table, r.rhymes, r.gk]
+    const hasFailMarks = subjects.some(
+      mark => mark === null || mark < 15
+    )
+    if (hasFailMarks) division = 'Fail'
 
-    const hasFailMarks = subjects.some(mark => (mark || 0) < 15)
+    // ✅ 8️⃣ UPDATE or INSERT (NO DUPLICATES)
+    const saved = await Report.findOneAndUpdate(
+      { studentId: student._id }, // ✅ unique
+      {
+        studentId: student._id,
+        english: r.english,
+        math: r.math,
+        hindi: r.hindi,
+        table: r.table,
+        rhymes: r.rhymes,
+        gk: r.gk,
+        art: r.art,
+        attendance: r.attendance,
+        remarks: r.remarks,
+        totalMarks,
+        percentage,
+        grade,
+        division,
+        classType: 'KG'
+      },
+      { upsert: true, new: true }
+    )
 
-    if (hasFailMarks) {
-      division = 'Fail'
-    }
-
-    // 5️⃣ Create and save report
-    const newReport = new Report({
-      studentId: student._id,
-      english: r.english,
-      math: r.math,
-      hindi: r.hindi,
-      table: r.table,
-      rhymes: r.rhymes,
-      gk: r.gk,
-      art: r.art,
-      attendance: r.attendance,
-      remarks: r.remarks,
-      totalMarks,
-      percentage,
-      grade,
-      division,
-      classType: 'KG' // ⭐ important
-    })
-
-    const saved = await newReport.save()
-    insertedReports.push(saved)
+    updatedReports.push(saved)
   }
 
-  console.log(
-    `🎉 Successfully inserted ${insertedReports.length} UKGA reports!`
-  )
+  console.log(`🎉 Successfully UPDATED ${updatedReports.length} UKGA reports!`)
   process.exit()
 }
+
 
 seedUkgaReports()
