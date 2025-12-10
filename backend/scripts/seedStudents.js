@@ -5,6 +5,7 @@ import Student from "../models/Student.js";
 dotenv.config();
 
 // Student Data (UKGA)
+
 // const students = [
 //   { "name": "Sunny Kumar", "class": "UKGA", "rollNumber": 1 },
 //   { "name": "Satyajeet Kumar", "class": "UKGA", "rollNumber": 2 },
@@ -38,61 +39,128 @@ dotenv.config();
 
 
 // Student Data (Nursery)
-const students = [
-  { "rollNumber": 1,  "name": "Shivangi Kumari",      "class": "NURSERY" },
-  { "rollNumber": 2,  "name": "Harekrishna",     "class": "NURSERY" },
-  { "rollNumber": 3,  "name": "Arohi Kumari",      "class": "NURSERY" },
-  { "rollNumber": 6,  "name": "Amit Kumar",          "class": "NURSERY" },
-  { "rollNumber": 7,  "name": "Ansh Kumar",          "class": "NURSERY" },
-  { "rollNumber": 8,  "name": "Vivek Kumar",         "class": "NURSERY" },
-  { "rollNumber": 9,  "name": "Kiska Kumari",        "class": "NURSERY" },
-  { "rollNumber": 10, "name": "Satyam Kumar",        "class": "NURSERY" },
-  { "rollNumber": 11, "name": "Prashant Kumar",      "class": "NURSERY" },
-  { "rollNumber": 12, "name": "Rishav Kumar",        "class": "NURSERY" },
-  { "rollNumber": 13, "name": "Kishor Kumar",        "class": "NURSERY" },
-  { "rollNumber": 14, "name": "Ankush Kumar",       "class": "NURSERY" },
-  { "rollNumber": 15, "name": "Nithu Kumari",         "class": "NURSERY" },
-  { "rollNumber": 16, "name": "Roushan Kumar",       "class": "NURSERY" },
-  { "rollNumber": 17, "name": "Harshit Kumar",       "class": "NURSERY" },
-  { "rollNumber": 18, "name": "Chirag Kumar",        "class": "NURSERY" },
-  { "rollNumber": 19, "name": "Prince Kumar",        "class": "NURSERY" },
-  { "rollNumber": 20, "name": "Karanjeet",       "class": "NURSERY" },
-  { "rollNumber": 21, "name": "Rishav Kumar",        "class": "NURSERY" },
-  { "rollNumber": 24, "name": "Premalata Kumari",    "class": "NURSERY" },
-  { "rollNumber": 25, "name": "Anushka Kumari",      "class": "NURSERY" },
-  { "rollNumber": 26, "name": "Arav Kumar",          "class": "NURSERY" },
-  { "rollNumber": 27, "name": "Chhaya Kumari",       "class": "NURSERY" },
-  { "rollNumber": 29, "name": "Aryan Kumar",        "class": "NURSERY" },
-  { "rollNumber": 30, "name": "Abhishek Kumar",      "class": "NURSERY" },
-  { "rollNumber": 31, "name": "Ravi Ranjan",      "class": "NURSERY" },
-  { "rollNumber": 32, "name": "Nikita Kumari",       "class": "NURSERY" },
-  { "rollNumber": 33, "name": "Pragati Kumari",       "class": "NURSERY" },
 
-  { "rollNumber": 34, "name": "Mousam Kumari", "class": "NURSERY" },
-  { "rollNumber": 35, "name": "Prince Kumar", "class": "NURSERY" },
-  { "rollNumber": 36, "name": "Tulsi Kumari", "class": "NURSERY" },
-  { "rollNumber": 37, "name": "Shree Ram", "class": "NURSERY" },
-  { "rollNumber": 38, "name": "Sheetal Kumari", "class": "NURSERY" },
-  { "rollNumber": 39, "name": "Satyajeet Kumar", "class": "NURSERY" },
-  { "rollNumber": 40, "name": "Krishna Kumar", "class": "NURSERY" },
-  { "rollNumber": 41, "name": "Priyanshu Kumar", "class": "NURSERY" },
-  { "rollNumber": 43, "name": "Neha Kumari", "class": "NURSERY" },
-  { "rollNumber": 44, "name": "Chandu Kumar", "class": "NURSERY" },
-  { "rollNumber": 47, "name": "Ayush Kumar", "class": "NURSERY" },
-  { "rollNumber": 48, "name": "Puja Kumari", "class": "NURSERY" },
-  { "rollNumber": 49, "name": "Aradhya Kumari", "class": "NURSERY" },
-  { "rollNumber": 50, "name": "Sumit Kumar", "class": "NURSERY" },
-  { "rollNumber": 51, "name": "Dhananjay Kumar", "class": "NURSERY" },
-  { "rollNumber": 52, "name": "Shubhchitak Kumar", "class": "NURSERY" },
-  { "rollNumber": 53, "name": "Raj Priyadarshi", "class": "NURSERY" },
-  { "rollNumber": 54, "name": "Ankush Kumar", "class": "NURSERY" },
-  { "rollNumber": 55, "name": "Sonu Kumar", "class": "NURSERY" },
-  { "rollNumber": 56, "name": "Anand Kumar", "class": "NURSERY" },
-  { "rollNumber": 57, "name": "Kartik Kumar", "class": "NURSERY" },
-  { "rollNumber": 58, "name": "Lakshya Kumar", "class": "NURSERY" },
-  { "rollNumber": 59, "name": "Pushkar Kumar", "class": "NURSERY" },
-  { "rollNumber": 60, "name": "Adarsh Kumar", "class": "NURSERY" }
-]
+// const students = [
+//   { "rollNumber": 1,  "name": "Shivangi Kumari",      "class": "NURSERY" },
+//   { "rollNumber": 2,  "name": "Harekrishna",     "class": "NURSERY" },
+//   { "rollNumber": 3,  "name": "Arohi Kumari",      "class": "NURSERY" },
+//   { "rollNumber": 6,  "name": "Amit Kumar",          "class": "NURSERY" },
+//   { "rollNumber": 7,  "name": "Ansh Kumar",          "class": "NURSERY" },
+//   { "rollNumber": 8,  "name": "Vivek Kumar",         "class": "NURSERY" },
+//   { "rollNumber": 9,  "name": "Kiska Kumari",        "class": "NURSERY" },
+//   { "rollNumber": 10, "name": "Satyam Kumar",        "class": "NURSERY" },
+//   { "rollNumber": 11, "name": "Prashant Kumar",      "class": "NURSERY" },
+//   { "rollNumber": 12, "name": "Rishav Kumar",        "class": "NURSERY" },
+//   { "rollNumber": 13, "name": "Kishor Kumar",        "class": "NURSERY" },
+//   { "rollNumber": 14, "name": "Ankush Kumar",       "class": "NURSERY" },
+//   { "rollNumber": 15, "name": "Nithu Kumari",         "class": "NURSERY" },
+//   { "rollNumber": 16, "name": "Roushan Kumar",       "class": "NURSERY" },
+//   { "rollNumber": 17, "name": "Harshit Kumar",       "class": "NURSERY" },
+//   { "rollNumber": 18, "name": "Chirag Kumar",        "class": "NURSERY" },
+//   { "rollNumber": 19, "name": "Prince Kumar",        "class": "NURSERY" },
+//   { "rollNumber": 20, "name": "Karanjeet",       "class": "NURSERY" },
+//   { "rollNumber": 21, "name": "Rishav Kumar",        "class": "NURSERY" },
+//   { "rollNumber": 24, "name": "Premalata Kumari",    "class": "NURSERY" },
+//   { "rollNumber": 25, "name": "Anushka Kumari",      "class": "NURSERY" },
+//   { "rollNumber": 26, "name": "Arav Kumar",          "class": "NURSERY" },
+//   { "rollNumber": 27, "name": "Chhaya Kumari",       "class": "NURSERY" },
+//   { "rollNumber": 29, "name": "Aryan Kumar",        "class": "NURSERY" },
+//   { "rollNumber": 30, "name": "Abhishek Kumar",      "class": "NURSERY" },
+//   { "rollNumber": 31, "name": "Ravi Ranjan",      "class": "NURSERY" },
+//   { "rollNumber": 32, "name": "Nikita Kumari",       "class": "NURSERY" },
+//   { "rollNumber": 33, "name": "Pragati Kumari",       "class": "NURSERY" },
+
+//   { "rollNumber": 34, "name": "Mousam Kumari", "class": "NURSERY" },
+//   { "rollNumber": 35, "name": "Prince Kumar", "class": "NURSERY" },
+//   { "rollNumber": 36, "name": "Tulsi Kumari", "class": "NURSERY" },
+//   { "rollNumber": 37, "name": "Shree Ram", "class": "NURSERY" },
+//   { "rollNumber": 38, "name": "Sheetal Kumari", "class": "NURSERY" },
+//   { "rollNumber": 39, "name": "Satyajeet Kumar", "class": "NURSERY" },
+//   { "rollNumber": 40, "name": "Krishna Kumar", "class": "NURSERY" },
+//   { "rollNumber": 41, "name": "Priyanshu Kumar", "class": "NURSERY" },
+//   { "rollNumber": 43, "name": "Neha Kumari", "class": "NURSERY" },
+//   { "rollNumber": 44, "name": "Chandu Kumar", "class": "NURSERY" },
+//   { "rollNumber": 47, "name": "Ayush Kumar", "class": "NURSERY" },
+//   { "rollNumber": 48, "name": "Puja Kumari", "class": "NURSERY" },
+//   { "rollNumber": 49, "name": "Aradhya Kumari", "class": "NURSERY" },
+//   { "rollNumber": 50, "name": "Sumit Kumar", "class": "NURSERY" },
+//   { "rollNumber": 51, "name": "Dhananjay Kumar", "class": "NURSERY" },
+//   { "rollNumber": 52, "name": "Shubhchitak Kumar", "class": "NURSERY" },
+//   { "rollNumber": 53, "name": "Raj Priyadarshi", "class": "NURSERY" },
+//   { "rollNumber": 54, "name": "Ankush Kumar", "class": "NURSERY" },
+//   { "rollNumber": 55, "name": "Sonu Kumar", "class": "NURSERY" },
+//   { "rollNumber": 56, "name": "Anand Kumar", "class": "NURSERY" },
+//   { "rollNumber": 57, "name": "Kartik Kumar", "class": "NURSERY" },
+//   { "rollNumber": 58, "name": "Lakshya Kumar", "class": "NURSERY" },
+//   { "rollNumber": 59, "name": "Pushkar Kumar", "class": "NURSERY" },
+//   { "rollNumber": 60, "name": "Adarsh Kumar", "class": "NURSERY" }
+// ]
+
+
+// Student Data (I)
+
+// const students = [
+//   { "name": "Rishabh Kumar", "class": "I", "rollNumber": 1 },
+//   { "name": "Payal Kumari", "class": "I", "rollNumber": 4 },
+//   { "name": "Ritik Raj", "class": "I", "rollNumber": 5 },
+//   { "name": "Abhilasha Kumari", "class": "I", "rollNumber": 7 },
+//   { "name": "Abhishek Kumar", "class": "I", "rollNumber": 8 },
+//   { "name": "Himanshu Kumar", "class": "I", "rollNumber": 9 },
+//   { "name": "Pallavi Kumari", "class": "I", "rollNumber": 10 },
+//   { "name": "Aaradhya Kumari", "class": "I", "rollNumber": 11 },
+//   { "name": "Sujeet Kumar", "class": "I", "rollNumber": 12 },
+//   { "name": "Harsh Kumar", "class": "I", "rollNumber": 13 },
+//   { "name": "Ankit Kumar", "class": "I", "rollNumber": 14 },
+//   { "name": "Kunal Kumar", "class": "I", "rollNumber": 15 },
+//   { "name": "Gurusharan Kumar", "class": "I", "rollNumber": 16 },
+//   { "name": "Md Samir Alam", "class": "I", "rollNumber": 17 },
+//   { "name": "Mahi Kumari", "class": "I", "rollNumber": 19 },
+//   { "name": "Srishti Kumari", "class": "I", "rollNumber": 20 },
+//   { "name": "Ritik Kumar", "class": "I", "rollNumber": 22 },
+//   { "name": "Sneha Kumari", "class": "I", "rollNumber": 23 },
+//   { "name": "Gulshan Kumar", "class": "I", "rollNumber": 24 },
+//   { "name": "Beauti Kumari", "class": "I", "rollNumber": 25 },
+//   { "name": "Juhi Kumari", "class": "I", "rollNumber": 26 },
+//   { "name": "Dilkhush Kumar", "class": "I", "rollNumber": 27 },
+//   { "name": "Mayank Kumar", "class": "I", "rollNumber": 28 },
+//   { "name": "Resham Kumari", "class": "I", "rollNumber": 29 },
+//   { "name": "Abhinav Kumar", "class": "I", "rollNumber": 30 },
+//   { "name": "Sonu Kumar", "class": "I", "rollNumber": 32 },
+//   { "name": "Aniket Kumar", "class": "I", "rollNumber": 33 },
+//   { "name": "Satyam Kumar", "class": "I", "rollNumber": 34 },
+
+//    { "name": "Khushboo Kumari", "class": "I", "rollNumber": 35 },
+//   { "name": "Rajnish Kumar", "class": "I", "rollNumber": 36 },
+//   { "name": "Rohit Kumar", "class": "I", "rollNumber": 37 },
+//   { "name": "Krishna Kumar", "class": "I", "rollNumber": 38 },
+//   { "name": "Alok Kumar", "class": "I", "rollNumber": 39 },
+//   { "name": "Nishu Kumari", "class": "I", "rollNumber": 40 },
+//   { "name": "Niharika Kumari", "class": "I", "rollNumber": 41 },
+//   { "name": "Ayush Kumar", "class": "I", "rollNumber": 42 },
+//   { "name": "Utkarsh Raj", "class": "I", "rollNumber": 43 },
+//   { "name": "Nishant Kumar", "class": "I", "rollNumber": 44 },
+//   { "name": "Shivam Kumar", "class": "I", "rollNumber": 45 },
+//   { "name": "Sozal Kumari", "class": "I", "rollNumber": 46 },
+//   { "name": "Ayush Kumar", "class": "I", "rollNumber": 47 },
+//   { "name": "Aman Kumar", "class": "I", "rollNumber": 48 },
+//   { "name": "Sinu Kumari", "class": "I", "rollNumber": 49 },
+//   { "name": "Shivam Kumar", "class": "I", "rollNumber": 50 },
+//   { "name": "Md Rohit Alam", "class": "I", "rollNumber": 51 },
+//   { "name": "Abhinandan Kumar", "class": "I", "rollNumber": 52 },
+
+
+  
+// ]
+
+// Student Data (VI)
+
+// const students = [
+//     { "name": "Naitik Kumar", "class": "VI", "rollNumber": 1 },
+//   { "name": "Adarsh Kumar", "class": "VI", "rollNumber": 2 },
+//   { "name": "Anshuman Kumar", "class": "VI", "rollNumber": 3 },
+// ]
+
+// Student Data (IV)
 
 async function seedStudents() {
   try {

@@ -602,7 +602,7 @@ async function seedNurseryReports () {
   await connectDB()
   console.log('MongoDB Connected ✔')
 
-  let insertedReports = []
+  let updatedReports = []
 
   for (const r of nurseryReports) {
     // 1️⃣ Find student
@@ -616,8 +616,8 @@ async function seedNurseryReports () {
       continue
     }
 
-    // 2️⃣ GK always null/0
-    r.gk = r.gk ?? 0
+    // 2️⃣ GK always null for Nursery
+    r.gk = null
 
     // 3️⃣ Total marks (Nursery = 5 subjects)
     const totalMarks =
@@ -637,19 +637,33 @@ async function seedNurseryReports () {
     else if (percentage >= 45) grade = 'C'
     else grade = 'D'
 
-    // 6️⃣ Division
+    // ✅ 6️⃣ Subject-wise FAIL rule
+    const subjects = [
+      r.english,
+      r.math,
+      r.hindi,
+      r.table,
+      r.rhymes
+    ]
+
+    const hasFailMarks = subjects.some(
+      mark => mark === null || mark < 15
+    )
+
+    // ✅ 7️⃣ Division (correct logic)
     let division = ''
-    if (percentage >= 60) division = 'First'
-    else if (percentage >= 45) division = 'Second'
-    else if (percentage >= 33) division = 'Third'
-    else division = 'Fail'
 
-    // 7️⃣ Fail rule
-    const subjects = [r.english, r.math, r.hindi, r.table, r.rhymes]
-    const hasFailMarks = subjects.some(mark => (mark || 0) < 15)
-    if (hasFailMarks) division = 'Fail'
+    if (hasFailMarks) {
+      division = 'Fail'
+    } else if (percentage >= 60) {
+      division = 'First'
+    } else if (percentage >= 45) {
+      division = 'Second'
+    } else {
+      division = 'Third'   // ✅ 30% is PASS
+    }
 
-    // ✅ 8️⃣ UPDATE or INSERT report
+    // ✅ 8️⃣ UPDATE or INSERT report (NO DUPLICATES)
     const saved = await Report.findOneAndUpdate(
       { studentId: student._id },
       {
@@ -672,12 +686,13 @@ async function seedNurseryReports () {
       { upsert: true, new: true }
     )
 
-    insertedReports.push(saved)
+    updatedReports.push(saved)
   }
 
-  console.log(`🎉 Successfully UPDATED ${insertedReports.length} Nursery reports!`)
+  console.log(`🎉 Successfully UPDATED ${updatedReports.length} Nursery reports!`)
   process.exit()
 }
+
 
 seedNurseryReports()
 

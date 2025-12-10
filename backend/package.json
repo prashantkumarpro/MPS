@@ -10,6 +10,7 @@
     "seed:students": "node ./scripts/seedStudents.js",
      "seed:ukga": "node ./scripts/seedUkgaReports.js",
      "seed:nursery": "node ./scripts/seedNurseryReports.js",
+     "seed:one": "node ./scripts/seedOneReport.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

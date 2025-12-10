@@ -393,23 +393,25 @@ async function seedUkgaReports () {
     else if (percentage >= 45) grade = 'C'
     else grade = 'D'
 
-    // 6️⃣ Division
-    let division = ''
-    if (percentage >= 60) division = 'First'
-    else if (percentage >= 45) division = 'Second'
-    else if (percentage >= 33) division = 'Third'
-    else division = 'Fail'
-
-    // 7️⃣ Fail rule (UKG)
+    // ✅ 6️⃣ Subject-wise FAIL rule
     const subjects = [r.english, r.math, r.hindi, r.table, r.rhymes, r.gk]
-    const hasFailMarks = subjects.some(
-      mark => mark === null || mark < 15
-    )
-    if (hasFailMarks) division = 'Fail'
+    const hasFailMarks = subjects.some(mark => mark === null || mark < 15)
+
+    // ✅ 7️⃣ Division (correct)
+    let division = ''
+    if (hasFailMarks) {
+      division = 'Fail'
+    } else if (percentage >= 60) {
+      division = 'First'
+    } else if (percentage >= 45) {
+      division = 'Second'
+    } else {
+      division = 'Third'
+    }
 
     // ✅ 8️⃣ UPDATE or INSERT (NO DUPLICATES)
     const saved = await Report.findOneAndUpdate(
-      { studentId: student._id }, // ✅ unique
+      { studentId: student._id },
       {
         studentId: student._id,
         english: r.english,
@@ -436,6 +438,5 @@ async function seedUkgaReports () {
   console.log(`🎉 Successfully UPDATED ${updatedReports.length} UKGA reports!`)
   process.exit()
 }
-
 
 seedUkgaReports()
