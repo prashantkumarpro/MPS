@@ -1,6 +1,28 @@
 import React, { forwardRef } from 'react'
 import logo from '../assets/logo.webp'
 import { useNavigate } from 'react-router'
+
+function getPositionText(position) {
+  if (!position) return ''
+
+  const j = position % 10
+  const k = position % 100
+
+  if (j === 1 && k !== 11) return position + 'st'
+  if (j === 2 && k !== 12) return position + 'nd'
+  if (j === 3 && k !== 13) return position + 'rd'
+  return position + 'th'
+}
+
+function getMarkCellClass(mark) {
+  if (mark === null || mark < 15) {
+    return 'bg-red-200 text-red-800 font-semibold'
+  }
+  return ''
+}
+
+
+
 const PrintableReport = forwardRef(({ student, report }, ref) => {
   const navigate = useNavigate()
 
@@ -15,7 +37,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
     ['TABLE', report.table, 50],
     ['RHYMES', report.rhymes, 50],
     ...(!isNursery ? [['GENERAL KNOWLEDGE', report.gk, 50]] : []),
-    ['ART/EVS', report.art, '-']
+    ['ART/EVS', report.art, '-'],
   ]
 
   // Primary subjects
@@ -34,6 +56,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
 
   // ⭐ Nursery = 250 marks, PG/LKG/UKG/Primary = 300 marks ⭐
   const totalFullMarks = isNursery ? 250 : 300
+console.log(report)
 
   return (
     <>
@@ -115,15 +138,24 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
 
           <tbody>
             {/* SUBJECT ROWS */}
-            {subjectRows.map((row, i) => (
-              <tr key={i}>
-                <td className='border border-black p-2 bg-[#ccffcc] font-semibold'>
-                  {row[0]}
-                </td>
-                <td className='border border-black p-2'>{row[1]}</td>
-                <td className='border border-black p-2'>{row[2]}</td>
-              </tr>
-            ))}
+           {subjectRows.map((row, i) => (
+  <tr key={i}>
+    <td className='border border-black p-2 bg-[#ccffcc] font-semibold'>
+      {row[0]}
+    </td>
+
+    <td
+      className={`border border-black p-2 ${getMarkCellClass(row[1])}`}
+    >
+      {row[1] ?? 'Absent'}
+    </td>
+
+    <td className='border border-black p-2'>
+      {row[2]}
+    </td>
+  </tr>
+))}
+
 
             {/* COMMON DETAILS */}
             {[
@@ -132,7 +164,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
               ['PERCENTAGE (%)', report.percentage.toFixed(2)],
               ['DIVISION', report.division],
               ['GRADE', report.grade],
-              ['POSITION', ''],
+               ['POSITION', report.division === 'Fail' ? '' : getPositionText(report.position)],,
               ['ATTENDANCE', report.attendance],
               ['REMARKS', report.remarks]
             ].map((row, i) => (
