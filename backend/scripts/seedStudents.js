@@ -162,6 +162,31 @@ dotenv.config();
 
 // Student Data (IV)
 
+const students = [
+  { "rollNumber": 1, "name": "Minakshi Sharma", "class": "IV" },
+  { "rollNumber": 2, "name": "Sweta Rani", "class": "IV" },
+  { "rollNumber": 3, "name": "Ankita Kumari", "class": "IV" },
+  { "rollNumber": 4, "name": "Kaynath Mirza", "class": "IV" },
+  { "rollNumber": 5, "name": "Sangita Kumari", "class": "IV" },
+  { "rollNumber": 6, "name": "Mahi Priya", "class": "IV" },
+  { "rollNumber": 7, "name": "Prince Kumar", "class": "IV" },
+  { "rollNumber": 8, "name": "Honey Kumari", "class": "IV" },
+  { "rollNumber": 9, "name": "Akriti Kumar", "class": "IV" },
+  { "rollNumber": 10, "name": "Pihu Kumari", "class": "IV" },
+  { "rollNumber": 11, "name": "Varsha Kumari", "class": "IV" },
+  { "rollNumber": 12, "name": "Aryan Kumar", "class": "IV" },
+  { "rollNumber": 13, "name": "Aayu Kumar", "class": "IV" },
+  { "rollNumber": 14, "name": "Satyam Kumar", "class": "IV" },
+  { "rollNumber": 18, "name": "Anamika Priya", "class": "IV" },
+  { "rollNumber": 19, "name": "Simran Kumari", "class": "IV" },
+  { "rollNumber": 20, "name": "Nisha Kumari", "class": "IV" },
+  { "rollNumber": 21, "name": "Suhani Kumari", "class": "IV" },
+  { "rollNumber": 22, "name": "Shaddab Alam", "class": "IV" },
+  { "rollNumber": 23, "name": "Ankit Kumar", "class": "IV" },
+  { "rollNumber": 24, "name": "Beauti Kumari", "class": "IV" }
+]
+
+
 async function seedStudents() {
   try {
     await connectDB(); // <-- using your existing DB connection

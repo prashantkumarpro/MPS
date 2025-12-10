@@ -696,3 +696,29 @@ async function seedNurseryReports () {
 
 seedNurseryReports()
 
+async function assignPositions(className) {
+  await connectDB()
+
+  const reports = await Report.find({ classType: 'KG' }).populate('studentId')
+
+  const classReports = reports.filter(
+    r => r.studentId.class.toUpperCase() === className.toUpperCase()
+  )
+
+  classReports.sort((a, b) => {
+    if (b.percentage !== a.percentage) return b.percentage - a.percentage
+    return b.totalMarks - a.totalMarks
+  })
+
+  for (let i = 0; i < classReports.length; i++) {
+    await Report.updateOne(
+      { _id: classReports[i]._id },
+      { position: i + 1 }
+    )
+  }
+
+  console.log(`🎉 Positions assigned to class ${className}`)
+  process.exit()
+}
+
+assignPositions("Nursery")
