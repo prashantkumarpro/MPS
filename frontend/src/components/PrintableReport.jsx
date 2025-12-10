@@ -32,7 +32,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
   // Decide table based on classType
   const subjectRows = report.classType === 'KG' ? kgSubjects : primarySubjects
 
-  // ⭐ Nursery = 250 marks, LKG/UKG/Primary = 300 marks ⭐
+  // ⭐ Nursery = 250 marks, PG/LKG/UKG/Primary = 300 marks ⭐
   const totalFullMarks = isNursery ? 250 : 300
 
   return (
