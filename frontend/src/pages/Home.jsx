@@ -7,12 +7,12 @@ import Footer from '../pages/Footer'
 import ContactForm from '../components/Contact'
 import GallerySection from '../components/GallerySection'
 import CoursesAndPrograms from '../components/CoursesAndPrograms'
-import ResultBanner from '../components/ResultBanner'
+// import ResultBanner from '../components/ResultBanner'
 
 const Home = () => {
   return (
     <>
-      <ResultBanner />
+      {/* <ResultBanner /> */}
       <HomeBanner />
       <WelcomeText />
       <FeaturesSection />

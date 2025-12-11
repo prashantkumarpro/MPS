@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import logo from '../assets/logo.webp'
 import { useNavigate } from 'react-router'
 
-function getPositionText(position) {
+function getPositionText (position) {
   if (!position) return ''
 
   const j = position % 10
@@ -14,14 +14,12 @@ function getPositionText(position) {
   return position + 'th'
 }
 
-function getMarkCellClass(mark) {
+function getMarkCellClass (mark) {
   if (mark === null || mark < 15) {
     return 'bg-red-200 text-red-800 font-semibold'
   }
   return ''
 }
-
-
 
 const PrintableReport = forwardRef(({ student, report }, ref) => {
   const navigate = useNavigate()
@@ -37,7 +35,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
     ['TABLE', report.table, 50],
     ['RHYMES', report.rhymes, 50],
     ...(!isNursery ? [['GENERAL KNOWLEDGE', report.gk, 50]] : []),
-    ['ART/EVS', report.art, '-'],
+    ['ART/EVS', report.art, 'GRADE']
   ]
 
   // Primary subjects
@@ -48,7 +46,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
     ['SCIENCE', report.science, 50],
     ['SOCIAL STUDIES', report.socialStudies, 50],
     ['GENERAL KNOWLEDGE', report.gk, 50],
-    ['ART/EVS', report.art, '-']
+    ['ART/EVS', report.art, 'GRADE']
   ]
 
   // Decide table based on classType
@@ -56,13 +54,13 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
 
   // ⭐ Nursery = 250 marks, PG/LKG/UKG/Primary = 300 marks ⭐
   const totalFullMarks = isNursery ? 250 : 300
-console.log(report)
+  console.log(report)
 
   return (
     <>
       <div className='flex justify-center my-4'>
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/check-result')}
           className='bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition'
         >
           Check Another Result
@@ -76,8 +74,8 @@ console.log(report)
           <img
             src={logo}
             alt='logo'
-            width={'75px'}
-            height={'75px'}
+            width={'65px'}
+            height={'65px'}
             className='m-auto block'
             loading='lazy'
           />
@@ -100,13 +98,17 @@ console.log(report)
         {/* Student Info */}
         <div className='mb-2 leading-7'>
           <p>
-            <b>Class:</b> {String(student.class).toUpperCase()}
+            <b>Class:</b>{' '}
+            <span className='font-semibold'>
+              {String(student.class).toUpperCase()}
+            </span>
           </p>
           <p>
-            <b>Name:</b> {student.name}
+            <b>Name:</b> <span className='font-semibold'>{student.name} </span>
           </p>
           <p>
-            <b>Roll no:</b> {student.rollNumber}
+            <b>Roll no:</b>{' '}
+            <span className='font-semibold'>{student.rollNumber} </span>
           </p>
           <p>
             <b>Residential Address:</b> ____________________________
@@ -123,6 +125,9 @@ console.log(report)
         <p className='text-center font-semibold text-red-600 mb-2 underline'>
           Record of Academic Performance
         </p>
+        <p className='uppercase text-center font-semibold  mb-2 underline italic'>
+          <b>Note:</b> passing marks for each subject is 15.
+        </p>
 
         {/* Table */}
         <table className='w-full border border-black text-center'>
@@ -138,34 +143,39 @@ console.log(report)
 
           <tbody>
             {/* SUBJECT ROWS */}
-           {subjectRows.map((row, i) => (
-  <tr key={i}>
-    <td className='border border-black p-2 bg-[#ccffcc] font-semibold'>
-      {row[0]}
-    </td>
+            {subjectRows.map((row, i) => (
+              <tr key={i}>
+                <td className='border border-black p-2 bg-[#ccffcc] font-semibold'>
+                  {row[0]}
+                </td>
 
-    <td
-      className={`border border-black p-2 ${getMarkCellClass(row[1])}`}
-    >
-      {row[1] ?? 'Absent'}
-    </td>
+                <td
+                  className={`border border-black p-2 ${getMarkCellClass(
+                    row[1]
+                  )}`}
+                >
+                  {row[1] ?? 'Absent'}
+                </td>
 
-    <td className='border border-black p-2'>
-      {row[2]}
-    </td>
-  </tr>
-))}
-
+                <td className='border border-black p-2'>{row[2]}</td>
+              </tr>
+            ))}
 
             {/* COMMON DETAILS */}
             {[
               ['TOTAL OBTAINED MARK', `${report.totalMarks}`],
               ['TOTAL FULL MARKS', totalFullMarks],
               ['PERCENTAGE (%)', report.percentage.toFixed(2)],
-              ['DIVISION', report.division],
-              ['GRADE', report.grade],
-               ['POSITION', report.division === 'Fail' ? '' : getPositionText(report.position)],,
-              ['ATTENDANCE', report.attendance],
+              ['RESULT', report.division.toUpperCase()],
+              ['GRADE', report.division === 'Fail' ? '' : report.grade],
+              [
+                'POSITION',
+                report.division === 'Fail'
+                  ? ''
+                  : getPositionText(report.position)
+              ],
+              ,
+              ['ATTENDANCE', report.attendance+'/89'],
               ['REMARKS', report.remarks]
             ].map((row, i) => (
               <tr key={i}>
@@ -181,14 +191,14 @@ console.log(report)
         </table>
 
         {/* Signatures */}
-        <div className='flex justify-between mt-10 text-[16px]'>
+        {/* <div className='flex justify-between mt-10 text-[16px]'>
           <p>
             <b>Teacher’s Signature</b>
           </p>
           <p>
             <b>Principal’s Signature & Seal</b>
           </p>
-        </div>
+        </div> */}
       </div>
     </>
   )

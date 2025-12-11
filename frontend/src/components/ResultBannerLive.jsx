@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router'
 
 export default function ResultBannerLive () {
   const [show, setShow] = useState(true)
@@ -37,12 +38,12 @@ export default function ResultBannerLive () {
 
         {/* Right: Button */}
         <div className='flex flex-col items-center md:items-end'>
-          <a
-           href='#checkresult'
+          <Link
+           to='/check-result'
             className='bg-green-400 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition-transform hover:scale-105'
           >
             ✅ Check Result Now
-          </a>
+          </Link>
           <span className='text-xs mt-2 italic opacity-90'>
             Available for all students
           </span>
