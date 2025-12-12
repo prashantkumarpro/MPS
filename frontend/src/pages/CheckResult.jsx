@@ -40,9 +40,9 @@ const CheckResult = () => {
         Check Your Result
       </h2>
 <div className="bg-red-50 border border-red-400 text-red-700 p-3 rounded-lg text-sm">
-  <strong>Important:</strong> Class v, lkg, and pg results are not available yet. They will come soon.
+  <strong>Important:</strong> Class v, ukgb, and lkg  results are not available yet. They will come soon.
   <br />
-  <strong>महत्वपूर्ण:</strong> कक्षा v, ukgb, lkg, और pg का परिणाम अभी उपलब्ध नहीं है। यह जल्द ही जारी किया जाएगा।
+  <strong>महत्वपूर्ण:</strong> कक्षा v, ukgb, और lkg का परिणाम अभी उपलब्ध नहीं है। यह जल्द ही जारी किया जाएगा।
 </div>
       <input
         type='text'

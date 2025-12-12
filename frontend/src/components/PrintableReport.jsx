@@ -26,6 +26,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
 
   // ⭐ FIX: Identify Nursery separately ⭐
   const isNursery = String(student.class).toUpperCase() === 'NURSERY'
+  const isPg = String(student.class).toUpperCase() === 'PG'
 
   // KG subjects
   const kgSubjects = [
@@ -34,8 +35,8 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
     ['HINDI', report.hindi, 50],
     ['TABLE', report.table, 50],
     ['RHYMES', report.rhymes, 50],
-    ...(!isNursery ? [['GENERAL KNOWLEDGE', report.gk, 50]] : []),
-    ['ART/EVS', report.art, 'GRADE']
+    ...(!isNursery && !isPg ? [['GENERAL KNOWLEDGE', report.gk, 50]] : []),
+    ['ART/EVS', report.art, isPg ? 50 : 'GRADE']
   ]
 
   // Primary subjects
@@ -175,7 +176,7 @@ const PrintableReport = forwardRef(({ student, report }, ref) => {
                   : getPositionText(report.position)
               ],
               ,
-              ['ATTENDANCE', report.attendance+'/89'],
+              ['ATTENDANCE', report.attendance + '/89'],
               ['REMARKS', report.remarks]
             ].map((row, i) => (
               <tr key={i}>
