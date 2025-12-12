@@ -37,6 +37,41 @@ dotenv.config();
 // ];
 
 // Student Data (UKGB)
+const students = [
+  { "rollNumber": 1, "name": "Yash Karan", "class": "UKGB" },
+  { "rollNumber": 2, "name": "Rajveer", "class": "UKGB" },
+  { "rollNumber": 3, "name": "Ayush Kumar", "class": "UKGB" },
+  { "rollNumber": 4, "name": "Karan Kumar", "class": "UKGB" },
+  { "rollNumber": 5, "name": "Amit Kumar", "class": "UKGB" },
+  { "rollNumber": 6, "name": "Gautam Kumar", "class": "UKGB" },
+  { "rollNumber": 7, "name": "Navneet Kumar", "class": "UKGB" },
+  { "rollNumber": 8, "name": "Balveer Kumar", "class": "UKGB" },
+  { "rollNumber": 9, "name": "Pushkar Kumar", "class": "UKGB" },
+  { "rollNumber": 10, "name": "Harsh Raj", "class": "UKGB" },
+  { "rollNumber": 11, "name": "Ansh Kumar", "class": "UKGB" },
+  { "rollNumber": 12, "name": "Rahul Kumar", "class": "UKGB" },
+  { "rollNumber": 13, "name": "Raghav Kumar", "class": "UKGB" },
+  { "rollNumber": 14, "name": "Anchal Kumari", "class": "UKGB" },
+  { "rollNumber": 15, "name": "Anand Raj", "class": "UKGB" },
+  { "rollNumber": 16, "name": "Sonakshi Kumari", "class": "UKGB" },
+  { "rollNumber": 17, "name": "Tezash Kumar", "class": "UKGB" },
+  { "rollNumber": 18, "name": "Bhaskar Kumar", "class": "UKGB" },
+  { "rollNumber": 19, "name": "Sushant Raj", "class": "UKGB" },
+  { "rollNumber": 21, "name": "Akansha Kumari", "class": "UKGB" },
+  { "rollNumber": 22, "name": "Pampi Priya", "class": "UKGB" },
+  { "rollNumber": 23, "name": "Anushka Kumari", "class": "UKGB" },
+  { "rollNumber": 24, "name": "Ritik Kumar", "class": "UKGB" },
+  { "rollNumber": 25, "name": "Chand Alam", "class": "UKGB" },
+  { "rollNumber": 26, "name": "Pari Kumari", "class": "UKGB" },
+  { "rollNumber": 27, "name": "Nishant Kumar", "class": "UKGB" },
+  { "rollNumber": 28, "name": "Devraj Kumar", "class": "UKGB" },
+  { "rollNumber": 29, "name": "Jayant Raj", "class": "UKGB" },
+  { "rollNumber": 30, "name": "Aditya Kumar", "class": "UKGB" },
+  { "rollNumber": 31, "name": "Ayush Kumar", "class": "UKGB" },
+  { "rollNumber": 32, "name": "Divya Bharti", "class": "UKGB" },
+  { "rollNumber": 33, "name": "Ashish Kumar", "class": "UKGB" },
+  { "rollNumber": 34, "name": "Piyush Kumar", "class": "UKGB" }
+]
 
 
 // Student Data (Nursery)
@@ -292,26 +327,26 @@ dotenv.config();
 // ]
 
 // Student Data (V)
-const students = [
-  {"name":"Sonakshi Sharma", "class":"V", "rollNumber":1},
-  {"name":"Astha Tomar", "class":"V", "rollNumber":2},
-  {"name":"Aryaveer", "class":"V", "rollNumber":3},
-  {"name":"Sapna Yadav", "class":"V", "rollNumber":4},
-  {"name":"Dristi Priya", "class":"V", "rollNumber":6},
-  {"name":"Pushkar Kumar", "class":"V", "rollNumber":7},
-  {"name":"Aekta Kumari", "class":"V", "rollNumber":9},
-  {"name":"Arav Gupta", "class":"V", "rollNumber":10},
-  {"name":"Ansh Raj", "class":"V", "rollNumber":11},
-  {"name":"Yash Raj", "class":"V", "rollNumber":12},
-  {"name":"Raunak Kumar", "class":"V", "rollNumber":13},
-  {"name":"Smriti Kumari", "class":"V", "rollNumber":14},
-  {"name":"Manprit Kumar", "class":"V", "rollNumber":16},
-  {"name":"Adiba Khanam", "class":"V", "rollNumber":15},
-  {"name":"Ansh Singh", "class":"V", "rollNumber":17},
-  {"name":"Vaishnavi Kumari", "class":"V", "rollNumber":18},
-  {"name":"Sakshi Singh", "class":"V", "rollNumber":20},
+// const students = [
+//   {"name":"Sonakshi Sharma", "class":"V", "rollNumber":1},
+//   {"name":"Astha Tomar", "class":"V", "rollNumber":2},
+//   {"name":"Aryaveer", "class":"V", "rollNumber":3},
+//   {"name":"Sapna Yadav", "class":"V", "rollNumber":4},
+//   {"name":"Dristi Priya", "class":"V", "rollNumber":6},
+//   {"name":"Pushkar Kumar", "class":"V", "rollNumber":7},
+//   {"name":"Aekta Kumari", "class":"V", "rollNumber":9},
+//   {"name":"Arav Gupta", "class":"V", "rollNumber":10},
+//   {"name":"Ansh Raj", "class":"V", "rollNumber":11},
+//   {"name":"Yash Raj", "class":"V", "rollNumber":12},
+//   {"name":"Raunak Kumar", "class":"V", "rollNumber":13},
+//   {"name":"Smriti Kumari", "class":"V", "rollNumber":14},
+//   {"name":"Manprit Kumar", "class":"V", "rollNumber":16},
+//   {"name":"Adiba Khanam", "class":"V", "rollNumber":15},
+//   {"name":"Ansh Singh", "class":"V", "rollNumber":17},
+//   {"name":"Vaishnavi Kumari", "class":"V", "rollNumber":18},
+//   {"name":"Sakshi Singh", "class":"V", "rollNumber":20},
  
-]
+// ]
 
 // Student Data (VI)
 // const students = [
