@@ -39,7 +39,11 @@ const CheckResult = () => {
       <h2 className='text-2xl font-semibold text-gray-800 text-center'>
         Check Your Result
       </h2>
-
+<div className="bg-red-50 border border-red-400 text-red-700 p-3 rounded-lg text-sm">
+  <strong>Important:</strong> Class v, lkg, and pg results are not available yet. They will come soon.
+  <br />
+  <strong>महत्वपूर्ण:</strong> कक्षा v, lkg, और pg का परिणाम अभी उपलब्ध नहीं है। यह जल्द ही जारी किया जाएगा।
+</div>
       <input
         type='text'
         placeholder='Class in roman e.g iii'
@@ -50,11 +54,20 @@ const CheckResult = () => {
 
       <input
         type='number'
-        placeholder='Roll number in digit e.g 1'
+        placeholder='Rollnumber in digit e.g 1'
         value={rollNumber}
         onChange={e => setRollNumber(e.target.value.trim())}
         className='px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
       />
+
+      <p className='text-sm text-gray-600 bg-yellow-50 border border-yellow-300 p-3 rounded-lg'>
+        <span className='font-semibold'>Note:</span> Class 1 (I) – 6 (VI)
+        students must enter their class in roman like:{' '}
+        <span className='font-medium'>i, ii, iii, iv, v, vi</span>.
+        <br />
+        For KG classes enter:{' '}
+        <span className='font-medium'>ukga, ukgb, lkg, nursery, pg</span>.
+      </p>
 
       <button
         type='submit'
