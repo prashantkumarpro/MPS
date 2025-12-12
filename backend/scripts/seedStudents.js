@@ -36,6 +36,8 @@ dotenv.config();
 //   { "name": "Dilkhush Kumar", "class": "UKGA", "rollNumber": 37 }
 // ];
 
+// Student Data (UKGB)
+
 
 // Student Data (Nursery)
 // const students = [
@@ -94,7 +96,6 @@ dotenv.config();
 //   { "rollNumber": 60, "name": "Adarsh Kumar", "class": "NURSERY" }
 // ]
 
-
 // Student Data (I)
 // const students = [
 //   { "name": "Rishabh Kumar", "class": "I", "rollNumber": 1 },
@@ -150,7 +151,6 @@ dotenv.config();
 // ]
 
 // Student Data (II)
-
 //  const students = [
 //   { "name": "Sawan Kumar", "class": "II", "rollNumber": 1 },
 //   { "name": "Pritam Kumar", "class": "II", "rollNumber": 2 },
@@ -186,58 +186,46 @@ dotenv.config();
 // ];
 
 // Student Data (III)
-
-const students = [
-  { "name": "Sonakshi Yadav", "class": "III", "rollNumber": 1 },
-  { "name": "Rashni Yadav", "class": "III", "rollNumber": 3 },
-  { "name": "Sakshi Kumari", "class": "III", "rollNumber": 4 },
-  { "name": "Sonakshi Kumari", "class": "III", "rollNumber": 5 },
-  { "name": "Dipanshi Kumari", "class": "III", "rollNumber": 6 },
-  { "name": "Priyal Kumari", "class": "III", "rollNumber": 7 },
-  { "name": "Ritika Ranjan", "class": "III", "rollNumber": 8 },
-  { "name": "Raj Lakhami", "class": "III", "rollNumber": 9 },
-  { "name": "Stuti Priya", "class": "III", "rollNumber": 10 },
-  { "name": "Bhawana Kumari", "class": "III", "rollNumber": 11 },
-  { "name": "Sushant Kumar", "class": "III", "rollNumber": 12 },
-  { "name": "Ramanand Kumar", "class": "III", "rollNumber": 13 },
-  { "name": "Abhishek Kumar", "class": "III", "rollNumber": 14 },
-  { "name": "Shivam Kumar", "class": "III", "rollNumber": 16 },
-  { "name": "Ashish Kumar", "class": "III", "rollNumber": 17 },
-  { "name": "Divya Kumari", "class": "III", "rollNumber": 19 },
-  { "name": "Anushka Kumari", "class": "III", "rollNumber": 21 },
-  { "name": "Jwala Kumari", "class": "III", "rollNumber": 22 },
-  { "name": "Raj Nandani", "class": "III", "rollNumber": 24 },
-  { "name": "Riya Yadav", "class": "III", "rollNumber": 25 },
-  { "name": "Juli Kumari", "class": "III", "rollNumber": 26 },
-  { "name": "Dhani Kumari", "class": "III", "rollNumber": 27 },
-  { "name": "Dipti Priya", "class": "III", "rollNumber": 28 },
-  { "name": "Aiyush Kumar", "class": "III", "rollNumber": 29 },
-  { "name": "Jyotish Kumar", "class": "III", "rollNumber": 31 },
-  { "name": "Piyush Kumar", "class": "III", "rollNumber": 32 },
-  { "name": "Aditya Kumar", "class": "III", "rollNumber": 34 },
-  { "name": "Kunal Kumar", "class": "III", "rollNumber": 36 },
-  
-  { "name": "Tannu Priya", "class": "III", "rollNumber": 37 },
-  { "name": "Isha Priya", "class": "III", "rollNumber": 38 },
-  { "name": "Karnal Raj", "class": "III", "rollNumber": 39 },
-  { "name": "Sakshi Kumari", "class": "III", "rollNumber": 40 },
-  { "name": "Stuti Kumari", "class": "III", "rollNumber": 41 },
-  { "name": "Riddhi Kumari", "class": "III", "rollNumber": 42 },
-  { "name": "Sagar Kumar", "class": "III", "rollNumber": 43 },
-];
-
-
-
-
-// Student Data (VI)
 // const students = [
-//     { "name": "Anshuman Kumar", "class": "VI", "rollNumber": 1 },
-//     { "name": "Adarsh Kumar", "class": "VI", "rollNumber": 2 },
-//     { "name": "Naitik Kumar", "class": "VI", "rollNumber": 3 },
-// ]
+//   { "name": "Sonakshi Yadav", "class": "III", "rollNumber": 1 },
+//   { "name": "Rashni Yadav", "class": "III", "rollNumber": 3 },
+//   { "name": "Sakshi Kumari", "class": "III", "rollNumber": 4 },
+//   { "name": "Sonakshi Kumari", "class": "III", "rollNumber": 5 },
+//   { "name": "Dipanshi Kumari", "class": "III", "rollNumber": 6 },
+//   { "name": "Priyal Kumari", "class": "III", "rollNumber": 7 },
+//   { "name": "Ritika Ranjan", "class": "III", "rollNumber": 8 },
+//   { "name": "Raj Lakhami", "class": "III", "rollNumber": 9 },
+//   { "name": "Stuti Priya", "class": "III", "rollNumber": 10 },
+//   { "name": "Bhawana Kumari", "class": "III", "rollNumber": 11 },
+//   { "name": "Sushant Kumar", "class": "III", "rollNumber": 12 },
+//   { "name": "Ramanand Kumar", "class": "III", "rollNumber": 13 },
+//   { "name": "Abhishek Kumar", "class": "III", "rollNumber": 14 },
+//   { "name": "Shivam Kumar", "class": "III", "rollNumber": 16 },
+//   { "name": "Ashish Kumar", "class": "III", "rollNumber": 17 },
+//   { "name": "Divya Kumari", "class": "III", "rollNumber": 19 },
+//   { "name": "Anushka Kumari", "class": "III", "rollNumber": 21 },
+//   { "name": "Jwala Kumari", "class": "III", "rollNumber": 22 },
+//   { "name": "Raj Nandani", "class": "III", "rollNumber": 24 },
+//   { "name": "Riya Yadav", "class": "III", "rollNumber": 25 },
+//   { "name": "Juli Kumari", "class": "III", "rollNumber": 26 },
+//   { "name": "Dhani Kumari", "class": "III", "rollNumber": 27 },
+//   { "name": "Dipti Priya", "class": "III", "rollNumber": 28 },
+//   { "name": "Aiyush Kumar", "class": "III", "rollNumber": 29 },
+//   { "name": "Jyotish Kumar", "class": "III", "rollNumber": 31 },
+//   { "name": "Piyush Kumar", "class": "III", "rollNumber": 32 },
+//   { "name": "Aditya Kumar", "class": "III", "rollNumber": 34 },
+//   { "name": "Kunal Kumar", "class": "III", "rollNumber": 36 },
+
+//   { "name": "Tannu Priya", "class": "III", "rollNumber": 37 },
+//   { "name": "Isha Priya", "class": "III", "rollNumber": 38 },
+//   { "name": "Karnal Raj", "class": "III", "rollNumber": 39 },
+//   { "name": "Sakshi Kumari", "class": "III", "rollNumber": 40 },
+//   { "name": "Stuti Kumari", "class": "III", "rollNumber": 41 },
+//   { "name": "Riddhi Kumari", "class": "III", "rollNumber": 42 },
+//   { "name": "Sagar Kumar", "class": "III", "rollNumber": 43 },
+// ];
 
 // Student Data (IV)
-
 // const students = [
 //   { "rollNumber": 1, "name": "Minakshi Sharma", "class": "IV" },
 //   { "rollNumber": 2, "name": "Sweta Rani", "class": "IV" },
@@ -262,6 +250,14 @@ const students = [
 //   { "rollNumber": 24, "name": "Beauti Kumari", "class": "IV" }
 // ]
 
+// Student Data (V)
+
+// Student Data (VI)
+// const students = [
+//     { "name": "Anshuman Kumar", "class": "VI", "rollNumber": 1 },
+//     { "name": "Adarsh Kumar", "class": "VI", "rollNumber": 2 },
+//     { "name": "Naitik Kumar", "class": "VI", "rollNumber": 3 },
+// ]
 
 async function seedStudents() {
   try {
