@@ -45,7 +45,7 @@ export default function ResultBannerLive () {
             ✅ Check Result Now
           </Link>
           <span className='text-xs mt-2 italic opacity-90'>
-            Available for Class: PG, Nursery, UKGA, I, II, III, IV, V, VI students
+            Available for Class: PG, Nursery, UKGA, UKGB, I, II, III, IV, V, VI students
           </span>
         </div>
       </div>
