@@ -44,7 +44,7 @@ const CheckResult = () => {
         type='text'
         placeholder='Class in roman e.g iii'
         value={studentClass}
-        onChange={e => setStudentClass(e.target.value)}
+        onChange={e => setStudentClass(e.target.value.trim())}
         className='px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
       />
 
@@ -52,7 +52,7 @@ const CheckResult = () => {
         type='number'
         placeholder='Roll number in digit e.g 1'
         value={rollNumber}
-        onChange={e => setRollNumber(e.target.value)}
+        onChange={e => setRollNumber(e.target.value.trim())}
         className='px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
       />
 
