@@ -42,7 +42,7 @@ const CheckResult = () => {
 
       <input
         type='text'
-        placeholder='Enter your class'
+        placeholder='Class in roman: iii'
         value={studentClass}
         onChange={e => setStudentClass(e.target.value)}
         className='px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
@@ -50,7 +50,7 @@ const CheckResult = () => {
 
       <input
         type='number'
-        placeholder='Enter your roll number'
+        placeholder='Roll number in digit : 1'
         value={rollNumber}
         onChange={e => setRollNumber(e.target.value)}
         className='px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
