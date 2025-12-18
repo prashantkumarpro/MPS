@@ -1,6 +1,7 @@
 import express from 'express'
 import Report from '../models/Report.js'
 import Student from '../models/Student.js'
+import { getClassReports } from '../controllers/reportController.js'
 
 const router = express.Router()
 
@@ -126,5 +127,8 @@ router.post('/view', async (req, res) => {
     })
   }
 })
+
+
+router.get('/class/:className', getClassReports)
 
 export default router
