@@ -9,6 +9,7 @@ import ResultPage from './pages/resutlPage'
 import AdminLayout from './pages/admin/Dashboard'
 import CheckResult from './pages/CheckResult'
 import { ReportProvider } from './context/ReportContext'
+import ClassResult from './pages/ClassResult'
 
 function App () {
   return (
@@ -22,6 +23,7 @@ function App () {
             <Route path='/allgallery' element={<AllGallery />} />
             <Route path='/check-result' element={<CheckResult />} />
             <Route path='/result' element={<ResultPage />} />
+            <Route path='/class-result' element={<ClassResult />} />
             <Route path='/admin' element={<AdminLayout />} />
           </Route>
         </Routes>
