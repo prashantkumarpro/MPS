@@ -1,5 +1,5 @@
 // 🥇 Position text (1st, 2nd, 3rd...)
-export function getPositionText(position) {
+export function getPositionText (position) {
   if (!position) return ''
 
   const j = position % 10
@@ -12,7 +12,7 @@ export function getPositionText(position) {
 }
 
 // 🟥 Fail mark highlight
-export function getMarkCellClass(mark) {
+export function getMarkCellClass (mark) {
   if (mark === null || mark < 15) {
     return 'bg-red-200 text-red-800 font-semibold'
   }
@@ -20,29 +20,37 @@ export function getMarkCellClass(mark) {
 }
 
 // 🔤 Normalize class
-function normalizeClass(studentClass) {
-  return String(studentClass).toUpperCase()
+function normalizeClass (studentClass) {
+  const cls = String(studentClass).toUpperCase()
+
+  // 🔹 UKG sections → UKG
+  if (cls.startsWith('UKG')) return 'UKG'
+
+  // 🔹 LKG sections → LKG (future-proof)
+  if (cls.startsWith('LKG')) return 'LKG'
+
+  return cls
 }
 
 // 🧠 Class helpers
-function isNursery(cls) {
+function isNursery (cls) {
   return cls === 'NURSERY'
 }
 
-function isPg(cls) {
+function isPg (cls) {
   return cls === 'PG'
 }
 
-function isKg(cls) {
+function isKg (cls) {
   return ['LKG', 'UKG'].includes(cls)
 }
 
-function isPrimary(cls) {
+function isPrimary (cls) {
   return ['I', 'II', 'III', 'IV', 'V', 'VI'].includes(cls)
 }
 
 // 📘 Get subjects based on class
-export function getSubjectRows(report, studentClass) {
+export function getSubjectRows (report, studentClass) {
   const cls = normalizeClass(studentClass)
 
   // 🔹 Nursery
@@ -99,7 +107,7 @@ export function getSubjectRows(report, studentClass) {
 }
 
 // 📊 Total full marks logic
-export function getTotalFullMarks(studentClass) {
+export function getTotalFullMarks (studentClass) {
   const cls = normalizeClass(studentClass)
   return cls === 'NURSERY' ? 250 : 300
 }
