@@ -173,10 +173,10 @@ const fiveReports = [
   { "rollNumber": 13, "english": 26, "math": 39, "hindi": 42, "gk": 45, "socialStudies": 26, "science": 37, "art": "A", "attendance": 54, "remarks": "" },
   { "rollNumber": 14, "english": 18, "math": 46, "hindi": 43, "gk": 45, "socialStudies": 36, "science": 41, "art": "A", "attendance": 70, "remarks": "" },
   { "rollNumber": 16, "english": 26, "math": 27, "hindi": 42, "gk": 41, "socialStudies": 33, "science": 40, "art": "A+", "attendance": 72, "remarks": "" },
-  { "rollNumber": 15, "english": 30, "math": 42, "hindi": 40, "gk": 42, "socialStudies": 48, "science": 48, "art": "A+", "attendance": 57, "remarks": "" },
+  { "rollNumber": 15, "english": 30, "math": 42, "hindi": 40, "gk": 45, "socialStudies": 48, "science": 48, "art": "A+", "attendance": 57, "remarks": "" },
   { "rollNumber": 17, "english": 24, "math": 25, "hindi": 40, "gk": 46, "socialStudies": 32, "science": 43, "art": "A", "attendance": 50, "remarks": "" },
   { "rollNumber": 18, "english": 27, "math": 26, "hindi": 39, "gk": 41, "socialStudies": 29, "science": 35, "art": "A", "attendance": 47, "remarks": "" },
-  { "rollNumber": 20, "english": 14, "math": 31, "hindi": 36, "gk": 40, "socialStudies": 30, "science": 40, "art": "A", "attendance": 52, "remarks": "" }
+  { "rollNumber": 20, "english": 15, "math": 31, "hindi": 36, "gk": 40, "socialStudies": 30, "science": 40, "art": "A", "attendance": 52, "remarks": "" }
 ];
 
 
