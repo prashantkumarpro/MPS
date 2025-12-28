@@ -6,10 +6,17 @@ import Root from './Root'
 import Profile from './components/Profile'
 import Notification from './pages/Notification'
 import ResultPage from './pages/resutlPage'
-import AdminLayout from './pages/admin/Dashboard'
 import CheckResult from './pages/CheckResult'
-import { ReportProvider } from './context/ReportContext'
 import ClassResult from './pages/ClassResult'
+import { ReportProvider } from './context/ReportContext'
+import AdminLayout from './admin/layout/AdminLayout'
+import Dashboard from './admin/pages/Dashboard'
+import Students from './admin/pages/Students'
+import Notices from './admin/pages/Notices'
+import Reports from './admin/pages/Reports'
+import BulkUpload from './admin/pages/BulkUpload'
+import Settings from './admin/pages/Settings'
+import Logout from './admin/pages/Logout'
 
 function App () {
   return (
@@ -24,7 +31,16 @@ function App () {
             <Route path='/check-result' element={<CheckResult />} />
             <Route path='/result' element={<ResultPage />} />
             <Route path='/class-result' element={<ClassResult />} />
-            <Route path='/admin' element={<AdminLayout />} />
+          </Route>
+
+          <Route path='admin' element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path='students' element={<Students />} />
+            <Route path='notices' element={<Notices />} />
+            <Route path='reports' element={<Reports />} />
+            <Route path='bulk-upload' element={<BulkUpload />} />
+            <Route path='settings' element={<Settings />} />
+            <Route path='logout' element={<Logout />} />
           </Route>
         </Routes>
       </BrowserRouter>
