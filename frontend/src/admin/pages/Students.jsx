@@ -1,5 +1,15 @@
 import { useEffect, useState } from 'react'
-import { fetchStudents } from '../../api/index.js'
+import toast from 'react-hot-toast'
+import {
+  fetchStudents,
+  fetchStudentById,
+  updateStudent,
+  deleteStudent
+} from '../../api/index.js'
+import EditStudentModal from '../components/EditStudentModal'
+import { useNavigate } from 'react-router'
+
+// 👇 WRITE THIS INSIDE Students component
 
 export default function Students () {
   // ---------------- STATE ----------------
@@ -13,134 +23,240 @@ export default function Students () {
   const [selectedClass, setSelectedClass] = useState('')
   const [sortBy, setSortBy] = useState('roll')
 
-  // ---------------- FETCH DATA ----------------
+  const [editStudent, setEditStudent] = useState(null)
+  const [editing, setEditing] = useState(false)
+
+  const navigate = useNavigate()
+  // ---------------- LOAD STUDENTS (REUSABLE) ----------------
+  const loadStudents = async () => {
+    setLoading(true)
+
+    const res = await fetchStudents({
+      page,
+      limit,
+      className: selectedClass,
+      sort: sortBy
+    })
+
+    setStudents(res.data || [])
+    setTotalPages(res.totalPages || 1)
+    setLoading(false)
+  }
+
+  // ---------------- INITIAL & DEPENDENT LOAD ----------------
   useEffect(() => {
-    const loadStudents = async () => {
-      setLoading(true)
+    loadStudents()
+  }, [page, selectedClass, sortBy])
 
-      const res = await fetchStudents({
-        page,
-        limit,
-        className: selectedClass,
-        sort: sortBy
-      })
+  // ---------------- EDIT SUBMIT HANDLER ----------------
+  const handleEditStudent = async e => {
+    e.preventDefault()
+    setEditing(true)
 
-      setStudents(res.data || [])
-      setTotalPages(res.totalPages || 1)
-      setLoading(false)
+    const form = e.target
+
+    const payload = {
+      name: form.name.value,
+      parents: {
+        fatherName: form.fatherName.value,
+        motherName: form.motherName.value,
+        mobile: form.mobile.value
+      },
+      personal: {
+        dob: form.dob.value,
+        address: form.address.value
+      }
     }
 
-    loadStudents()
-  }, [page, selectedClass, sortBy, limit])
+    const res = await updateStudent(editStudent._id, payload)
 
-  // ---------------- UI STATES ----------------
-  if (loading) {
-    return <p className="text-lg">Loading students...</p>
+    if (res.success) {
+      toast.success('Student updated successfully 🎉') // ✅ SUCCESS TOAST
+      setEditStudent(null)
+      loadStudents()
+    } else {
+      toast.error(res.error || 'Failed to update student') // ❌ ERROR TOAST
+    }
+
+    setEditing(false)
+  }
+
+  // ---------------- Delete HANDLER ----------------
+  const handleDeleteStudent = async id => {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this student?'
+    )
+
+    if (!confirmed) return
+
+    const res = await deleteStudent(id)
+
+    if (res.success) {
+      toast.success('Student deleted successfully 🗑️')
+      loadStudents()
+    } else {
+      toast.error(res.error || 'Failed to delete student')
+    }
   }
 
   // ---------------- RENDER ----------------
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">👨‍🎓 Students</h1>
+    <div className='space-y-6'>
+      {/* Header */}
+      <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
+        <h1 className='text-3xl font-bold text-gray-800 flex items-center gap-2'>
+          👨‍🎓 Students
+        </h1>
 
-      {/* FILTER + SORT */}
-      <div className="flex gap-4 mb-4">
-        <select
-          value={selectedClass}
-          onChange={e => {
-            setSelectedClass(e.target.value)
-            setPage(1)
-          }}
-          className="border p-2 rounded"
+        <button
+          onClick={() => setOpenModal(true)}
+          className='self-start md:self-auto bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow transition'
         >
-          <option value="">All Classes</option>
-          <option value="NURSERY">NURSERY</option>
-          <option value="PG">PG</option>
-          <option value="LKG">LKG</option>
-          <option value="UKGA">UKGA</option>
-          <option value="UKGB">UKGB</option>
-          <option value="I">I</option>
-          <option value="II">II</option>
-          <option value="III">III</option>
-        </select>
-
-        <select
-          value={sortBy}
-          onChange={e => {
-            setSortBy(e.target.value)
-            setPage(1)
-          }}
-          className="border p-2 rounded"
-        >
-          <option value="roll">Sort by Roll</option>
-          <option value="name">Sort by Name</option>
-        </select>
+          ➕ Add Student
+        </button>
       </div>
 
-      {/* TABLE */}
-      <table className="w-full border border-gray-300 bg-white">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="border p-2">Roll</th>
-            <th className="border p-2">Name</th>
-            <th className="border p-2">Class</th>
-            <th className="border p-2">Actions</th>
-          </tr>
-        </thead>
+      {/* Filters */}
+      <div className='bg-white rounded-xl shadow p-4 flex flex-col md:flex-row gap-4'>
+        <div className='flex flex-col w-full md:w-1/3'>
+          <label className='text-sm text-gray-600 mb-1'>Class</label>
+          <select
+            value={selectedClass}
+            onChange={e => {
+              setSelectedClass(e.target.value)
+              setPage(1)
+            }}
+            className='border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+          >
+            <option value=''>All Classes</option>
+            <option value='NURSERY'>Nursery</option>
+            <option value='PG'>PG</option>
+            <option value='LKG'>LKG</option>
+            <option value='UKGA'>UKGA</option>
+            <option value='UKGB'>UKGB</option>
+            <option value='I'>Class I</option>
+            <option value='II'>Class II</option>
+            <option value='III'>Class III</option>
+          </select>
+        </div>
 
-        <tbody>
-          {students.length === 0 && (
+        <div className='flex flex-col w-full md:w-1/3'>
+          <label className='text-sm text-gray-600 mb-1'>Sort By</label>
+          <select
+            value={sortBy}
+            onChange={e => {
+              setSortBy(e.target.value)
+              setPage(1)
+            }}
+            className='border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+          >
+            <option value='roll'>Roll Number</option>
+            <option value='name'>Name (A–Z)</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className='bg-white rounded-xl shadow overflow-x-auto'>
+        <table className='min-w-full text-sm'>
+          <thead className='bg-gray-100 text-gray-700'>
             <tr>
-              <td colSpan="4" className="text-center p-4">
-                No students found
-              </td>
+              <th className='px-4 py-3 text-center'>Roll</th>
+              <th className='px-4 py-3 text-left'>Name</th>
+              <th className='px-4 py-3 text-center'>Class</th>
+              <th className='px-4 py-3 text-center'>Actions</th>
             </tr>
-          )}
+          </thead>
 
-          {students.map(student => (
-            <tr key={student._id}>
-              <td className="border p-2 text-center">
-                {student.rollNumber}
-              </td>
-              <td className="border p-2">{student.name}</td>
-              <td className="border p-2 text-center">
-                {student.class}
-              </td>
-              <td className="border p-2 text-center">
-                <button className="text-blue-600 hover:underline mr-3">
-                  Edit
-                </button>
-                <button className="text-red-600 hover:underline">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+          <tbody className='divide-y'>
+            {students.length === 0 && (
+              <tr>
+                <td colSpan='4' className='text-center py-6 text-gray-500'>
+                  No students found
+                </td>
+              </tr>
+            )}
 
-      {/* PAGINATION */}
-      <div className="flex justify-center gap-4 mt-6">
-        <button
-          disabled={page === 1}
-          onClick={() => setPage(p => p - 1)}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Prev
-        </button>
+            {students.map(student => (
+              <tr key={student._id} className='hover:bg-gray-50 transition'>
+                <td className='px-4 py-3 text-center font-medium'>
+                  {student.rollNumber}
+                </td>
 
-        <span className="px-4 py-2 font-semibold">
-          Page {page} of {totalPages}
+                <td className='px-4 py-3 font-medium text-gray-800'>
+                  {student.name}
+                </td>
+
+                <td className='px-4 py-3 text-center'>
+                  <span className='px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold'>
+                    {student.class}
+                  </span>
+                </td>
+
+                <td className='px-4 py-3 text-center space-x-3'>
+                  <button
+                    className='text-blue-600 hover:text-blue-800 font-medium'
+                    onClick={async () => {
+                      const res = await fetchStudentById(student._id)
+                      if (res.success) setEditStudent(res.data)
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className='text-red-600 hover:text-red-800 font-medium'
+                    onClick={() => handleDeleteStudent(student._id)}
+                  >
+                    Delete
+                  </button>
+
+                  <button
+                    className='text-green-600 hover:text-green-800 font-medium'
+                    onClick={() => navigate(`/admin/students/${student._id}`)}
+                  >
+                    View
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination */}
+      <div className='flex flex-col sm:flex-row justify-between items-center gap-4'>
+        <span className='text-sm text-gray-600'>
+          Page <b>{page}</b> of <b>{totalPages}</b>
         </span>
 
-        <button
-          disabled={page === totalPages}
-          onClick={() => setPage(p => p + 1)}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Next
-        </button>
+        <div className='flex gap-3'>
+          <button
+            disabled={page === 1}
+            onClick={() => setPage(p => p - 1)}
+            className='px-4 py-2 rounded-lg border bg-white hover:bg-gray-100 disabled:opacity-50'
+          >
+            ← Prev
+          </button>
+
+          <button
+            disabled={page === totalPages}
+            onClick={() => setPage(p => p + 1)}
+            className='px-4 py-2 rounded-lg border bg-white hover:bg-gray-100 disabled:opacity-50'
+          >
+            Next →
+          </button>
+        </div>
       </div>
+
+      {/* Edit Modal */}
+      <EditStudentModal
+        open={!!editStudent}
+        student={editStudent}
+        onClose={() => setEditStudent(null)}
+        onSubmit={handleEditStudent}
+        loading={editing}
+      />
     </div>
   )
 }

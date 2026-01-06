@@ -32,7 +32,6 @@ export async function fetchClassReport ({ className }) {
 }
 
 // Fetch students info
-
 export async function fetchStudents ({
   page = 1,
   limit = 10,
@@ -55,4 +54,29 @@ export async function fetchStudents ({
     console.error(error)
     return { success: false, data: [], totalPages: 0 }
   }
+}
+
+// Get student by ID
+export async function fetchStudentById (id) {
+  const res = await fetch(`${API_BASE}/api/student/${id}`)
+  return await res.json()
+}
+
+// Update student
+export async function updateStudent (id, data) {
+  const res = await fetch(`${API_BASE}/api/student/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  return await res.json()
+}
+
+export async function deleteStudent (id) {
+  const res = await fetch(`${API_BASE}/api/student/${id}`, {
+    method: 'DELETE'
+  })
+  return await res.json()
 }
