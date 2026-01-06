@@ -17,4 +17,23 @@ router.post('/add', async (req, res) => {
   }
 })
 
+// Get all students
+
+// Get all students
+router.get('/', async (req, res) => {
+  try {
+    const students = await Student.find().sort({ class: 1, rollNumber: 1 })
+
+    res.status(200).json({
+      success: true,
+      data: students
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
 export default router
