@@ -14,6 +14,17 @@ const studentSchema = new mongoose.Schema(
     rollNumber: {
       type: Number,
       required: true
+    },
+
+    parents: {
+      fatherName: String,
+      motherName: String,
+      mobile: String,
+      email: String
+    },
+    personal: {
+      dob: Date,
+      address: String
     }
   },
   { timestamps: true }
