@@ -1,4 +1,9 @@
-import { RiHome3Fill, RiHome3Line } from 'react-icons/ri'
+import {
+  RiAdminFill,
+  RiAdminLine,
+  RiHome3Fill,
+  RiHome3Line
+} from 'react-icons/ri'
 
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoNotifications } from 'react-icons/io5'
@@ -81,6 +86,19 @@ const MobileBottomHeader = () => {
           <span className='sr-only'>Gellary</span>
           <div className='absolute bottom-full mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition'>
             Gellary
+          </div>
+        </Link>
+        <Link
+          to='/admin'
+          onClick={() => setActiveTab('admin')}
+          className='relative group text-sky-600 hover:text-sky-800'
+        >
+          <div className='text-2xl text-[#0369A1]'>
+            {activeTab === 'admin' ? <RiAdminFill /> : <RiAdminLine />}
+          </div>
+          <span className='sr-only'>Admin</span>
+          <div className='absolute bottom-full mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition'>
+            Admin
           </div>
         </Link>
         <ShareButton />

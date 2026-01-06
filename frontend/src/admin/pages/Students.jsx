@@ -8,6 +8,7 @@ import {
 } from '../../api/index.js'
 import EditStudentModal from '../components/EditStudentModal'
 import { useNavigate } from 'react-router'
+import { GrEdit, GrView } from 'react-icons/gr'
 
 // 👇 WRITE THIS INSIDE Students component
 
@@ -161,10 +162,10 @@ export default function Students () {
         <table className='min-w-full text-sm'>
           <thead className='bg-gray-100 text-gray-700'>
             <tr>
-              <th className='px-4 py-3 text-center'>Roll</th>
-              <th className='px-4 py-3 text-left'>Name</th>
-              <th className='px-4 py-3 text-center'>Class</th>
-              <th className='px-4 py-3 text-center'>Actions</th>
+              <th className='px-4 py-3 text-center'>ROLL</th>
+              <th className='px-4 py-3 text-left'>NAME</th>
+              <th className='px-4 py-3 text-center'>CLASS</th>
+              <th className='px-4 py-3 text-center'>ACTIONS</th>
             </tr>
           </thead>
 
@@ -188,7 +189,7 @@ export default function Students () {
                 </td>
 
                 <td className='px-4 py-3 text-center'>
-                  <span className='px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold'>
+                  <span className='px-3 py-1 rounded-full  text-xs font-semibold'>
                     {student.class}
                   </span>
                 </td>
@@ -201,21 +202,21 @@ export default function Students () {
                       if (res.success) setEditStudent(res.data)
                     }}
                   >
-                    Edit
+                    <GrEdit />
                   </button>
 
-                  <button
+                  {/* <button
                     className='text-red-600 hover:text-red-800 font-medium'
                     onClick={() => handleDeleteStudent(student._id)}
                   >
                     Delete
-                  </button>
+                  </button> */}
 
                   <button
                     className='text-green-600 hover:text-green-800 font-medium'
                     onClick={() => navigate(`/admin/students/${student._id}`)}
                   >
-                    View
+                    <GrView />
                   </button>
                 </td>
               </tr>
