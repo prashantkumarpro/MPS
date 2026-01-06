@@ -1,6 +1,6 @@
 const API_BASE = import.meta.env.VITE_API_URL
 
-// Fetch individual report 
+// Fetch individual report
 export async function fetchReport (data) {
   try {
     const response = await fetch(`${API_BASE}/api/report/view`, {
@@ -16,7 +16,7 @@ export async function fetchReport (data) {
   }
 }
 
-// Fetch class wise report 
+// Fetch class wise report
 export async function fetchClassReport ({ className }) {
   try {
     const response = await fetch(`${API_BASE}/api/report/class/${className}`, {
@@ -32,13 +32,27 @@ export async function fetchClassReport ({ className }) {
 }
 
 // Fetch students info
-export async function fetchStudents () {
+
+export async function fetchStudents ({
+  page = 1,
+  limit = 10,
+  className = '',
+  sort = ''
+} = {}) {
   try {
-    const res = await fetch(`${API_BASE}/api/student`)
-    if (!res.ok) throw new Error('Failed to fetch students')
+    const params = new URLSearchParams()
+
+    params.append('page', page)
+    params.append('limit', limit)
+
+    if (className) params.append('class', className)
+    if (sort) params.append('sort', sort)
+
+    const res = await fetch(`${API_BASE}/api/student?${params.toString()}`)
+
     return await res.json()
-  } catch (err) {
-    console.error(err)
-    return []
+  } catch (error) {
+    console.error(error)
+    return { success: false, data: [], totalPages: 0 }
   }
 }
