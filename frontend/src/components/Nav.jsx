@@ -130,7 +130,7 @@ const Nav = () => {
               href='tel:+916206293108'
               className='hover:text-blue-700 text-[16px] no-underline font-medium'
             >
-              +91-6283522938
+              +91-6283552938
             </a>
           </li>
           <li>
