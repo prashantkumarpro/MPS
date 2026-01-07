@@ -62,6 +62,20 @@ export async function fetchStudentById (id) {
   return await res.json()
 }
 
+// Add new student
+export async function addStudent (data) {
+  const res = await fetch(`${API_BASE}/api/student/add`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+
+  return await res.json()
+}
+
+
 // Update student
 export async function updateStudent (id, data) {
   const res = await fetch(`${API_BASE}/api/student/${id}`, {
@@ -74,6 +88,7 @@ export async function updateStudent (id, data) {
   return await res.json()
 }
 
+// Delete Student
 export async function deleteStudent (id) {
   const res = await fetch(`${API_BASE}/api/student/${id}`, {
     method: 'DELETE'

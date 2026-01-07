@@ -12,6 +12,7 @@ import {
   X
 } from 'lucide-react'
 import SidebarLink from '../components/SidebarLink'
+import { GrHome } from 'react-icons/gr'
 
 export default function AdminLayout () {
   const [open, setOpen] = useState(false)
@@ -67,6 +68,9 @@ export default function AdminLayout () {
 
           <SidebarLink to='/admin/settings' icon={<Settings />}>
             Settings
+          </SidebarLink>
+          <SidebarLink to='/' icon={<GrHome />}>
+            Home
           </SidebarLink>
         </nav>
 

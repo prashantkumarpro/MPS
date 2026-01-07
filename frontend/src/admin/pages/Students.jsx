@@ -4,11 +4,13 @@ import {
   fetchStudents,
   fetchStudentById,
   updateStudent,
+  addStudent,
   deleteStudent
 } from '../../api/index.js'
 import EditStudentModal from '../components/EditStudentModal'
 import { useNavigate } from 'react-router'
 import { GrEdit, GrView } from 'react-icons/gr'
+import AddStudentModal from '../components/AddStudentModal.jsx'
 
 // 👇 WRITE THIS INSIDE Students component
 
@@ -23,6 +25,9 @@ export default function Students () {
 
   const [selectedClass, setSelectedClass] = useState('')
   const [sortBy, setSortBy] = useState('roll')
+
+  const [openAddModal, setOpenAddModal] = useState(false)
+  const [saving, setSaving] = useState(false)
 
   const [editStudent, setEditStudent] = useState(null)
   const [editing, setEditing] = useState(false)
@@ -100,27 +105,53 @@ export default function Students () {
     }
   }
 
+  const handleAddStudent = async e => {
+    e.preventDefault()
+    setSaving(true)
+
+    const form = e.target
+
+    const payload = {
+      name: form.name.value,
+      class: form.class.value,
+      rollNumber: Number(form.rollNumber.value)
+    }
+
+    const res = await addStudent(payload)
+
+    if (res.success) {
+      toast.success('Student added successfully 🎉')
+      setOpenAddModal(false)
+      setPage(1)
+      loadStudents()
+    } else {
+      toast.error(res.error || 'Failed to add student')
+    }
+
+    setSaving(false)
+  }
+
   // ---------------- RENDER ----------------
   return (
     <div className='space-y-6'>
       {/* Header */}
-      <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
+      <div className='flex flex-row md:flex-row items-center justify-between gap-4'>
         <h1 className='text-3xl font-bold text-gray-800 flex items-center gap-2'>
-          👨‍🎓 Students
+          👨‍🎓 STUDENTS
         </h1>
 
         <button
-          onClick={() => setOpenModal(true)}
+          onClick={() => setOpenAddModal(true)}
           className='self-start md:self-auto bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow transition'
         >
-          ➕ Add Student
+          ➕ Add
         </button>
       </div>
 
       {/* Filters */}
-      <div className='bg-white rounded-xl shadow p-4 flex flex-col md:flex-row gap-4'>
+      <div className='bg-white rounded-xl shadow p-4 flex flex-row gap-4'>
         <div className='flex flex-col w-full md:w-1/3'>
-          <label className='text-sm text-gray-600 mb-1'>Class</label>
+          <label className='text-sm text-gray-600 mb-1'>CLASS</label>
           <select
             value={selectedClass}
             onChange={e => {
@@ -142,7 +173,7 @@ export default function Students () {
         </div>
 
         <div className='flex flex-col w-full md:w-1/3'>
-          <label className='text-sm text-gray-600 mb-1'>Sort By</label>
+          <label className='text-sm text-gray-600 mb-1'>SORT BY</label>
           <select
             value={sortBy}
             onChange={e => {
@@ -257,6 +288,13 @@ export default function Students () {
         onClose={() => setEditStudent(null)}
         onSubmit={handleEditStudent}
         loading={editing}
+      />
+
+      <AddStudentModal
+        open={openAddModal}
+        onClose={() => setOpenAddModal(false)}
+        onSubmit={handleAddStudent}
+        loading={saving}
       />
     </div>
   )
