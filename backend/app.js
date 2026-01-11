@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import studentRoutes from './routes/studentRoutes.js'
 import reportRoutes from './routes/reportRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 
 dotenv.config()
 
@@ -33,6 +34,7 @@ connectDB()
 // Routes
 app.use('/api/student', studentRoutes)
 app.use('/api/report', reportRoutes)
+app.use('/api/auth', authRoutes)
 
 app.get('/', (req, res) => {
   res.send('MPS Backend Running')
