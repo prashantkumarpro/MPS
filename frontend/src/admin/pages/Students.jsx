@@ -160,15 +160,15 @@ export default function Students () {
             }}
             className='border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
           >
-            <option value=''>All Classes</option>
+            <option value=''>All</option>
             <option value='NURSERY'>Nursery</option>
             <option value='PG'>PG</option>
             <option value='LKG'>LKG</option>
             <option value='UKGA'>UKGA</option>
             <option value='UKGB'>UKGB</option>
-            <option value='I'>Class I</option>
-            <option value='II'>Class II</option>
-            <option value='III'>Class III</option>
+            <option value='I'> I</option>
+            <option value='II'> II</option>
+            <option value='III'> III</option>
           </select>
         </div>
 
@@ -182,7 +182,7 @@ export default function Students () {
             }}
             className='border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
           >
-            <option value='roll'>Roll Number</option>
+            <option value='roll'>Roll </option>
             <option value='name'>Name (A–Z)</option>
           </select>
         </div>

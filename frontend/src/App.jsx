@@ -19,8 +19,9 @@ import BulkUpload from './admin/pages/BulkUpload'
 import Settings from './admin/pages/Settings'
 import Logout from './admin/pages/Logout'
 import StudentProfile from './admin/pages/StudentProfile'
+import AdminLogin from './admin/pages/AdminLogin'
+import ProtectedRoute from './routes/ProtectedRoute'
 
-console.log(Toaster)
 function App () {
   return (
     <ReportProvider>
@@ -42,7 +43,16 @@ function App () {
             <Route path='/class-result' element={<ClassResult />} />
           </Route>
 
-          <Route path='admin' element={<AdminLayout />}>
+          {/* ✅ ADMIN LOGIN (PUBLIC) */}
+          <Route path='/admin/login' element={<AdminLogin />} />
+          <Route
+            path='admin'
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path='students' element={<Students />} />
             <Route path='students/:id' element={<StudentProfile />} />

@@ -13,10 +13,7 @@ import CoursesAndPrograms from '../components/CoursesAndPrograms'
 const Home = () => {
   return (
     <>
-
-     
       <HomeBanner />
-
       <WelcomeText />
       <FeaturesSection />
       <CoursesAndPrograms />
