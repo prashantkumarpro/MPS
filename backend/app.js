@@ -5,7 +5,7 @@ import connectDB from './config/db.js'
 import studentRoutes from './routes/studentRoutes.js'
 import reportRoutes from './routes/reportRoutes.js'
 import authRoutes from './routes/authRoutes.js'
-
+import userRoutes from './routes/userRoutes.js'
 dotenv.config()
 
 const app = express()
@@ -35,6 +35,7 @@ connectDB()
 app.use('/api/student', studentRoutes)
 app.use('/api/report', reportRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes)
 
 app.get('/', (req, res) => {
   res.send('MPS Backend Running')
