@@ -51,7 +51,7 @@ export default function ClassResultLiveBanner () {
           </Link>
 
           <span className="text-xs mt-2 italic opacity-90 text-center md:text-right">
-            Available for NURSERY, PG, UKGA, UKGB, Class I – VI
+            Available for ALL
           </span>
         </div>
       </div>

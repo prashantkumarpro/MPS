@@ -39,11 +39,11 @@ const CheckResult = () => {
       <h2 className='text-2xl font-semibold text-gray-800 text-center'>
         Check Your Result
       </h2>
-<div className="bg-red-50 border border-red-400 text-red-700 p-3 rounded-lg text-sm">
-  <strong>Important:</strong> Class lkg results are not available yet. This will come soon.
+{/* <div className="bg-red-50 border border-red-400 text-red-700 p-3 rounded-lg text-sm">
+  <strong>Important:</strong> Class lkg results are available.
   <br />
-  <strong>महत्वपूर्ण:</strong> कक्षा lkg का परिणाम अभी उपलब्ध नहीं है। यह जल्द ही जारी किया जाएगा।
-</div>
+  <strong>महत्वपूर्ण:</strong> कक्षा lkg का परिणाम अभी उपलब्ध है।
+</div> */}
       <input
         type='text'
         placeholder='Class in roman e.g iii'
