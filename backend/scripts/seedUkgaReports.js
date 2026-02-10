@@ -534,48 +534,48 @@ async function seedUkgaReports () {
 seedUkgaReports()
 
 
-// async function assignPositions(className) {
-//   await connectDB()
+async function assignPositions(className) {
+  await connectDB()
 
-//   const reports = await Report.find({ classType: 'KG' }).populate('studentId')
+  const reports = await Report.find({ classType: 'KG' }).populate('studentId')
 
-//  const classReports = reports.filter(
-//      r => r.studentId.class.trim().toUpperCase() === className.trim().toUpperCase()
-//    )
+ const classReports = reports.filter(
+     r => r.studentId.class.trim().toUpperCase() === className.trim().toUpperCase()
+   )
  
-//    // Sort by percentage, then totalMarks
-//    classReports.sort((a, b) => {
-//      if (b.percentage !== a.percentage) return b.percentage - a.percentage
-//      return b.totalMarks - a.totalMarks
-//    })
+   // Sort by percentage, then totalMarks
+   classReports.sort((a, b) => {
+     if (b.percentage !== a.percentage) return b.percentage - a.percentage
+     return b.totalMarks - a.totalMarks
+   })
  
-//    let lastOM = null
-//    let lastPercentage = null
-//    let lastPosition = 0
+   let lastOM = null
+   let lastPercentage = null
+   let lastPosition = 0
  
-//    for (let i = 0; i < classReports.length; i++) {
-//      const r = classReports[i]
+   for (let i = 0; i < classReports.length; i++) {
+     const r = classReports[i]
  
-//      // Check if tied with previous student
-//      const isTie =
-//        r.totalMarks === lastOM &&
-//        r.percentage === lastPercentage
+     // Check if tied with previous student
+     const isTie =
+       r.totalMarks === lastOM &&
+       r.percentage === lastPercentage
  
-//      const position = isTie ? lastPosition : i + 1
+     const position = isTie ? lastPosition : i + 1
  
-//      await Report.updateOne(
-//        { _id: r._id },
-//        { position }
-//      )
+     await Report.updateOne(
+       { _id: r._id },
+       { position }
+     )
  
-//      // update trackers
-//      lastOM = r.totalMarks
-//      lastPercentage = r.percentage
-//      lastPosition = position
-//    }
+     // update trackers
+     lastOM = r.totalMarks
+     lastPercentage = r.percentage
+     lastPosition = position
+   }
  
-//    console.log(`🎉 Positions assigned to class ${className}`)
-//    process.exit()
-// }
+   console.log(`🎉 Positions assigned to class ${className}`)
+   process.exit()
+}
 
-// assignPositions("lkg")
+assignPositions("lkg")
