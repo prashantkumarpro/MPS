@@ -8,6 +8,18 @@ const reportSchema = new mongoose.Schema(
       required: true
     },
 
+    // 🔑 Term & Academic Year (MANDATORY)
+    term: {
+      type: String,
+      enum: ['TERM_1', 'TERM_2', 'TERM_3'],
+      required: true
+    },
+
+    academicYear: {
+      type: String, // e.g. "2025-26"
+      required: true
+    },
+
     // Common subjects (KG + Primary)
     english: Number,
     math: Number,
@@ -28,10 +40,10 @@ const reportSchema = new mongoose.Schema(
     percentage: Number,
     grade: String,
     division: String,
-    position:Number,
+    position: Number,
     attendance: String,
     remarks: String,
-    
+
     // IMPORTANT for logic
     classType: {
       type: String,
@@ -41,5 +53,9 @@ const reportSchema = new mongoose.Schema(
   },
   { timestamps: true }
 )
+
+// 🔐 Prevent duplicate reports
+// One student + one term + one academic year = ONE report
+reportSchema.index({ studentId: 1, term: 1, academicYear: 1 }, { unique: true })
 
 export default mongoose.model('Report', reportSchema)
