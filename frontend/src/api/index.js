@@ -1,18 +1,38 @@
 const API_BASE = import.meta.env.VITE_API_URL
 
-// Fetch individual report
-export async function fetchReport (data) {
+// Fetch individual student report (TERM + YEAR wise)
+export async function fetchReport ({
+  studentClass,
+  rollNumber,
+  term,
+  academicYear
+}) {
   try {
     const response = await fetch(`${API_BASE}/api/report/view`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        studentClass,
+        rollNumber,
+        term,
+        academicYear
+      })
     })
+
+    // 🔐 safety check
+    if (!response.ok) {
+      const text = await response.text()
+      throw new Error(text)
+    }
+
     return await response.json()
   } catch (error) {
-    return { success: false, error: error.message }
+    return {
+      success: false,
+      error: error.message
+    }
   }
 }
 

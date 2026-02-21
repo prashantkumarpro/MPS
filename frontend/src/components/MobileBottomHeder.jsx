@@ -59,7 +59,7 @@ const MobileBottomHeader = () => {
         <Link
           to='/notification'
           onClick={() => setActiveTab('notice')}
-          className='relative group animate-bounce text-sky-600 hover:text-sky-800'
+          className='relative group text-sky-600 hover:text-sky-800'
         >
           <div className='text-3xl text-[#0369A1]'>
             {activeTab === 'notice' ? (
