@@ -13,20 +13,26 @@ const app = express()
 // JSON parser
 app.use(express.json())
 
-// CORS SETUP
-const allowedOrigins = [
-  'https://maxpublicschool.site',
-  'https://mps-mohanpur.vercel.app',
-  'http://localhost:5173' // for testing
-]
-
 app.use(
   cors({
-    origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (Postman, curl, server-to-server)
+      if (!origin) return callback(null, true)
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
   })
 )
+
+// Explicitly handle preflight
+app.options('*', cors())
 
 // Connect DB
 connectDB()
