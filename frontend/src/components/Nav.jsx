@@ -47,6 +47,16 @@ const Nav = () => {
               Home
             </Link>
           </li>
+          <li onClick={() => handleNavClick('admin')}>
+            <Link
+              to='/admin'
+              className={`hover:text-blue-700 ${
+                activeItem === 'admin' ? 'border-b-4 border-blue-500 pb-2' : ''
+              }`}
+            >
+              Admin
+            </Link>
+          </li>
           <li onClick={() => handleNavClick('#the_school')}>
             <a
               href='#the_school'

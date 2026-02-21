@@ -17,20 +17,28 @@ export async function fetchReport (data) {
 }
 
 // Fetch class wise report
-export async function fetchClassReport ({ className }) {
+export async function fetchClassReport ({ className, term, academicYear }) {
   try {
-    const response = await fetch(`${API_BASE}/api/report/class/${className}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
+    const query = new URLSearchParams({
+      term,
+      academicYear
+    }).toString()
+
+    const response = await fetch(
+      `${API_BASE}/api/report/class/${className}?${query}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    })
+    )
+
     return await response.json()
   } catch (error) {
     return { success: false, error: error.message }
   }
 }
-
 // Fetch students info
 export async function fetchStudents ({
   page = 1,
@@ -74,7 +82,6 @@ export async function addStudent (data) {
 
   return await res.json()
 }
-
 
 // Update student
 export async function updateStudent (id, data) {

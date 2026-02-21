@@ -1,10 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import SelectBox from '../components/SelectBox'
 import { fetchClassReport } from '../api'
-import {
-  getSubjectRows,
-  getTotalFullMarks
-} from '../utils/reportUtils'
+import { getSubjectRows, getTotalFullMarks } from '../utils/reportUtils'
 
 // ---------------- OPTIONS ----------------
 
@@ -22,6 +19,14 @@ const classOptions = [
   { label: 'Class VI', value: 'VI' }
 ]
 
+const termOptions = [
+  { label: '1st Term', value: 'TERM_1' },
+  { label: '2nd Term', value: 'TERM_2' },
+  { label: '3rd Term', value: 'TERM_3' }
+]
+
+const yearOptions = [{ label: '2025–26', value: '2025-26' }]
+
 const sortOptions = [
   { label: 'Roll Number', value: 'roll' },
   { label: 'Position', value: 'position' },
@@ -32,21 +37,37 @@ const sortOptions = [
 
 const ClassResult = () => {
   const [selectedClass, setSelectedClass] = useState('')
+  const [term, setTerm] = useState('')
+  const [academicYear, setAcademicYear] = useState('')
   const [sortBy, setSortBy] = useState('')
   const [reports, setReports] = useState([])
   const [loading, setLoading] = useState(false)
 
   // ---------------- FETCH DATA ----------------
   useEffect(() => {
-    if (!selectedClass) return
+    if (!selectedClass || !term || !academicYear) {
+      setReports([])
+      return
+    }
 
     const loadData = async () => {
       setLoading(true)
       try {
-        const data = await fetchClassReport({ className: selectedClass })
-        setReports(data?.data || data || [])
-      } catch (err) {
-        console.error(err)
+        const res = await fetchClassReport({
+          className: selectedClass,
+          term,
+          academicYear
+        })
+
+        // 🔑 STRICT response handling
+        if (res?.success && Array.isArray(res.data)) {
+          setReports(res.data)
+        } else {
+          console.warn('Unexpected response shape:', res)
+          setReports([])
+        }
+      } catch (error) {
+        console.error('Failed to load class reports:', error)
         setReports([])
       } finally {
         setLoading(false)
@@ -54,7 +75,7 @@ const ClassResult = () => {
     }
 
     loadData()
-  }, [selectedClass])
+  }, [selectedClass, term, academicYear])
 
   // ---------------- FRONTEND SORTING ----------------
   const sortedReports = useMemo(() => {
@@ -63,9 +84,7 @@ const ClassResult = () => {
     const sorted = [...reports]
 
     if (sortBy === 'roll') {
-      sorted.sort(
-        (a, b) => a.studentId.rollNumber - b.studentId.rollNumber
-      )
+      sorted.sort((a, b) => a.studentId.rollNumber - b.studentId.rollNumber)
     }
 
     if (sortBy === 'position') {
@@ -73,9 +92,7 @@ const ClassResult = () => {
     }
 
     if (sortBy === 'name') {
-      sorted.sort((a, b) =>
-        a.studentId.name.localeCompare(b.studentId.name)
-      )
+      sorted.sort((a, b) => a.studentId.name.localeCompare(b.studentId.name))
     }
 
     return sorted
@@ -84,114 +101,104 @@ const ClassResult = () => {
   // ---------------- DYNAMIC SUBJECT HEADERS ----------------
   const subjectHeaders =
     sortedReports.length > 0
-      ? getSubjectRows(
-          sortedReports[0],
-          sortedReports[0].studentId.class
-        )
+      ? getSubjectRows(sortedReports[0], sortedReports[0].studentId.class)
       : []
 
-  const totalFullMarks = selectedClass
-    ? getTotalFullMarks(selectedClass)
-    : 300
+  const totalFullMarks = selectedClass ? getTotalFullMarks(selectedClass) : 300
 
   // ---------------- UI ----------------
   return (
-    <div className="mt-24 px-4">
+    <div className='mt-24 px-4'>
       {/* Dropdowns */}
-      <div className="flex gap-6 items-end mb-6">
+      <div className='flex gap-6 items-end mb-6 flex-wrap'>
         <SelectBox
-          label="Class"
+          label='Class'
           value={selectedClass}
           onChange={e => setSelectedClass(e.target.value)}
           options={classOptions}
-          placeholder="Select Class"
+          placeholder='Select Class'
         />
 
         <SelectBox
-          label="Sort By"
+          label='Term'
+          value={term}
+          onChange={e => setTerm(e.target.value)}
+          options={termOptions}
+          placeholder='Select Term'
+        />
+
+        <SelectBox
+          label='Academic Year'
+          value={academicYear}
+          onChange={e => setAcademicYear(e.target.value)}
+          options={yearOptions}
+          placeholder='Select Year'
+        />
+
+        <SelectBox
+          label='Sort By'
           value={sortBy}
           onChange={e => setSortBy(e.target.value)}
           options={sortOptions}
-          placeholder="Sort By"
+          placeholder='Sort By'
         />
       </div>
 
       {/* Loading */}
       {loading && (
-        <div className="text-center text-lg text-gray-600">
+        <div className='text-center text-lg text-gray-600'>
           Loading reports...
         </div>
       )}
 
       {/* Table */}
       {!loading && sortedReports.length > 0 && (
-        <table className="border w-full mt-4 text-sm">
+        <table className='border w-full mt-4 text-sm'>
           <thead>
-            <tr className="bg-gray-200">
-              <th className="border p-2 text-center">ROLL</th>
-              <th className="border p-2 text-center">NAME</th>
+            <tr className='bg-gray-200'>
+              <th className='border p-2'>ROLL</th>
+              <th className='border p-2'>NAME</th>
 
               {subjectHeaders.map(([subject]) => (
-                <th
-                  key={subject}
-                  className="border p-2 text-center"
-                >
+                <th key={subject} className='border p-2'>
                   {subject}
                 </th>
               ))}
 
-              <th className="border p-2 text-center">OM</th>
-              <th className="border p-2 text-center">FM</th>
-              <th className="border p-2 text-center">%</th>
-              <th className="border p-2 text-center">Grade</th>
-              <th className="border p-2 text-center">Position</th>
-              <th className="border p-2 text-center">Attendance/89</th>
+              <th className='border p-2'>OM</th>
+              <th className='border p-2'>FM</th>
+              <th className='border p-2'>%</th>
+              <th className='border p-2'>Grade</th>
+              <th className='border p-2'>Position</th>
+              <th className='border p-2'>Attendance</th>
             </tr>
           </thead>
 
           <tbody>
             {sortedReports.map(r => {
-              const subjects = getSubjectRows(
-                r,
-                r.studentId.class
-              )
+              const subjects = getSubjectRows(r, r.studentId.class)
 
               return (
                 <tr key={r._id}>
-                  <td className="border p-2 text-center">
+                  <td className='border p-2 text-center'>
                     {r.studentId.rollNumber}
                   </td>
-                  <td className="border p-2 text-center">
-                    {r.studentId.name}
-                  </td>
+                  <td className='border p-2'>{r.studentId.name}</td>
 
                   {subjects.map(([_, value], i) => (
-                    <td
-                      key={i}
-                      className="border p-2 text-center"
-                    >
+                    <td key={i} className='border p-2 text-center'>
                       {value ?? '—'}
                     </td>
                   ))}
 
-                  <td className="border p-2 text-center">
-                    {r.totalMarks}
-                  </td>
-                  <td className="border p-2 text-center">
-                    {totalFullMarks}
-                  </td>
-                  <td className="border p-2 text-center">
+                  <td className='border p-2 text-center'>{r.totalMarks}</td>
+                  <td className='border p-2 text-center'>{totalFullMarks}</td>
+                  <td className='border p-2 text-center'>
                     {r.percentage?.toFixed(1)}%
                   </td>
-                  <td className="border p-2 text-center">
-                    {r.grade}
-                  </td>
-                  <td className="border p-2 text-center">
-                    {r.position}
-                  </td>
-                  <td className="border p-2 text-center">
-                    {r.attendance}
-                  </td>
+                  <td className='border p-2 text-center'>{r.grade}</td>
+                  <td className='border p-2 text-center'>{r.position}</td>
+                  <td className='border p-2 text-center'>{r.attendance}</td>
                 </tr>
               )
             })}
@@ -200,11 +207,15 @@ const ClassResult = () => {
       )}
 
       {/* No Data */}
-      {!loading && selectedClass && sortedReports.length === 0 && (
-        <div className="text-center text-gray-500 mt-6">
-          No records found for this class.
-        </div>
-      )}
+      {!loading &&
+        selectedClass &&
+        term &&
+        academicYear &&
+        sortedReports.length === 0 && (
+          <div className='text-center text-gray-500 mt-6'>
+            No records found for this class.
+          </div>
+        )}
     </div>
   )
 }
