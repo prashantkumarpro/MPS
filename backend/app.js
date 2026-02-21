@@ -39,8 +39,7 @@ app.use(
   })
 )
 
-// Explicitly handle preflight
-app.options('*', cors())
+
 
 // Connect DB
 connectDB()
