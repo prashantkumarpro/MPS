@@ -13,6 +13,14 @@ const app = express()
 // JSON parser
 app.use(express.json())
 
+// CORS SETUP
+const allowedOrigins = [
+  'https://maxpublicschool.site',
+  'https://www.maxpublicschool.site',
+  'https://mps-mohanpur.vercel.app',
+  'http://localhost:5173' // for testing
+]
+
 app.use(
   cors({
     origin: function (origin, callback) {
