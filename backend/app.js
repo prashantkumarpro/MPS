@@ -6,6 +6,7 @@ import studentRoutes from './routes/studentRoutes.js'
 import reportRoutes from './routes/reportRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import dashboardRoutes from './routes/dashboardRoutes.js'
 dotenv.config()
 
 const app = express()
@@ -49,6 +50,7 @@ app.use('/api/student', studentRoutes)
 app.use('/api/report', reportRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/dashboard', dashboardRoutes)
 
 app.get('/', (req, res) => {
   res.send('MPS Backend Running')
