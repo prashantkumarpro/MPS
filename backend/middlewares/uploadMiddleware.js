@@ -1,11 +1,20 @@
 import multer from "multer";
 import path from "path";
+import fs from "fs";
+import crypto from "crypto"; // ⚠️ you also missed this
 
+// 🔥 DEFINE UPLOAD PATH
+const uploadDir = path.join("uploads", "notices");
+
+// 🔥 CREATE FOLDER IF NOT EXISTS
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 // storage config
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads/notices");
+    cb(null, uploadDir); // ✅ use dynamic path
   },
 
   filename: function (req, file, cb) {
@@ -17,7 +26,7 @@ const storage = multer.diskStorage({
 
 // file filter
 const fileFilter = (req, file, cb) => {
-  const allowed = /pdf|jpg|jpeg|png/;
+  const allowed = /pdf|jpg|jpeg|png|webp/;
   const ext = path.extname(file.originalname).toLowerCase();
 
   if (allowed.test(ext)) cb(null, true);
