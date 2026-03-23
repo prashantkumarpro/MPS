@@ -31,37 +31,58 @@ const Notices = () => {
   }, [])
 
   // 🚀 CREATE NOTICE
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
-    const formData = new FormData()
-    formData.append('title', title)
-    formData.append('content', content)
-    formData.append('isImportant', isImportant)
+    try {
+      const token = localStorage.getItem('token')
 
-    for (let file of files) {
-      formData.append('files', file)
+      if (!token) {
+        alert('User not logged in')
+        return
+      }
+
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('content', content)
+      formData.append('isImportant', isImportant)
+
+      for (let file of files) {
+        formData.append('files', file)
+      }
+
+      const res = await fetch(`${API_BASE}/api/notices`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      })
+
+      const data = await res.json()
+
+      // 🔥 DEBUG RESPONSE
+      console.log('CREATE NOTICE RESPONSE:', data)
+
+      if (!res.ok) {
+        alert(data.message || 'Failed to create notice')
+        return
+      }
+
+      // ✅ reset form
+      setTitle('')
+      setContent('')
+      setFiles([])
+      setIsImportant(false)
+
+      loadData()
+    } catch (error) {
+      console.log('ERROR:', error)
     }
-
-    await fetch(`${API_BASE}/api/notices`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      body: formData
-    })
-
-    setTitle('')
-    setContent('')
-    setFiles([])
-    setIsImportant(false)
-
-    loadData()
   }
 
   return (
     <div className='p-6 space-y-8'>
-
       {/* 🔥 CREATE NOTICE FORM */}
       <div className='bg-white p-6 rounded-2xl shadow border'>
         <h2 className='text-xl font-semibold mb-4'>➕ Create Notice</h2>
@@ -130,7 +151,7 @@ const Notices = () => {
                   {editId === notice._id ? (
                     <input
                       value={editData.title}
-                      onChange={(e) =>
+                      onChange={e =>
                         setEditData({ ...editData, title: e.target.value })
                       }
                       className='border p-1 rounded'
@@ -151,7 +172,7 @@ const Notices = () => {
               {editId === notice._id ? (
                 <textarea
                   value={editData.content}
-                  onChange={(e) =>
+                  onChange={e =>
                     setEditData({ ...editData, content: e.target.value })
                   }
                   className='border p-2 w-full rounded mt-2'
@@ -166,7 +187,7 @@ const Notices = () => {
                   <input
                     type='checkbox'
                     checked={editData.isImportant}
-                    onChange={(e) =>
+                    onChange={e =>
                       setEditData({
                         ...editData,
                         isImportant: e.target.checked
@@ -205,7 +226,9 @@ const Notices = () => {
                             method: 'PUT',
                             headers: {
                               'Content-Type': 'application/json',
-                              Authorization: `Bearer ${localStorage.getItem('token')}`
+                              Authorization: `Bearer ${localStorage.getItem(
+                                'token'
+                              )}`
                             },
                             body: JSON.stringify(editData)
                           })
@@ -218,9 +241,7 @@ const Notices = () => {
                         💾 Save
                       </button>
 
-                      <button onClick={() => setEditId(null)}>
-                        Cancel
-                      </button>
+                      <button onClick={() => setEditId(null)}>Cancel</button>
                     </>
                   ) : (
                     <>
@@ -229,7 +250,9 @@ const Notices = () => {
                           await fetch(`${API_BASE}/api/notices/${notice._id}`, {
                             method: 'DELETE',
                             headers: {
-                              Authorization: `Bearer ${localStorage.getItem('token')}`
+                              Authorization: `Bearer ${localStorage.getItem(
+                                'token'
+                              )}`
                             }
                           })
 
