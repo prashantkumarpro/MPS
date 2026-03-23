@@ -1,5 +1,29 @@
 const API_BASE = import.meta.env.VITE_API_URL
 
+// Fetch dashboard stats
+export async function fetchStats () {
+  try {
+    const res = await fetch(`${API_BASE}/api/dashboard/stats`)
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch dashboard stats')
+    }
+
+    const data = await res.json()
+
+    return data
+  } catch (error) {
+    console.error('Dashboard API Error:', error)
+    throw error
+  }
+}
+
+export async function fetchNotices() {
+  const res = await fetch(`${API_BASE}/api/notices`);
+  if (!res.ok) throw new Error("Failed to fetch notices");
+  return await res.json();
+}
+
 // Fetch individual student report (TERM + YEAR wise)
 export async function fetchReport ({
   studentClass,
