@@ -6,6 +6,7 @@ import Student from '../models/Student.js'
 // =======================================
 export const createUser = async (req, res) => {
   try {
+    
     const { name, email, password, role } = req.body
 
     // 1️⃣ Validate input

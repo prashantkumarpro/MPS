@@ -7,6 +7,7 @@ import reportRoutes from './routes/reportRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import dashboardRoutes from './routes/dashboardRoutes.js'
+import noticeRoutes from './routes/noticeRoutes.js'
 dotenv.config()
 
 const app = express()
@@ -51,6 +52,10 @@ app.use('/api/report', reportRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/dashboard', dashboardRoutes)
+app.use("/api/notices", noticeRoutes);
+
+// static access
+app.use("/uploads", express.static("uploads"));
 
 app.get('/', (req, res) => {
   res.send('MPS Backend Running')

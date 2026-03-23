@@ -45,7 +45,7 @@ export const protect = async (req, res, next) => {
 
     // 4️⃣ Attach user to request
     req.user = {
-      id: user._id,
+      _id: user._id, 
       role: user.role,
       studentId: user.studentId
     }
