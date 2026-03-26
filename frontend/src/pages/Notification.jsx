@@ -3,6 +3,7 @@ import { fetchNotices } from '../api'
 import MarqueeDownload from '../components/MarqueeDownload '
 import ResultBannerLive from '../components/ResultBannerLive'
 import ClassResultLiveBanner from '../components/ClassResultLiveBanner'
+import ImagePreviewModal from '../components/ImagePreviewModal'
 
 const Notification = () => {
   const [notices, setNotices] = useState([])
@@ -33,7 +34,7 @@ const Notification = () => {
         </p>
       </div>
       <div className='space-y-6 mb-12'>
-        {notices.map((notice,index) => (
+        {notices.map((notice, index) => (
           <div
             key={notice._id}
             className='bg-white p-5 rounded-2xl shadow-sm hover:shadow-md transition border border-gray-100'
@@ -66,48 +67,48 @@ const Notification = () => {
               {notice.content}
             </p>
 
-            {/* ✅ FILES SECTION */}
+            {/* ✅ FILES */}
             {notice.files?.length > 0 && (
               <div className='mt-4 border-t pt-3'>
                 <p className='text-sm font-medium text-gray-700 mb-3'>
                   📎 Attachments:
                 </p>
 
-                {/* 🔥 Grid Layout */}
-                <div className='grid grid-cols-2 md:grid-cols-3 gap-3'>
-                  {notice.files.map((file, index) => {
-                    const fileUrl = `${API_BASE}/${file}`
-
-                    const isImage =
-                      file.endsWith('.jpg') ||
-                      file.endsWith('.jpeg') ||
-                      file.endsWith('.png') ||
-                      file.endsWith('.webp')
-
-                    return isImage ? (
+                {/* 🔥 IMAGE SLIDER */}
+                <div className='flex gap-3 overflow-x-auto pb-2 scrollbar-hide'>
+                  {notice.files
+                    .filter(file => file.url.match(/\.(jpg|jpeg|png|webp)$/i))
+                    .map((file, index) => (
                       <div
                         key={index}
-                        className='overflow-hidden rounded-lg border cursor-pointer group'
-                        onClick={() => setPreviewImage(fileUrl)}
+                        onClick={() => setPreviewImage(file.url)}
+                        className='min-w-[140px] h-28 rounded-lg overflow-hidden border cursor-pointer flex-shrink-0'
                       >
                         <img
-                          src={fileUrl}
+                          src={file.url}
                           alt='notice'
-                          className='w-full h-28 object-cover group-hover:scale-110 transition duration-300'
+                          loading='lazy'
+                          className='w-full h-full object-cover hover:scale-110 transition'
                         />
                       </div>
-                    ) : (
+                    ))}
+                </div>
+
+                {/* 🔥 PDF FILES */}
+                <div className='mt-3 flex flex-wrap gap-2'>
+                  {notice.files
+                    .filter(file => file.url.endsWith('.pdf'))
+                    .map((file, index) => (
                       <a
                         key={index}
-                        href={fileUrl}
+                        href={file.url}
                         target='_blank'
                         rel='noreferrer'
-                        className='flex items-center justify-center text-sm bg-gray-100 text-blue-600 rounded-lg p-2 hover:bg-blue-100 transition'
+                        className='text-sm bg-gray-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-100'
                       >
                         📄 File {index + 1}
                       </a>
-                    )
-                  })}
+                    ))}
                 </div>
               </div>
             )}
@@ -119,27 +120,11 @@ const Notification = () => {
           </div>
         ))}
       </div>
+      <ImagePreviewModal
+        image={previewImage}
+        onClose={() => setPreviewImage(null)}
+      />
 
-      {previewImage && (
-        <div
-          className='fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50'
-          onClick={() => setPreviewImage(null)}
-        >
-          <img
-            src={previewImage}
-            alt='preview'
-            className='max-w-[90%] max-h-[90%] rounded-lg shadow-lg'
-          />
-
-          {/* Close Button */}
-          <button
-            className='absolute top-5 right-5 text-white text-3xl'
-            onClick={() => setPreviewImage(null)}
-          >
-            ✕
-          </button>
-        </div>
-      )}
       {/* 🔥 Extra Sections */}
       <div className='flex flex-col gap-10'>
         <ClassResultLiveBanner />

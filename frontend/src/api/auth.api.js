@@ -22,6 +22,11 @@ export async function loginUser(credentials) {
       }
     }
 
+    // 🔥 IMPORTANT: Save token
+    if (data.token) {
+      localStorage.setItem('token', data.token)
+    }
+
     return data
   } catch (error) {
     return {

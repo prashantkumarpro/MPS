@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react'
-import { fetchNotices } from '../../api'
+import { deleteNotice, fetchNotices, updateNotice } from '../../api'
+import ImagePreviewModal from '../../components/ImagePreviewModal'
 
 const Notices = () => {
   const [notices, setNotices] = useState([])
-
+  const [loading, setLoading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [isUploading, setIsUploading] = useState(false)
   // 🔥 CREATE STATE
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [files, setFiles] = useState([])
   const [isImportant, setIsImportant] = useState(false)
+  const [previewImage, setPreviewImage] = useState(null)
 
   // 🔥 EDIT STATE
   const [editId, setEditId] = useState(null)
@@ -22,63 +26,82 @@ const Notices = () => {
 
   // 🔁 LOAD DATA
   const loadData = async () => {
-    const data = await fetchNotices()
-    setNotices(data)
+    try {
+      setLoading(true)
+      const data = await fetchNotices()
+      setNotices(data)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
     loadData()
   }, [])
 
-  // 🚀 CREATE NOTICE
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault()
 
-    try {
-      const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token')
 
-      if (!token) {
-        alert('User not logged in')
-        return
-      }
-
-      const formData = new FormData()
-      formData.append('title', title)
-      formData.append('content', content)
-      formData.append('isImportant', isImportant)
-
-      for (let file of files) {
-        formData.append('files', file)
-      }
-
-      const res = await fetch(`${API_BASE}/api/notices`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-        body: formData
-      })
-
-      const data = await res.json()
-
-      // 🔥 DEBUG RESPONSE
-      console.log('CREATE NOTICE RESPONSE:', data)
-
-      if (!res.ok) {
-        alert(data.message || 'Failed to create notice')
-        return
-      }
-
-      // ✅ reset form
-      setTitle('')
-      setContent('')
-      setFiles([])
-      setIsImportant(false)
-
-      loadData()
-    } catch (error) {
-      console.log('ERROR:', error)
+    if (!token) {
+      alert('User not logged in')
+      return
     }
+
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('content', content)
+    formData.append('isImportant', isImportant)
+
+    for (let file of files) {
+      formData.append('files', file)
+    }
+
+    const xhr = new XMLHttpRequest()
+
+    xhr.open('POST', `${API_BASE}/api/notices`)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    setIsUploading(true)
+
+    // 🔥 TRACK PROGRESS
+    xhr.upload.onprogress = e => {
+      if (e.lengthComputable) {
+        const percent = Math.round((e.loaded / e.total) * 100)
+        setUploadProgress(percent)
+      }
+    }
+
+    // ✅ SUCCESS
+    xhr.onload = () => {
+      setIsUploading(false)
+
+      if (xhr.status === 201) {
+        setUploadProgress(0)
+
+        // reset form
+        setTitle('')
+        setContent('')
+        setFiles([])
+        setIsImportant(false)
+
+        loadData()
+      } else {
+        const data = JSON.parse(xhr.responseText)
+        alert(data.message || 'Upload failed')
+      }
+    }
+
+    // ❌ ERROR
+    xhr.onerror = () => {
+      setIsUploading(false)
+      alert('Upload failed')
+    }
+
+    xhr.send(formData)
   }
 
   return (
@@ -121,170 +144,223 @@ const Notices = () => {
             Mark as Important 📌
           </label>
 
-          <button className='bg-blue-600 text-white px-4 py-2 rounded'>
-            Upload Notice
+          <button
+            disabled={isUploading}
+            className='bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50'
+          >
+            {isUploading ? 'Uploading...' : 'Upload Notice'}
           </button>
         </form>
       </div>
+      {isUploading && (
+        <div className='mt-3'>
+          <p className='text-sm text-gray-600 mb-1'>
+            Uploading... {uploadProgress}%
+          </p>
+
+          <div className='w-full bg-gray-200 rounded h-2'>
+            <div
+              className='bg-blue-500 h-2 rounded transition-all'
+              style={{ width: `${uploadProgress}%` }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* 🔥 NOTICE LIST */}
       <div>
         <h1 className='text-2xl font-bold mb-4'>📢 All Notices</h1>
 
-        <div className='space-y-5'>
-          {notices.map((notice, index) => (
-            <div
-              key={notice._id}
-              className={`p-5 rounded-2xl shadow border ${
-                notice.isImportant ? 'bg-red-50 border-red-200' : 'bg-white'
-              }`}
-            >
-              {/* Header */}
-              <div className='flex justify-between'>
-                <div className='flex items-center gap-2'>
-                  {notice.isImportant && (
-                    <span className='bg-red-500 text-white text-xs px-2 py-1 rounded'>
-                      📌 Important
+        {loading ? (
+          <p className='text-center text-gray-500'>Loading notices...</p>
+        ) : notices.length === 0 ? (
+          <p className='text-center text-gray-400'>No notices available</p>
+        ) : (
+          <div className='space-y-5'>
+            {notices.map((notice, index) => (
+              <div
+                key={notice._id}
+                className={`p-5 rounded-2xl shadow border ${
+                  notice.isImportant ? 'bg-red-50 border-red-200' : 'bg-white'
+                }`}
+              >
+                {/* Header */}
+                <div className='flex justify-between'>
+                  <div className='flex items-center gap-2'>
+                    {notice.isImportant && (
+                      <span className='bg-red-500 text-white text-xs px-2 py-1 rounded'>
+                        📌 Important
+                      </span>
+                    )}
+
+                    {editId === notice._id ? (
+                      <input
+                        value={editData.title}
+                        onChange={e =>
+                          setEditData({ ...editData, title: e.target.value })
+                        }
+                        className='border p-1 rounded'
+                      />
+                    ) : (
+                      <h2 className='text-lg font-semibold'>{notice.title}</h2>
+                    )}
+                  </div>
+
+                  {index === 0 && (
+                    <span className='bg-green-100 text-green-600 text-xs px-2 py-1 rounded'>
+                      New
                     </span>
                   )}
-
-                  {editId === notice._id ? (
-                    <input
-                      value={editData.title}
-                      onChange={e =>
-                        setEditData({ ...editData, title: e.target.value })
-                      }
-                      className='border p-1 rounded'
-                    />
-                  ) : (
-                    <h2 className='text-lg font-semibold'>{notice.title}</h2>
-                  )}
                 </div>
 
-                {index === 0 && (
-                  <span className='bg-green-100 text-green-600 text-xs px-2 py-1 rounded'>
-                    New
-                  </span>
-                )}
-              </div>
-
-              {/* Content */}
-              {editId === notice._id ? (
-                <textarea
-                  value={editData.content}
-                  onChange={e =>
-                    setEditData({ ...editData, content: e.target.value })
-                  }
-                  className='border p-2 w-full rounded mt-2'
-                />
-              ) : (
-                <p className='text-gray-600 mt-2'>{notice.content}</p>
-              )}
-
-              {/* Important toggle */}
-              {editId === notice._id && (
-                <label className='flex items-center gap-2 mt-2'>
-                  <input
-                    type='checkbox'
-                    checked={editData.isImportant}
+                {/* Content */}
+                {editId === notice._id ? (
+                  <textarea
+                    value={editData.content}
                     onChange={e =>
-                      setEditData({
-                        ...editData,
-                        isImportant: e.target.checked
-                      })
+                      setEditData({ ...editData, content: e.target.value })
                     }
+                    className='border p-2 w-full rounded mt-2'
                   />
-                  Important 📌
-                </label>
-              )}
+                ) : (
+                  <p className='text-gray-600 mt-2'>{notice.content}</p>
+                )}
 
-              {/* Files */}
-              <div className='mt-3 flex flex-wrap gap-2'>
-                {notice.files?.map((file, i) => (
-                  <a
-                    key={i}
-                    href={`${API_BASE}/${file}`}
-                    target='_blank'
-                    rel='noreferrer'
-                    className='text-blue-500 text-sm bg-gray-100 px-2 py-1 rounded'
-                  >
-                    📄 File {i + 1}
-                  </a>
-                ))}
-              </div>
+                {/* Important toggle */}
+                {editId === notice._id && (
+                  <label className='flex items-center gap-2 mt-2'>
+                    <input
+                      type='checkbox'
+                      checked={editData.isImportant}
+                      onChange={e =>
+                        setEditData({
+                          ...editData,
+                          isImportant: e.target.checked
+                        })
+                      }
+                    />
+                    Important 📌
+                  </label>
+                )}
 
-              {/* Footer */}
-              <div className='flex justify-between items-center mt-3 text-sm text-gray-400'>
-                <span>By: {notice.createdBy?.name}</span>
+                {/* ✅ FILES */}
+                {notice.files?.length > 0 && (
+                  <div className='mt-4 border-t pt-3'>
+                    <p className='text-sm font-medium text-gray-700 mb-3'>
+                      📎 Attachments:
+                    </p>
 
-                <div className='flex gap-3'>
-                  {editId === notice._id ? (
-                    <>
-                      <button
-                        onClick={async () => {
-                          await fetch(`${API_BASE}/api/notices/${notice._id}`, {
-                            method: 'PUT',
-                            headers: {
-                              'Content-Type': 'application/json',
-                              Authorization: `Bearer ${localStorage.getItem(
-                                'token'
-                              )}`
-                            },
-                            body: JSON.stringify(editData)
-                          })
+                    {/* 🔥 IMAGE SLIDER */}
+                    <div className='flex gap-3 overflow-x-auto pb-2 scrollbar-hide'>
+                      {notice.files
+                        .filter(file =>
+                          file.url.match(/\.(jpg|jpeg|png|webp)$/i)
+                        )
+                        .map((file, index) => (
+                          <div
+                            key={index}
+                            onClick={() => setPreviewImage(file.url)}
+                            className='min-w-[140px] h-28 rounded-lg overflow-hidden border cursor-pointer flex-shrink-0'
+                          >
+                            <img
+                              src={file.url}
+                              alt='notice'
+                              loading='lazy'
+                              className='w-full h-full object-cover hover:scale-110 transition'
+                            />
+                          </div>
+                        ))}
+                    </div>
 
-                          setEditId(null)
-                          loadData()
-                        }}
-                        className='text-green-600'
-                      >
-                        💾 Save
-                      </button>
+                    {/* 🔥 PDF FILES */}
+                    <div className='mt-3 flex flex-wrap gap-2'>
+                      {notice.files
+                        .filter(file => file.url.endsWith('.pdf'))
+                        .map((file, index) => (
+                          <a
+                            key={index}
+                            href={file.url}
+                            target='_blank'
+                            rel='noreferrer'
+                            className='text-sm bg-gray-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-100'
+                          >
+                            📄 File {index + 1}
+                          </a>
+                        ))}
+                    </div>
+                  </div>
+                )}
 
-                      <button onClick={() => setEditId(null)}>Cancel</button>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        onClick={async () => {
-                          await fetch(`${API_BASE}/api/notices/${notice._id}`, {
-                            method: 'DELETE',
-                            headers: {
-                              Authorization: `Bearer ${localStorage.getItem(
-                                'token'
-                              )}`
+                {/* Footer */}
+                <div className='flex justify-between items-center mt-3 text-sm text-gray-400'>
+                  <span>By: {notice.createdBy?.name}</span>
+
+                  <div className='flex gap-3'>
+                    {editId === notice._id ? (
+                      <>
+                        <button
+                          onClick={async () => {
+                            try {
+                              await updateNotice(notice._id, editData)
+
+                              setEditId(null)
+                              loadData()
+                            } catch (error) {
+                              alert(error.message)
                             }
-                          })
+                          }}
+                          className='text-green-600'
+                        >
+                          💾 Save
+                        </button>
 
-                          setNotices(prev =>
-                            prev.filter(n => n._id !== notice._id)
-                          )
-                        }}
-                        className='text-red-500'
-                      >
-                        🗑 Delete
-                      </button>
+                        <button onClick={() => setEditId(null)}>Cancel</button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={async () => {
+                            try {
+                              await deleteNotice(notice._id)
 
-                      <button
-                        onClick={() => {
-                          setEditId(notice._id)
-                          setEditData({
-                            title: notice.title,
-                            content: notice.content,
-                            isImportant: notice.isImportant
-                          })
-                        }}
-                        className='text-blue-500'
-                      >
-                        ✏️ Edit
-                      </button>
-                    </>
-                  )}
+                              setNotices(prev =>
+                                prev.filter(n => n._id !== notice._id)
+                              )
+                            } catch (error) {
+                              alert(error.message)
+                            }
+                          }}
+                          className='text-red-500'
+                        >
+                          🗑 Delete
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            setEditId(notice._id)
+                            setEditData({
+                              title: notice.title,
+                              content: notice.content,
+                              isImportant: notice.isImportant
+                            })
+                          }}
+                          className='text-blue-500'
+                        >
+                          ✏️ Edit
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
+
+                <ImagePreviewModal
+                  image={previewImage}
+                  onClose={() => setPreviewImage(null)}
+                />
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

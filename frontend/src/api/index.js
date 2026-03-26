@@ -18,6 +18,7 @@ export async function fetchStats () {
   }
 }
 
+// Fetch all notices
 export async function fetchNotices() {
   const res = await fetch(`${API_BASE}/api/notices`);
   if (!res.ok) throw new Error("Failed to fetch notices");
@@ -145,4 +146,74 @@ export async function deleteStudent (id) {
     method: 'DELETE'
   })
   return await res.json()
+}
+
+// Delete notice
+export async function deleteNotice(id) {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("No token");
+  }
+
+  const res = await fetch(`${API_BASE}/api/notices/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await res.json();
+
+  // 🔥 handle expired token
+  if (
+    data.message === "Not authorized, token invalid" ||
+    data.message === "jwt expired"
+  ) {
+    localStorage.clear();
+    window.location.href = "/login";
+    throw new Error("Session expired");
+  }
+
+  if (!res.ok) {
+    throw new Error(data.message || "Delete failed");
+  }
+
+  return data;
+}
+
+// Edit notice
+export async function updateNotice(id, editData) {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("Please login again");
+  }
+
+  const res = await fetch(`${API_BASE}/api/notices/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(editData),
+  });
+
+  const data = await res.json();
+
+  // 🔥 handle expired token
+  if (
+    data.message === "Not authorized, token invalid" ||
+    data.message === "jwt expired"
+  ) {
+    localStorage.clear();
+    window.location.href = "/login";
+    throw new Error("Session expired");
+  }
+
+  if (!res.ok) {
+    throw new Error(data.message || "Update failed");
+  }
+
+  return data;
 }
