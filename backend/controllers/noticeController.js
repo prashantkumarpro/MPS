@@ -6,12 +6,12 @@ export const createNotice = async (req, res) => {
     const { title, content, isImportant } = req.body
 
     // ✅ handle multiple files (UPDATED)
-    const files = req.files
-      ? req.files.map(file => ({
-          url: file.path, // Cloudinary URL
-          public_id: file.filename // Cloudinary public_id
-        }))
-      : []
+    const files = req.files.map(file => ({
+      url: file.path,
+      public_id: file.filename,
+      type: file.mimetype,
+      originalName: file.originalname
+    }))
 
     console.log('FILES:', req.files)
     console.log('BODY:', req.body)
