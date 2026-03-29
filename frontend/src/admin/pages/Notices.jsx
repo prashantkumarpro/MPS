@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { deleteNotice, fetchNotices, updateNotice } from '../../api'
-import ImagePreviewModal from '../../components/ImagePreviewModal'
+import FilePreviewModal from '../../components/FilePreviewModal'
 
 const Notices = () => {
   const [notices, setNotices] = useState([])
@@ -12,7 +12,7 @@ const Notices = () => {
   const [content, setContent] = useState('')
   const [files, setFiles] = useState([])
   const [isImportant, setIsImportant] = useState(false)
-  const [previewImage, setPreviewImage] = useState(null)
+  const [previewFile, setPreviewFile] = useState(null)
 
   // 🔥 EDIT STATE
   const [editId, setEditId] = useState(null)
@@ -253,13 +253,15 @@ const Notices = () => {
                     {/* 🔥 IMAGE SLIDER */}
                     <div className='flex gap-3 overflow-x-auto pb-2 scrollbar-hide'>
                       {notice.files
-                        .filter(file =>
-                          file.url.match(/\.(jpg|jpeg|png|webp)$/i)
+                        .filter(
+                          file =>
+                            file.type?.startsWith('image') ||
+                            file.url.match(/\.(jpg|jpeg|png|webp)$/i)
                         )
                         .map((file, index) => (
                           <div
                             key={index}
-                            onClick={() => setPreviewImage(file.url)}
+                            onClick={() => setPreviewFile(file.url)}
                             className='min-w-[140px] h-28 rounded-lg overflow-hidden border cursor-pointer flex-shrink-0'
                           >
                             <img
@@ -272,22 +274,25 @@ const Notices = () => {
                         ))}
                     </div>
 
-                    {/* 🔥 PDF FILES */}
-                    <div className='mt-3 flex flex-wrap gap-2'>
-                      {notice.files
-                        .filter(file => file.url.endsWith('.pdf'))
-                        .map((file, index) => (
-                          <a
-                            key={index}
-                            href={file.url}
-                            target='_blank'
-                            rel='noreferrer'
-                            className='text-sm bg-gray-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-100'
-                          >
-                            📄 File {index + 1}
-                          </a>
-                        ))}
-                    </div>
+                    
+                {/* 🔥 PDF FILES */}
+                <div className='mt-3 flex flex-wrap gap-2'>
+                  {notice.files
+                    .filter(
+                      file =>
+                        file.type === 'application/pdf' ||
+                        file.url.endsWith('.pdf')
+                    )
+                    .map((file, index) => (
+                      <div
+                        key={index}
+                        onClick={() => setPreviewFile(file.url)} // 🔥 open modal
+                        className='text-sm bg-gray-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-100 cursor-pointer'
+                      >
+                        📄 File {index + 1}
+                      </div>
+                    ))}
+                </div>
                   </div>
                 )}
 
@@ -353,9 +358,9 @@ const Notices = () => {
                   </div>
                 </div>
 
-                <ImagePreviewModal
-                  image={previewImage}
-                  onClose={() => setPreviewImage(null)}
+                <FilePreviewModal
+                  file={previewFile}
+                  onClose={() => setPreviewFile(null)}
                 />
               </div>
             ))}

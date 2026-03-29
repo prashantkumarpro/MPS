@@ -3,12 +3,11 @@ import { fetchNotices } from '../api'
 import MarqueeDownload from '../components/MarqueeDownload '
 import ResultBannerLive from '../components/ResultBannerLive'
 import ClassResultLiveBanner from '../components/ClassResultLiveBanner'
-import ImagePreviewModal from '../components/ImagePreviewModal'
+import FilePreviewModal from '../components/FilePreviewModal'
 
 const Notification = () => {
   const [notices, setNotices] = useState([])
-  const [previewImage, setPreviewImage] = useState(null)
-  const API_BASE = import.meta.env.VITE_API_URL
+  const [previewFile, setPreviewFile] = useState(null)
 
   useEffect(() => {
     const loadNotices = async () => {
@@ -77,11 +76,15 @@ const Notification = () => {
                 {/* 🔥 IMAGE SLIDER */}
                 <div className='flex gap-3 overflow-x-auto pb-2 scrollbar-hide'>
                   {notice.files
-                    .filter(file => file.url.match(/\.(jpg|jpeg|png|webp)$/i))
+                    .filter(
+                      file =>
+                        file.type?.startsWith('image') ||
+                        file.url.match(/\.(jpg|jpeg|png|webp)$/i)
+                    )
                     .map((file, index) => (
                       <div
                         key={index}
-                        onClick={() => setPreviewImage(file.url)}
+                        onClick={() => setPreviewFile(file.url)}
                         className='min-w-[140px] h-28 rounded-lg overflow-hidden border cursor-pointer flex-shrink-0'
                       >
                         <img
@@ -97,17 +100,19 @@ const Notification = () => {
                 {/* 🔥 PDF FILES */}
                 <div className='mt-3 flex flex-wrap gap-2'>
                   {notice.files
-                    .filter(file => file.url.endsWith('.pdf'))
+                    .filter(
+                      file =>
+                        file.type === 'application/pdf' ||
+                        file.url.endsWith('.pdf')
+                    )
                     .map((file, index) => (
-                      <a
+                      <div
                         key={index}
-                        href={file.url}
-                        target='_blank'
-                        rel='noreferrer'
-                        className='text-sm bg-gray-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-100'
+                        onClick={() => setPreviewFile(file.url)} // 🔥 open modal
+                        className='text-sm bg-gray-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-100 cursor-pointer'
                       >
                         📄 File {index + 1}
-                      </a>
+                      </div>
                     ))}
                 </div>
               </div>
@@ -120,9 +125,9 @@ const Notification = () => {
           </div>
         ))}
       </div>
-      <ImagePreviewModal
-        image={previewImage}
-        onClose={() => setPreviewImage(null)}
+      <FilePreviewModal
+        file={previewFile}
+        onClose={() => setPreviewFile(null)}
       />
 
       {/* 🔥 Extra Sections */}
