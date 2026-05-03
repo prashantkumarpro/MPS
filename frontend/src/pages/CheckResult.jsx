@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { ReportContext } from '../context/ReportContext'
 import { fetchReport } from '../api'
 import SelectBox from '../components/SelectBox'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 // ---------------- OPTIONS ----------------
 
@@ -12,19 +13,27 @@ const termOptions = [
   { label: '3rd Term', value: 'TERM_3' }
 ]
 
-const yearOptions = [{ label: '2025–26', value: '2025-26' }]
+const yearOptions = [
+  { label: '2025–26', value: '2025-26' },
+  { label: '2026–27', value: '2026-27' }
+]
 
 // ---------------- COMPONENT ----------------
 
 const CheckResult = () => {
   const [studentClass, setStudentClass] = useState('')
   const [rollNumber, setRollNumber] = useState('')
-  const [term, setTerm] = useState('')
-  const [academicYear, setAcademicYear] = useState('')
   const [loading, setLoading] = useState(false)
 
   const { setStudent, setReport } = useContext(ReportContext)
   const navigate = useNavigate()
+
+  const [formState, setFormState] = useLocalStorage('termYear', {
+    term: '',
+    academicYear: ''
+  })
+
+  const { term, academicYear } = formState
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -89,7 +98,10 @@ const CheckResult = () => {
           <SelectBox
             label='Term'
             value={term}
-            onChange={e => setTerm(e.target.value)}
+            onChange={value => {
+              console.log('VALUE:', value.target.value)
+              setFormState(prev => ({ ...prev, term: value.target.value }))
+            }}
             options={termOptions}
             placeholder='Select'
           />
@@ -97,7 +109,13 @@ const CheckResult = () => {
           <SelectBox
             label='Academic Year'
             value={academicYear}
-            onChange={e => setAcademicYear(e.target.value)}
+            onChange={value => {
+              console.log('VALUE:', value.target.value)
+              setFormState(prev => ({
+                ...prev,
+                academicYear: value.target.value
+              }))
+            }}
             options={yearOptions}
             placeholder='Year'
           />
