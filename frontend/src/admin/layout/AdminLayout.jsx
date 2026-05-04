@@ -46,7 +46,7 @@ export default function AdminLayout () {
 
         {/* Navigation */}
         <nav className='flex flex-col gap-2'>
-          <SidebarLink to='/admin' icon={<LayoutGrid />}>
+          <SidebarLink to='/admin' icon={<LayoutGrid />} end>
             Dashboard
           </SidebarLink>
 
