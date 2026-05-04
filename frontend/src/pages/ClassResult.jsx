@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import SelectBox from '../components/SelectBox'
 import { fetchClassReport } from '../api'
 import { getSubjectRows, getTotalFullMarks } from '../utils/reportUtils'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 // ---------------- OPTIONS ----------------
 
@@ -36,12 +37,17 @@ const sortOptions = [
 // ---------------- COMPONENT ----------------
 
 const ClassResult = () => {
-  const [selectedClass, setSelectedClass] = useState('')
-  const [term, setTerm] = useState('')
-  const [academicYear, setAcademicYear] = useState('')
-  const [sortBy, setSortBy] = useState('')
   const [reports, setReports] = useState([])
   const [loading, setLoading] = useState(false)
+
+  const [formState, setFormState] = useLocalStorage('termYear', {
+    selectedClass: '',
+    term: '',
+    academicYear: '',
+    sortBy: ''
+  })
+
+  const { selectedClass, term, academicYear, sortBy } = formState
 
   // ---------------- FETCH DATA ----------------
   useEffect(() => {
@@ -114,7 +120,12 @@ const ClassResult = () => {
         <SelectBox
           label='Class'
           value={selectedClass}
-          onChange={e => setSelectedClass(e.target.value)}
+          onChange={value => {
+            setFormState(prev => ({
+              ...prev,
+              selectedClass: value.target.value
+            }))
+          }}
           options={classOptions}
           placeholder='Select Class'
         />
@@ -122,7 +133,9 @@ const ClassResult = () => {
         <SelectBox
           label='Term'
           value={term}
-          onChange={e => setTerm(e.target.value)}
+          onChange={value => {
+            setFormState(prev => ({ ...prev, term: value.target.value }))
+          }}
           options={termOptions}
           placeholder='Select Term'
         />
@@ -130,7 +143,12 @@ const ClassResult = () => {
         <SelectBox
           label='Academic Year'
           value={academicYear}
-          onChange={e => setAcademicYear(e.target.value)}
+          onChange={value => {
+            setFormState(prev => ({
+              ...prev,
+              academicYear: value.target.value
+            }))
+          }}
           options={yearOptions}
           placeholder='Select Year'
         />
@@ -138,7 +156,9 @@ const ClassResult = () => {
         <SelectBox
           label='Sort By'
           value={sortBy}
-          onChange={e => setSortBy(e.target.value)}
+          onChange={value => {
+            setFormState(prev => ({ ...prev, sortBy: value.target.value }))
+          }}
           options={sortOptions}
           placeholder='Sort By'
         />

@@ -99,7 +99,6 @@ const CheckResult = () => {
             label='Term'
             value={term}
             onChange={value => {
-              console.log('VALUE:', value.target.value)
               setFormState(prev => ({ ...prev, term: value.target.value }))
             }}
             options={termOptions}
@@ -110,7 +109,7 @@ const CheckResult = () => {
             label='Academic Year'
             value={academicYear}
             onChange={value => {
-              console.log('VALUE:', value.target.value)
+              // console.log('VALUE:', value.target.value)
               setFormState(prev => ({
                 ...prev,
                 academicYear: value.target.value
