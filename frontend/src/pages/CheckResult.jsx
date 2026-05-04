@@ -4,7 +4,7 @@ import { ReportContext } from '../context/ReportContext'
 import { fetchReport } from '../api'
 import SelectBox from '../components/SelectBox'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-
+import toast from 'react-hot-toast'
 // ---------------- OPTIONS ----------------
 
 const termOptions = [
@@ -39,35 +39,41 @@ const CheckResult = () => {
     e.preventDefault()
 
     if (!studentClass || !rollNumber || !term || !academicYear) {
-      alert('Please fill all fields')
+      toast.error('Please fill all fields')
       return
     }
 
-    setLoading(true)
+    try {
+      setLoading(true)
 
-    const result = await fetchReport({
-      studentClass,
-      rollNumber,
-      term,
-      academicYear
-    })
+      const result = await fetchReport({
+        studentClass,
+        rollNumber,
+        term,
+        academicYear
+      })
 
-    setLoading(false)
-
-    if (result.success) {
-      setStudent(result.student)
-      setReport(result.report)
-      navigate('/result')
-    } else {
-      alert(result.message || 'Invalid details. Please check again.')
+      if (result.success) {
+        setStudent(result.student)
+        setReport(result.report)
+        navigate('/result')
+      } else {
+        // ✅ Show exact API message
+        toast.error(result.message || 'Something went wrong')
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error('Server error. Please try again later')
+    } finally {
+      setLoading(false)
     }
   }
-
   return (
     <div
       className='min-h-screen w-full bg-gradient-to-br from-blue-50 to-indigo-100
                 flex items-center justify-center px-4'
     >
+      
       <form
         onSubmit={handleSubmit}
         id='checkresult'

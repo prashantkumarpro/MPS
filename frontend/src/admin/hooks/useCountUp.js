@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export function useCountUp (end, duration = 800) {
+export function useCountUp (end, duration = 1200) {
   const [count, setCount] = useState(0)
 
   useEffect(() => {

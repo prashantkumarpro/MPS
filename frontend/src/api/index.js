@@ -46,13 +46,16 @@ export async function fetchReport ({
       })
     })
 
+    const data = await response.json()
     // 🔐 safety check
     if (!response.ok) {
-      const text = await response.text()
-      throw new Error(text)
+      return {
+        success:false,
+        message: data.message || "something went wrong"
+      }
     }
 
-    return await response.json()
+    return data
   } catch (error) {
     return {
       success: false,
