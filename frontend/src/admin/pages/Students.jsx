@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router'
 import { GrEdit, GrView } from 'react-icons/gr'
 import AddStudentModal from '../components/AddStudentModal.jsx'
 import { useLocalStorage } from '../../hooks/useLocalStorage.js'
+import ConfirmModal from '../components/ConfirmModal.jsx'
+import { ChevronsLeft, ChevronsRight } from 'lucide-react'
 
 // 👇 WRITE THIS INSIDE Students component
 
@@ -30,28 +32,37 @@ export default function Students () {
   const [editStudent, setEditStudent] = useState(null)
   const [editing, setEditing] = useState(false)
 
-    const [formState, setFormState] = useLocalStorage('termYear', {
-      selectedClass: '',
-      sortBy: ''
-    })
-  
-    const { selectedClass, sortBy } = formState
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedId, setSelectedId] = useState(null)
+
+  const [formState, setFormState] = useLocalStorage('termYear', {
+    selectedClass: '',
+    sortBy: ''
+  })
+
+  const { selectedClass, sortBy } = formState
 
   const navigate = useNavigate()
   // ---------------- LOAD STUDENTS (REUSABLE) ----------------
   const loadStudents = async () => {
-    setLoading(true)
+    try {
+      setLoading(true)
 
-    const res = await fetchStudents({
-      page,
-      limit,
-      className: selectedClass,
-      sort: sortBy
-    })
+      const res = await fetchStudents({
+        page,
+        limit,
+        className: selectedClass,
+        sort: sortBy
+      })
 
-    setStudents(res.data || [])
-    setTotalPages(res.totalPages || 1)
-    setLoading(false)
+      setStudents(res.data || [])
+      setTotalPages(res.totalPages || 1)
+    } catch (error) {
+      console.error(error)
+      toast.error('Failed to load students')
+    } finally {
+      setLoading(false)
+    }
   }
 
   // ---------------- INITIAL & DEPENDENT LOAD ----------------
@@ -93,14 +104,10 @@ export default function Students () {
   }
 
   // ---------------- Delete HANDLER ----------------
-  const handleDeleteStudent = async id => {
-    const confirmed = window.confirm(
-      'Are you sure you want to delete this student?'
-    )
+  const handleConfirmDelete = async () => {
+    if (!selectedId) return
 
-    if (!confirmed) return
-
-    const res = await deleteStudent(id)
+    const res = await deleteStudent(selectedId)
 
     if (res.success) {
       toast.success('Student deleted successfully 🗑️')
@@ -108,6 +115,9 @@ export default function Students () {
     } else {
       toast.error(res.error || 'Failed to delete student')
     }
+
+    setIsModalOpen(false)
+    setSelectedId(null)
   }
 
   const handleAddStudent = async e => {
@@ -160,7 +170,10 @@ export default function Students () {
           <select
             value={selectedClass}
             onChange={value => {
-              setFormState(prev => ({ ...prev, selectedClass: value.target.value }))
+              setFormState(prev => ({
+                ...prev,
+                selectedClass: value.target.value
+              }))
               setPage(1)
             }}
             className='border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -174,9 +187,9 @@ export default function Students () {
             <option value='I'> I</option>
             <option value='II'> II</option>
             <option value='III'> III</option>
-            <option value='III'> IV</option>
-            <option value='III'> V</option>
-            <option value='III'> VI</option>
+            <option value='IV'> IV</option>
+            <option value='V'> V</option>
+            <option value='VI'> VI</option>
           </select>
         </div>
 
@@ -209,85 +222,162 @@ export default function Students () {
           </thead>
 
           <tbody className='divide-y'>
-            {students.length === 0 && (
+            {/* 🔄 Loading State */}
+            {loading ? (
+              Array.from({ length: 8 }).map((_, i) => (
+                <tr key={i} className='animate-pulse'>
+                  <td className='px-4 py-3 text-center'>
+                    <div className='h-4 bg-gray-200 rounded w-10 mx-auto'></div>
+                  </td>
+
+                  <td className='px-4 py-3'>
+                    <div className='h-4 bg-gray-200 rounded w-32'></div>
+                  </td>
+
+                  <td className='px-4 py-3 text-center'>
+                    <div className='h-4 bg-gray-200 rounded w-16 mx-auto'></div>
+                  </td>
+
+                  <td className='px-4 py-3'>
+                    <div className='flex justify-center gap-2'>
+                      <div className='h-8 w-8 bg-gray-200 rounded-full'></div>
+                      <div className='h-8 w-8 bg-gray-200 rounded-full'></div>
+                      <div className='h-8 w-8 bg-gray-200 rounded-full'></div>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : students.length === 0 ? (
+              /* ❌ Empty State */
               <tr>
                 <td colSpan='4' className='text-center py-6 text-gray-500'>
                   No students found
                 </td>
               </tr>
+            ) : (
+              /* ✅ Data Rows */
+              students.map(student => (
+                <tr key={student._id} className='hover:bg-gray-50 transition'>
+                  <td className='px-4 py-3 text-center font-medium'>
+                    {student.rollNumber}
+                  </td>
+
+                  <td className='px-4 py-3 font-medium text-gray-800'>
+                    {student.name}
+                  </td>
+
+                  <td className='px-4 py-3 text-center'>
+                    <span className='px-3 py-1 rounded-sm text-xs font-semibold bg-gray-50'>
+                      {student.class}
+                    </span>
+                  </td>
+
+                  <td className='px-4 py-3'>
+                    <div className='flex items-center justify-center gap-2'>
+                      {/* Edit */}
+                      <button
+                        title='Edit Student'
+                        className='group p-2 rounded-full bg-blue-50 text-blue-600 
+                         hover:bg-blue-100 hover:scale-110 transition-all duration-200'
+                        onClick={async () => {
+                          const res = await fetchStudentById(student._id)
+                          if (res.success) setEditStudent(res.data)
+                        }}
+                      >
+                        <GrEdit
+                          size={16}
+                          className='group-hover:rotate-12 transition'
+                        />
+                      </button>
+
+                      {/* View */}
+                      <button
+                        title='View Student'
+                        className='group p-2 rounded-full bg-emerald-50 text-emerald-600 
+                         hover:bg-emerald-100 hover:scale-110 transition-all duration-200'
+                        onClick={() =>
+                          navigate(`/admin/students/${student._id}`)
+                        }
+                      >
+                        <GrView
+                          size={16}
+                          className='group-hover:scale-110 transition'
+                        />
+                      </button>
+
+                      {/* Delete */}
+                      <button
+                        title='Delete Student'
+                        className='p-2 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition'
+                        onClick={() => {
+                          setSelectedId(student._id)
+                          setIsModalOpen(true)
+                        }}
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
             )}
-
-            {students.map(student => (
-              <tr key={student._id} className='hover:bg-gray-50 transition'>
-                <td className='px-4 py-3 text-center font-medium'>
-                  {student.rollNumber}
-                </td>
-
-                <td className='px-4 py-3 font-medium text-gray-800'>
-                  {student.name}
-                </td>
-
-                <td className='px-4 py-3 text-center'>
-                  <span className='px-3 py-1 rounded-full  text-xs font-semibold'>
-                    {student.class}
-                  </span>
-                </td>
-
-                <td className='px-4 py-3 text-center space-x-3'>
-                  <button
-                    className='text-blue-600 hover:text-blue-800 font-medium'
-                    onClick={async () => {
-                      const res = await fetchStudentById(student._id)
-                      if (res.success) setEditStudent(res.data)
-                    }}
-                  >
-                    <GrEdit />
-                  </button>
-
-                  {/* <button
-                    className='text-red-600 hover:text-red-800 font-medium'
-                    onClick={() => handleDeleteStudent(student._id)}
-                  >
-                    Delete
-                  </button> */}
-
-                  <button
-                    className='text-green-600 hover:text-green-800 font-medium'
-                    onClick={() => navigate(`/admin/students/${student._id}`)}
-                  >
-                    <GrView />
-                  </button>
-                </td>
-              </tr>
-            ))}
           </tbody>
         </table>
       </div>
 
-      {/* Pagination */}
-      <div className='flex flex-col sm:flex-row justify-between items-center gap-4'>
-        <span className='text-sm text-gray-600'>
-          Page <b>{page}</b> of <b>{totalPages}</b>
-        </span>
+     <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 p-4 bg-white rounded-xl shadow-sm border">
 
-        <div className='flex gap-3'>
-          <button
-            disabled={page === 1}
-            onClick={() => setPage(p => p - 1)}
-            className='px-4 py-2 rounded-lg border bg-white hover:bg-gray-100 disabled:opacity-50'
-          >
-            ← Prev
-          </button>
+  {/* Page Info */}
+  <div className="flex items-center gap-2 text-sm text-gray-600">
+    <span className="px-3 py-1 rounded-full bg-gray-100">
+      Page <span className="font-semibold text-gray-800">{page}</span>
+    </span>
 
-          <button
-            disabled={page === totalPages}
-            onClick={() => setPage(p => p + 1)}
-            className='px-4 py-2 rounded-lg border bg-white hover:bg-gray-100 disabled:opacity-50'
-          >
-            Next →
-          </button>
-        </div>
-      </div>
+    <span className="text-gray-300">/</span>
+
+    <span className="px-3 py-1 rounded-full bg-gray-100">
+      {totalPages} Pages
+    </span>
+  </div>
+
+  {/* Controls */}
+  <div className="flex items-center gap-2">
+
+    {/* Prev */}
+    <button
+      disabled={page === 1}
+      onClick={() => setPage(p => p - 1)}
+      className={`p-2 rounded-full border transition-all duration-200 flex items-center justify-center
+        ${
+          page === 1
+            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+            : "bg-white text-gray-700 hover:bg-gray-100 hover:scale-110 shadow-sm"
+        }`}
+    >
+      <ChevronsLeft size={18} />
+    </button>
+
+    {/* Current Page */}
+    <div className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow">
+      {page}
+    </div>
+
+    {/* Next */}
+    <button
+      disabled={page === totalPages}
+      onClick={() => setPage(p => p + 1)}
+      className={`p-2 rounded-full border transition-all duration-200 flex items-center justify-center
+        ${
+          page === totalPages
+            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+            : "bg-white text-gray-700 hover:bg-gray-100 hover:scale-110 shadow-sm"
+        }`}
+    >
+      <ChevronsRight size={18} />
+    </button>
+
+  </div>
+</div>
 
       {/* Edit Modal */}
       <EditStudentModal
@@ -303,6 +393,14 @@ export default function Students () {
         onClose={() => setOpenAddModal(false)}
         onSubmit={handleAddStudent}
         loading={saving}
+      />
+
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+        title='Delete Student'
+        message='This action cannot be undone. Are you sure?'
       />
     </div>
   )
