@@ -69,11 +69,11 @@ const Nav = () => {
               The School
             </a>
           </li>
-          <li onClick={() => handleNavClick('#contact-button')}>
+          <li onClick={() => handleNavClick('#contact')}>
             <a
-              href='#contact'
+              href='/#contact'
               className={`hover:text-blue-700 ${
-                activeItem === '#contact-button'
+                activeItem === '#contact'
                   ? 'border-b-4 border-blue-500 pb-2'
                   : ''
               }`}
