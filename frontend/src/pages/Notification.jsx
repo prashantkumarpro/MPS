@@ -134,7 +134,7 @@ const Notification = () => {
       <div className='flex flex-col gap-10'>
         <ClassResultLiveBanner />
         <ResultBannerLive />
-        <MarqueeDownload />
+        {/* <MarqueeDownload /> */}
       </div>
     </div>
   )

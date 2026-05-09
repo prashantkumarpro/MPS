@@ -22,7 +22,7 @@ export default function ClassResultLiveBanner () {
 
   return (
     <section
-      className={`w-full sticky top-20 z-20 mb-6
+      className={`w-full sticky top-20 z-20 
         bg-gradient-to-r from-primary-blue via-secondary-blue to-accent-purple
         text-white shadow-md transition-transform duration-500
         ${show ? 'translate-y-0' : '-translate-y-full'}`}
