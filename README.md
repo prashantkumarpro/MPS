@@ -80,13 +80,11 @@ This project focuses on:
 ---
 
 # 📂 Project Structure
+# 📂 Project Structure
 
-```
 <img width="305" height="588" alt="image" src="https://github.com/user-attachments/assets/a9d177de-4b3e-43eb-9658-d41fbfb19faf" />
 
 <img width="308" height="365" alt="image" src="https://github.com/user-attachments/assets/eadefd4c-69eb-45f0-ad84-88122bb681cb" />
-
-```
 
 ---
 
