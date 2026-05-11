@@ -80,11 +80,11 @@ This project focuses on:
 ---
 
 # 📂 Project Structure
-# 📂 Project Structure
-
-<img width="305" height="588" alt="image" src="https://github.com/user-attachments/assets/a9d177de-4b3e-43eb-9658-d41fbfb19faf" />
-
-<img width="308" height="365" alt="image" src="https://github.com/user-attachments/assets/eadefd4c-69eb-45f0-ad84-88122bb681cb" />
+<p align="center">
+  <img width="305" src="https://github.com/user-attachments/assets/a9d177de-4b3e-43eb-9658-d41fbfb19faf" />
+  
+  <img width="308" src="https://github.com/user-attachments/assets/eadefd4c-69eb-45f0-ad84-88122bb681cb" />
+</p>
 
 ---
 
@@ -111,7 +111,7 @@ npm install
 ## 3️⃣ Install Backend Dependencies
 
 ```bash id="t6jlwm"
-cd  server
+cd  backend
 npm install
 ```
 
@@ -140,7 +140,7 @@ npm run dev
 ### Backend
 
 ```bash id="p6xq3d"
-npm run server
+npm run dev
 ```
 
 ---
@@ -165,9 +165,9 @@ npm run server
 
 # 📱 Connect With Me
 
-* 💼 [LinkedIn](https://linkedin.com/in/your-profile?utm_source=chatgpt.com)
-* 💻 [GitHub](https://github.com/your-username?utm_source=chatgpt.com)
-* 🌐 [Portfolio](https://your-portfolio.com?utm_source=chatgpt.com)
+* 💼 [LinkedIn](https://www.linkedin.com/in/prashant-web-developer/)
+* 💻 [GitHub](https://github.com/prashantkumarpro)
+* 🌐 [Portfolio](https://prashantkumar.dev/)
 
 ---
 
