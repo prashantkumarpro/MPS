@@ -1,114 +1,192 @@
+# 📘 Max Public School – Full Stack School Management Platform
 
-# 📘 Max Public School – Official Website
-
-Welcome to the official repository of **Max Public School's** website – a modern, responsive, and easy-to-navigate platform that connects parents, students, and educators.
-
----
-
-## 🌟 Overview
-
-Max Public School’s website is built to reflect the school’s values of **excellence, growth, and care**. It provides detailed information about the school, admissions, results, holiday schedules, important notices, faculty members, and contact details in a user-friendly layout.
+Welcome to the official repository of **Max Public School** — a modern full-stack school management platform built to streamline communication, administration, and academic management for students, parents, teachers, and administrators.
 
 ---
 
-## 🚀 Features
+# 🌟 Overview
 
-- 🏫 **The School** – Learn about our mission, vision, and history  
-- 📝 **Admissions** – Simple and clear admission process for new students  
-- 🎓 **Results** – Academic results and performance updates  
-- 📅 **Holiday List** – Official school holidays and calendar  
-- 📢 **Notice Board** – Real-time announcements and updates  
-- 🧑‍🏫 **Members** – Meet our dedicated staff and faculty  
-- 📞 **Contact Us** – Integrated contact form, location map, and social links  
-- 💬 **WhatsApp Integration** – Easy direct communication  
-- 🌐 **Fully Responsive Design** – Optimized for mobile, tablet, and desktop  
-- ⚙️ **SEO & Accessibility Optimized**  
-- 📩 **EmailJS Contact Form** – Dynamic messaging without backend setup
+Max Public School is a scalable and responsive full-stack web application designed to digitize school operations with a clean user experience and powerful backend architecture.
 
----
+The platform enables administrators to manage student records, academic results, notices, admissions, and school updates through a secure admin dashboard while providing students and parents with seamless access to important information online.
 
-## 🛠️ Tech Stack
+This project focuses on:
 
-- **Frontend**: React.js  
-- **Routing**: React Router  
-- **Form Handling**: EmailJS  
-- **Icons**: Remix Icon  
-- **Styling**: CSS3  
-- **Deployment**: Netlify / Vercel / GitHub Pages
+* ⚡ High performance
+* 🔐 Secure data management
+* 📱 Responsive user experience
+* 🌐 Real-world production deployment
 
 ---
 
-## 📂 Folder Structure
+# 🚀 Features
+
+## 👨‍💼 Admin Dashboard
+
+* Secure admin authentication
+* Student information management
+* Full CRUD operations for student records
+* Manage academic results
+* Upload and manage notices
+* Dashboard analytics and quick access controls
+
+## 🎓 Student Features
+* Online result checking system
+
+
+## 🌐 General Features
+
+* Fully responsive design
+* SEO optimized pages
+* WhatsApp integration
+* Google Maps integration
+* Clean and modern UI/UX
+* REST API integration
+* Real-time dynamic data rendering
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* React.js
+* React Router DOM
+* Tailwind CSS
+* JavaScript (ES6+)
+
+## Backend
+
+* Node.js
+* Express.js
+
+## Database
+
+* MongoDB
+* Mongoose
+* MongoSH
+
+## Authentication & APIs
+
+* REST API
+* JWT Authentication
+
+## Deployment
+
+* Vercel (Frontend)
+* Railway (Backend)
+* MongoDB Atlas
+
+---
+
+# 📂 Project Structure
+
+```
+<img width="305" height="588" alt="image" src="https://github.com/user-attachments/assets/a9d177de-4b3e-43eb-9658-d41fbfb19faf" />
+
+<img width="308" height="365" alt="image" src="https://github.com/user-attachments/assets/eadefd4c-69eb-45f0-ad84-88122bb681cb" />
 
 ```
 
-/public
-/src
-├── assets/
-├── components/
-├── pages/
-├── App.jsx
-└── index.js
+---
 
-````
+# 📦 Installation & Setup
+
+## 1️⃣ Clone Repository
+
+```bash id="0cbbm0"
+git clone https://github.com/your-username/MPS.git 
+cd MPS
+```
 
 ---
 
-## 📦 Setup Instructions
+## 2️⃣ Install Frontend Dependencies
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/max-public-school.git
-   cd max-public-school
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for production**
-
-   ```bash
-   npm run build
-   ```
+```bash id="dxk4yz"
+cd frontend
+npm install
+```
 
 ---
 
-## 🔗 Live Website
+## 3️⃣ Install Backend Dependencies
 
-[Visit Max Public School Website](https://maxpublicschool.site/)
-
----
-
-## 📱 Connect With Us
-
-* 🌐 [Portfolio](https://your-portfolio.com)
-* 💼 [LinkedIn](https://linkedin.com/in/your-profile)
-* 💬 [WhatsApp](https://wa.me/your-number)
-* 📸 [Instagram](https://instagram.com/your-profile)
-* 💻 [GitHub](https://github.com/your-username)
+```bash id="t6jlwm"
+cd  server
+npm install
+```
 
 ---
 
-## 🙌 Contributing
+## 4️⃣ Setup Environment Variables
 
-Contributions are welcome! Feel free to fork the repo and submit a pull request.
+Create a `.env` file inside the server folder:
+
+```env id="8w0gmi"
+PORT=8000
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_secret_key
+```
 
 ---
 
-## 📄 License
+## 5️⃣ Start Development Servers
 
-This project is licensed under the [MIT License](LICENSE).
+### Frontend
+
+```bash id="d7kn0m"
+npm run dev
+```
+
+### Backend
+
+```bash id="p6xq3d"
+npm run server
+```
 
 ---
 
-> Developed with ❤️ by \[Prashant Kumar]
+# 🌐 Live Website
 
+👉 [Max Public School Official Website](https://maxpublicschool.site/?utm_source=chatgpt.com)
 
+---
+
+# 🔥 Key Highlights
+
+* Real-world freelance project
+* Full-stack MERN architecture
+* Dynamic admin dashboard
+* Production-ready CRUD system
+* Secure database integration
+* Scalable backend structure
+* Mobile-first responsive design
+
+---
+
+# 📱 Connect With Me
+
+* 💼 [LinkedIn](https://linkedin.com/in/your-profile?utm_source=chatgpt.com)
+* 💻 [GitHub](https://github.com/your-username?utm_source=chatgpt.com)
+* 🌐 [Portfolio](https://your-portfolio.com?utm_source=chatgpt.com)
+
+---
+
+# 🙌 Contributing
+
+Contributions and improvements are welcome.
+Feel free to fork this repository and submit a pull request.
+
+---
+
+# 📄 License
+
+Licensed under the MIT License.
+
+---
+
+# 👨‍💻 Developer
+
+Developed with ❤️ by **Prashant Kumar**
+Full Stack Developer | MERN Stack Developer | React.js Enthusiast
