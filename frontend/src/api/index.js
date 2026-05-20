@@ -220,3 +220,76 @@ export async function updateNotice(id, editData) {
 
   return data;
 }
+
+
+// ===============================
+// ADD REPORT
+// ===============================
+export async function addReport(data) {
+
+  const res = await fetch(
+    `${API_BASE}/api/report/add`,
+    {
+      method: 'POST',
+
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify(data)
+    }
+  )
+
+  return await res.json()
+}
+
+// ===============================
+// GET REPORTS
+// ===============================
+export async function getReports() {
+
+  const res = await fetch(
+    `${API_BASE}/api/report`
+  )
+
+  return await res.json()
+}
+
+// ===============================
+// UPDATE REPORT
+// ===============================
+export async function updateReport(
+  id,
+  data
+) {
+
+  const res = await fetch(
+    `${API_BASE}/api/report/${id}`,
+    {
+      method: 'PUT',
+
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify(data)
+    }
+  )
+
+  return await res.json()
+}
+
+// ===============================
+// DELETE REPORT
+// ===============================
+export async function deleteReport(id) {
+
+  const res = await fetch(
+    `${API_BASE}/api/report/${id}`,
+    {
+      method: 'DELETE'
+    }
+  )
+
+  return await res.json()
+}

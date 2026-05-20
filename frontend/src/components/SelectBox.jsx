@@ -1,45 +1,71 @@
-export default function SelectBox ({
+export default function SelectBox({
   label,
   value,
   onChange,
   options = [],
-  placeholder = 'Select option'
+  placeholder = 'Select option',
+  name
 }) {
+
   return (
-    <div className='flex flex-col gap-1'>
+    <div className="w-full">
+
       {label && (
-        <label className='text-sm font-medium text-gray-700'>{label}</label>
+        <label
+          className="
+            block
+            mb-2
+            text-sm
+            font-semibold
+            text-gray-700
+          "
+        >
+          {label}
+        </label>
       )}
 
       <select
+        name={name}
         value={value}
         onChange={onChange}
-        className='
-          w-48
-          rounded-lg
+        className="
+          w-full
+          h-12
+          rounded-xl
           border
-          border-gray-300
+          border-gray-200
           bg-white
-          px-3
-          py-2
+          px-4
           text-sm
-          text-gray-800
+          text-gray-700
           shadow-sm
-          focus:outline-none
-          focus:ring-2
-          focus:ring-blue-500
-          focus:border-blue-500
-          hover:border-gray-400
-          transition
-        '
-      >
-        <option value=''>{placeholder}</option>
+          outline-none
+          transition-all
+          duration-200
 
-        {options.map(opt => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
+          focus:border-blue-500
+          focus:ring-4
+          focus:ring-blue-100
+
+          hover:border-gray-300
+        "
+      >
+
+        <option value="">
+          {placeholder}
+        </option>
+
+        {options.map(option => (
+
+          <option
+            key={option.value}
+            value={option.value}
+          >
+            {option.label}
           </option>
+
         ))}
+
       </select>
     </div>
   )
