@@ -13,8 +13,6 @@ export const createNotice = async (req, res) => {
       originalName: file.originalname
     }))
 
-    console.log('FILES:', req.files)
-    console.log('BODY:', req.body)
 
     const notice = await Notice.create({
       title,

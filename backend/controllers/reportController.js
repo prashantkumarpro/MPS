@@ -43,3 +43,60 @@ export const getClassReports = async (req, res) => {
     })
   }
 }
+
+// Create report
+export const createReport = async (req, res) => {
+  try {
+    const report = await Report.create(req.body)
+
+    res.status(201).json({
+      success: true,
+      data: report
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+// update Report
+export const updateReport = async (req, res) => {
+  try {
+    const report = await Report.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    )
+
+    res.status(200).json({
+      success: true,
+      data: report
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+// Delete report 
+export const deleteReport = async (req, res) => {
+  try {
+    await Report.findByIdAndDelete(req.params.id)
+
+    res.status(200).json({
+      success: true,
+      message: 'Report deleted'
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}

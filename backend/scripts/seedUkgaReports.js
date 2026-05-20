@@ -443,6 +443,8 @@ const ukgbReports = [
 // ========================================
 // 2) BULK INSERT SCRIPT
 // ========================================
+
+
 async function seedUkgaReports () {
   await connectDB()
   console.log('MongoDB Connected ✔')

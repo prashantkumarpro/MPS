@@ -2,6 +2,9 @@ import express from 'express'
 import Report from '../models/Report.js'
 import Student from '../models/Student.js'
 import { getClassReports } from '../controllers/reportController.js'
+import { calculateReportData } from '../utils/calculateReportData.js'
+
+import { assignPositions } from '../utils/assignPositions.js'
 
 const router = express.Router()
 
@@ -11,7 +14,10 @@ const router = express.Router()
 router.post('/add', async (req, res) => {
   try {
     const {
-      studentId,
+      studentClass,
+      rollNumber,
+      studentName,
+
       term,
       academicYear,
       classType,
@@ -27,73 +33,66 @@ router.post('/add', async (req, res) => {
       rhymes,
 
       attendance,
-      remarks,
-      position
+      remarks
     } = req.body
 
-    // 🔴 Mandatory checks (important)
-    if (!studentId || !term || !academicYear || !classType) {
+    // ===============================
+    // REQUIRED FIELDS
+    // ===============================
+    if (
+      !studentClass ||
+      !rollNumber ||
+      !studentName ||
+      !term ||
+      !academicYear ||
+      !classType
+    ) {
       return res.status(400).json({
         success: false,
-        message: 'studentId, term, academicYear and classType are required'
+        message: 'Missing required fields'
       })
     }
 
     // ===============================
-    // TOTAL MARKS CALCULATION
+    // FIND STUDENT
     // ===============================
-    let totalMarks = 0
-    let maxMarks = 0
+    const student = await Student.findOne({
+      class: studentClass.toUpperCase(),
+      rollNumber,
+      name: studentName
+    })
 
-    if (classType === 'PRIMARY') {
-      totalMarks =
-        (english || 0) +
-        (math || 0) +
-        (hindi || 0) +
-        (science || 0) +
-        (socialStudies || 0) +
-        (gk || 0)
-
-      maxMarks = 300 // 6 subjects × 50
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: 'No student found with given class, roll number and name'
+      })
     }
 
-    if (classType === 'KG') {
-      totalMarks =
-        (english || 0) +
-        (math || 0) +
-        (hindi || 0) +
-        (gk || 0) +
-        (table || 0) +
-        (rhymes || 0)
-
-      maxMarks = 300
-    }
-
-    const percentage = maxMarks ? (totalMarks / maxMarks) * 100 : 0
-
     // ===============================
-    // GRADE CALCULATION
+    // CALCULATIONS
     // ===============================
-    let grade = ''
-    if (percentage >= 80) grade = 'A'
-    else if (percentage >= 60) grade = 'B'
-    else if (percentage >= 45) grade = 'C'
-    else grade = 'D'
-
-    // ===============================
-    // DIVISION CALCULATION
-    // ===============================
-    let division = ''
-    if (percentage >= 60) division = 'First'
-    else if (percentage >= 45) division = 'Second'
-    else if (percentage >= 33) division = 'Third'
-    else division = 'Fail'
+    const { totalMarks, percentage, grade, division } = calculateReportData(
+      student.class,
+      {
+        english,
+        math,
+        hindi,
+        science,
+        socialStudies,
+        gk,
+        art,
+        table,
+        rhymes
+      }
+    )
 
     // ===============================
     // SAVE REPORT
     // ===============================
     const report = new Report({
-      studentId,
+      studentId: student._id,
+
       term,
       academicYear,
       classType,
@@ -112,25 +111,32 @@ router.post('/add', async (req, res) => {
       percentage,
       grade,
       division,
+
       attendance,
-      remarks,
-      position
+      remarks
     })
 
     await report.save()
+
+    // ===============================
+    // AUTO POSITION
+    // ===============================
+    await assignPositions(student.class, classType, term, academicYear)
 
     res.status(201).json({
       success: true,
       message: 'Report added successfully',
       report
     })
-
   } catch (error) {
-    // 🔐 Duplicate report protection
+    // ===============================
+    // DUPLICATE REPORT
+    // ===============================
     if (error.code === 11000) {
       return res.status(400).json({
         success: false,
-        message: 'Report already exists for this student, term and academic year'
+        message:
+          'Report already exists for this student, term and academic year'
       })
     }
 
@@ -188,7 +194,70 @@ router.post('/view', async (req, res) => {
       student,
       report
     })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+})
 
+// ===============================
+// GET ALL REPORTS (ADMIN)
+// ===============================
+router.get('/', async (req, res) => {
+  try {
+    const reports = await Report.find()
+      .populate('studentId', 'name rollNumber class')
+      .sort({ createdAt: -1 })
+
+    res.status(200).json({
+      success: true,
+      data: reports
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
+// ===============================
+// UPDATE REPORT
+// ===============================
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedReport = await Report.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    )
+
+    res.status(200).json({
+      success: true,
+      message: 'Report updated successfully',
+      data: updatedReport
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
+// ===============================
+// DELETE REPORT
+// ===============================
+router.delete('/:id', async (req, res) => {
+  try {
+    await Report.findByIdAndDelete(req.params.id)
+
+    res.status(200).json({
+      success: true,
+      message: 'Report deleted successfully'
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
