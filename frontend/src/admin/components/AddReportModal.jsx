@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { addReport } from '../../api'
-
+import toast from 'react-hot-toast'
 import {
   classOptions,
   termOptions,
@@ -113,6 +113,8 @@ const AddReportModal = ({ isOpen, onClose, fetchReports }) => {
       if (data.success) {
         setSuccess('Report added successfully')
 
+        toast.success('Report added successfully 🎉')
+
         fetchReports()
 
         setTimeout(() => {
@@ -120,11 +122,15 @@ const AddReportModal = ({ isOpen, onClose, fetchReports }) => {
         }, 1000)
       } else {
         setError(data.message || 'Something went wrong')
+
+        toast.error(data.message || 'Failed to add report')
       }
     } catch (error) {
       console.log(error)
 
       setError('Failed to add report')
+
+      toast.error('Failed to add report')
     } finally {
       setLoading(false)
     }
