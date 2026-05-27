@@ -21,6 +21,7 @@ import Logout from './admin/pages/Logout'
 import StudentProfile from './admin/pages/StudentProfile'
 import AdminLogin from './admin/pages/AdminLogin'
 import ProtectedRoute from './routes/ProtectedRoute'
+import EditReport from './admin/pages/EditReport'
 
 function App () {
   return (
@@ -61,6 +62,7 @@ function App () {
             <Route path='bulk-upload' element={<BulkUpload />} />
             <Route path='settings' element={<Settings />} />
             <Route path='logout' element={<Logout />} />
+            <Route path='edit-report' element={<EditReport />} />
           </Route>
         </Routes>
       </BrowserRouter>

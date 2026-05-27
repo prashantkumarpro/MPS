@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { addReport } from '../../api'
+import { useEffect, useState } from 'react'
+import { addReport, updateReport } from '../../api'
 import toast from 'react-hot-toast'
 import {
   classOptions,
@@ -54,35 +54,116 @@ const textareaClass = `
   hover:border-gray-300
 `
 
-const AddReportModal = ({ isOpen, onClose, fetchReports }) => {
+const ReportFormModal = ({
+  mode = 'add',
+  report = null,
+  isOpen,
+  onClose,
+  fetchReports
+}) => {
+  const isEditMode = mode === 'edit'
+
   const [formData, setFormData] = useState({
-    studentName: '',
-    studentClass: '',
-    rollNumber: '',
+    studentName: report?.studentId?.name || '',
 
-    term: 'TERM_1',
-    academicYear: '2025-26',
-    classType: '',
+    studentClass: report?.studentId?.class || '',
 
-    english: '',
-    hindi: '',
-    math: '',
+    rollNumber: report?.studentId?.rollNumber || '',
 
-    science: '',
-    socialStudies: '',
-    gk: '',
+    term: report?.term || '',
 
-    table: '',
-    rhymes: '',
-    art: '',
+    academicYear: report?.academicYear || '',
 
-    attendance: '',
-    remarks: ''
+    english: report?.english || '',
+
+    math: report?.math || '',
+
+    hindi: report?.hindi || '',
+
+    science: report?.science || '',
+
+    socialStudies: report?.socialStudies || '',
+
+    gk: report?.gk || '',
+
+    table: report?.table || '',
+
+    rhymes: report?.rhymes || '',
+
+    art: report?.art || '',
+
+    attendance: report?.attendance || '',
+
+    remarks: report?.remarks || ''
   })
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+
+
+
+
+  useEffect(() => {
+
+  if (
+    isEditMode &&
+    report
+  ) {
+
+    setFormData({
+
+      studentName:
+        report?.studentId?.name || '',
+
+      studentClass:
+        report?.studentId?.class || '',
+
+      rollNumber:
+        report?.studentId?.rollNumber || '',
+
+      term:
+        report?.term || '',
+
+      academicYear:
+        report?.academicYear || '',
+
+      english:
+        report?.english || '',
+
+      math:
+        report?.math || '',
+
+      hindi:
+        report?.hindi || '',
+
+      science:
+        report?.science || '',
+
+      socialStudies:
+        report?.socialStudies || '',
+
+      gk:
+        report?.gk || '',
+
+      table:
+        report?.table || '',
+
+      rhymes:
+        report?.rhymes || '',
+
+      art:
+        report?.art || '',
+
+      attendance:
+        report?.attendance || '',
+
+      remarks:
+        report?.remarks || ''
+    })
+  }
+
+}, [report, isEditMode])
   // ===============================
   // HANDLE CHANGE
   // ===============================
@@ -102,35 +183,33 @@ const AddReportModal = ({ isOpen, onClose, fetchReports }) => {
     try {
       setLoading(true)
 
-      setError('')
+      let data
 
-      setSuccess('')
-
-      const data = await addReport(formData)
-
-      console.log(data)
+      if (isEditMode) {
+        data = await updateReport(report._id, formData)
+      } else {
+        data = await addReport(formData)
+      }
 
       if (data.success) {
-        setSuccess('Report added successfully')
-
-        toast.success('Report added successfully 🎉')
+        toast.success(
+          isEditMode
+            ? 'Report updated successfully 🎉'
+            : 'Report added successfully 🎉'
+        )
 
         fetchReports()
 
-        setTimeout(() => {
-          onClose()
-        }, 1000)
+        onClose()
       } else {
-        setError(data.message || 'Something went wrong')
-
-        toast.error(data.message || 'Failed to add report')
+        toast.error(data.message || 'Something went wrong')
       }
     } catch (error) {
       console.log(error)
 
-      setError('Failed to add report')
-
-      toast.error('Failed to add report')
+      toast.error(
+        isEditMode ? 'Failed to update report' : 'Failed to add report'
+      )
     } finally {
       setLoading(false)
     }
@@ -907,6 +986,8 @@ const AddReportModal = ({ isOpen, onClose, fetchReports }) => {
         animate-spin
       '
                   />
+                ) : isEditMode ? (
+                  'Update Report'
                 ) : (
                   'Save Report'
                 )}
@@ -919,4 +1000,4 @@ const AddReportModal = ({ isOpen, onClose, fetchReports }) => {
   )
 }
 
-export default AddReportModal
+export default ReportFormModal

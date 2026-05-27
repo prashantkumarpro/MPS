@@ -190,6 +190,8 @@ export default function Students () {
             <option value='IV'> IV</option>
             <option value='V'> V</option>
             <option value='VI'> VI</option>
+            <option value='VII'> VII</option>
+            <option value='VIII'> VIII</option>
           </select>
         </div>
 
@@ -325,59 +327,56 @@ export default function Students () {
         </table>
       </div>
 
-     <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 p-4 bg-white rounded-xl shadow-sm border">
+      <div className='flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 p-4 bg-white rounded-xl shadow-sm border'>
+        {/* Page Info */}
+        <div className='flex items-center gap-2 text-sm text-gray-600'>
+          <span className='px-3 py-1 rounded-full bg-gray-100'>
+            Page <span className='font-semibold text-gray-800'>{page}</span>
+          </span>
 
-  {/* Page Info */}
-  <div className="flex items-center gap-2 text-sm text-gray-600">
-    <span className="px-3 py-1 rounded-full bg-gray-100">
-      Page <span className="font-semibold text-gray-800">{page}</span>
-    </span>
+          <span className='text-gray-300'>/</span>
 
-    <span className="text-gray-300">/</span>
+          <span className='px-3 py-1 rounded-full bg-gray-100'>
+            {totalPages} Pages
+          </span>
+        </div>
 
-    <span className="px-3 py-1 rounded-full bg-gray-100">
-      {totalPages} Pages
-    </span>
-  </div>
-
-  {/* Controls */}
-  <div className="flex items-center gap-2">
-
-    {/* Prev */}
-    <button
-      disabled={page === 1}
-      onClick={() => setPage(p => p - 1)}
-      className={`p-2 rounded-full border transition-all duration-200 flex items-center justify-center
+        {/* Controls */}
+        <div className='flex items-center gap-2'>
+          {/* Prev */}
+          <button
+            disabled={page === 1}
+            onClick={() => setPage(p => p - 1)}
+            className={`p-2 rounded-full border transition-all duration-200 flex items-center justify-center
         ${
           page === 1
-            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-            : "bg-white text-gray-700 hover:bg-gray-100 hover:scale-110 shadow-sm"
+            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+            : 'bg-white text-gray-700 hover:bg-gray-100 hover:scale-110 shadow-sm'
         }`}
-    >
-      <ChevronsLeft size={18} />
-    </button>
+          >
+            <ChevronsLeft size={18} />
+          </button>
 
-    {/* Current Page */}
-    <div className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow">
-      {page}
-    </div>
+          {/* Current Page */}
+          <div className='px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow'>
+            {page}
+          </div>
 
-    {/* Next */}
-    <button
-      disabled={page === totalPages}
-      onClick={() => setPage(p => p + 1)}
-      className={`p-2 rounded-full border transition-all duration-200 flex items-center justify-center
+          {/* Next */}
+          <button
+            disabled={page === totalPages}
+            onClick={() => setPage(p => p + 1)}
+            className={`p-2 rounded-full border transition-all duration-200 flex items-center justify-center
         ${
           page === totalPages
-            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-            : "bg-white text-gray-700 hover:bg-gray-100 hover:scale-110 shadow-sm"
+            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+            : 'bg-white text-gray-700 hover:bg-gray-100 hover:scale-110 shadow-sm'
         }`}
-    >
-      <ChevronsRight size={18} />
-    </button>
-
-  </div>
-</div>
+          >
+            <ChevronsRight size={18} />
+          </button>
+        </div>
+      </div>
 
       {/* Edit Modal */}
       <EditStudentModal

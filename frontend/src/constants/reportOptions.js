@@ -13,7 +13,9 @@ export const classOptions = [
   { label: 'Class III', value: 'III' },
   { label: 'Class IV', value: 'IV' },
   { label: 'Class V', value: 'V' },
-  { label: 'Class VI', value: 'VI' }
+  { label: 'Class VI', value: 'VI' },
+  { label: 'Class VII', value: 'VII' },
+  { label: 'Class VIII', value: 'VIII' },
 ]
 
 export const termOptions = [
