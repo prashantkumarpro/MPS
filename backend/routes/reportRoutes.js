@@ -226,27 +226,88 @@ router.get('/', async (req, res) => {
 // ===============================
 // UPDATE REPORT
 // ===============================
+
 router.put('/:id', async (req, res) => {
+
   try {
-    const updatedReport = await Report.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    )
+
+    const report =
+      await Report.findById(
+        req.params.id
+      )
+
+    if (!report) {
+
+      return res.status(404).json({
+        success: false,
+        message: 'Report not found'
+      })
+    }
+
+    // ===============================
+    // UPDATE DATA
+    // ===============================
+    const updatedData = {
+      ...report.toObject(),
+      ...req.body
+    }
+
+    // ===============================
+    // CALCULATE AGAIN
+    // ===============================
+    const calculatedData =
+      calculateReportData(
+        updatedData.studentClass ||
+        updatedData.studentId?.class ||
+        report.studentId?.class,
+
+        updatedData
+      )
+
+    // ===============================
+    // FINAL UPDATE
+    // ===============================
+    const updatedReport =
+      await Report.findByIdAndUpdate(
+
+        req.params.id,
+
+        {
+          ...updatedData,
+
+          totalMarks:
+            calculatedData.totalMarks,
+
+          percentage:
+            calculatedData.percentage,
+
+          grade:
+            calculatedData.grade,
+
+          division:
+            calculatedData.division
+        },
+
+        {
+          new: true
+        }
+      )
 
     res.status(200).json({
       success: true,
-      message: 'Report updated successfully',
+      message:
+        'Report updated successfully',
       data: updatedReport
     })
+
   } catch (error) {
+
     res.status(500).json({
       success: false,
       error: error.message
     })
   }
 })
-
 // ===============================
 // DELETE REPORT
 // ===============================

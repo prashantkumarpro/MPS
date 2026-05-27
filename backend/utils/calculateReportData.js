@@ -1,41 +1,80 @@
 import { REPORT_CONFIGS } from '../constants/reportConfigs.js'
 
-export const calculateReportData = (className, marks) => {
-  // ===============================
-  // NORMALIZE CLASS
-  // ===============================
-  const normalizedClass = className.trim().toUpperCase()
+export const calculateReportData = (
+  className,
+  marks
+) => {
 
-  // ===============================
-  // GET CONFIG
-  // ===============================
-  const config = REPORT_CONFIGS[normalizedClass]
+  const normalizedClass =
+    className
+      .trim()
+      .toUpperCase()
+
+  const config =
+    REPORT_CONFIGS[
+      normalizedClass
+    ]
 
   if (!config) {
-    throw new Error(`No report config found for ${className}`)
+
+    throw new Error(
+      `No report config found for ${className}`
+    )
   }
 
   // ===============================
   // SUBJECTS
   // ===============================
-  const subjects = config.subjects
+  const subjects =
+    config.subjects
 
   // ===============================
-  // CONVERT ALL MARKS TO NUMBER
+  // TOTAL SUBJECT MARKS
   // ===============================
-  const subjectMarks = subjects.map(subject => {
-    return Number(marks[subject]) || 0
+  let totalMarks = 0
+
+  subjects.forEach(subject => {
+
+    totalMarks +=
+      Number(
+        marks[subject]
+      ) || 0
   })
 
   // ===============================
-  // TOTAL MARKS
+  // DEFAULT MAX MARKS
   // ===============================
-  const totalMarks = subjectMarks.reduce((acc, curr) => acc + curr, 0)
+  let maxMarks =
+    config.maxMarks
+
+  // ===============================
+  // HANDLE ART
+  // ===============================
+  const artValue =
+    marks.art
+
+  const isArtNumeric =
+    artValue !== undefined &&
+    artValue !== null &&
+    artValue !== '' &&
+    !isNaN(Number(artValue))
+
+  // if art is numeric
+  if (isArtNumeric) {
+
+    totalMarks +=
+      Number(artValue)
+
+    maxMarks += 50
+  }
 
   // ===============================
   // PERCENTAGE
   // ===============================
-  const percentage = Number(((totalMarks / config.maxMarks) * 100).toFixed(2))
+  const percentage =
+    maxMarks > 0
+      ? (totalMarks / maxMarks) * 100
+      : 0
 
   // ===============================
   // GRADE
@@ -43,42 +82,80 @@ export const calculateReportData = (className, marks) => {
   let grade = ''
 
   if (percentage >= 80) {
+
     grade = 'A'
-  } else if (percentage >= 60) {
+
+  } else if (
+    percentage >= 60
+  ) {
+
     grade = 'B'
-  } else if (percentage >= 45) {
+
+  } else if (
+    percentage >= 45
+  ) {
+
     grade = 'C'
+
   } else {
+
     grade = 'D'
   }
 
   // ===============================
   // FAIL CHECK
   // ===============================
-  const hasFailMarks = subjectMarks.some(mark => mark < 15)
+  const hasFailMarks =
+    subjects.some(subject => {
+
+      const value =
+        Number(marks[subject])
+
+      return value < 15
+    })
+
+  // art fail only if numeric
+  const artFail =
+    isArtNumeric &&
+    Number(artValue) < 15
 
   // ===============================
   // DIVISION
   // ===============================
   let division = ''
 
-  if (hasFailMarks) {
+  if (
+    hasFailMarks ||
+    artFail
+  ) {
+
     division = 'Fail'
-  } else if (percentage >= 60) {
+
+  } else if (
+    percentage >= 60
+  ) {
+
     division = 'First'
-  } else if (percentage >= 45) {
+
+  } else if (
+    percentage >= 45
+  ) {
+
     division = 'Second'
+
   } else {
+
     division = 'Third'
   }
 
-  // ===============================
-  // RETURN
-  // ===============================
   return {
+
     totalMarks,
+
     percentage,
+
     grade,
+
     division
   }
 }
