@@ -14,8 +14,10 @@ import AddStudentModal from '../components/AddStudentModal.jsx'
 import { useLocalStorage } from '../../hooks/useLocalStorage.js'
 import ConfirmModal from '../components/ConfirmModal.jsx'
 import { ChevronsLeft, ChevronsRight } from 'lucide-react'
+import { classOptions, sortOptions } from '../../constants/reportOptions.js'
+import SelectBox from '../../components/SelectBox.jsx'
 
-// 👇 WRITE THIS INSIDE Students component
+
 
 export default function Students () {
   // ---------------- STATE ----------------
@@ -166,8 +168,8 @@ export default function Students () {
       {/* Filters */}
       <div className='bg-white rounded-xl shadow p-4 flex flex-row gap-4'>
         <div className='flex flex-col w-full md:w-1/3'>
-          <label className='text-sm text-gray-600 mb-1'>CLASS</label>
-          <select
+          <SelectBox
+            label='CLASS'
             value={selectedClass}
             onChange={value => {
               setFormState(prev => ({
@@ -176,38 +178,23 @@ export default function Students () {
               }))
               setPage(1)
             }}
-            className='border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
-          >
-            <option value=''>All</option>
-            <option value='NURSERY'>Nursery</option>
-            <option value='PG'>PG</option>
-            <option value='LKG'>LKG</option>
-            <option value='UKGA'>UKGA</option>
-            <option value='UKGB'>UKGB</option>
-            <option value='I'> I</option>
-            <option value='II'> II</option>
-            <option value='III'> III</option>
-            <option value='IV'> IV</option>
-            <option value='V'> V</option>
-            <option value='VI'> VI</option>
-            <option value='VII'> VII</option>
-            <option value='VIII'> VIII</option>
-          </select>
+            options={classOptions}
+            placeholder='Select Class'
+          />
         </div>
 
         <div className='flex flex-col w-full md:w-1/3'>
-          <label className='text-sm text-gray-600 mb-1'>SORT BY</label>
-          <select
-            value={sortBy}
-            onChange={value => {
-              setFormState(prev => ({ ...prev, sortBy: value.target.value }))
-              setPage(1)
-            }}
-            className='border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
-          >
-            <option value='roll'>Roll </option>
-            <option value='name'>Name (A–Z)</option>
-          </select>
+           <SelectBox
+                    label='SORT BY'
+                    value={sortBy}
+                    onChange={value => {
+                      setFormState(prev => ({ ...prev, sortBy: value.target.value }))
+                    }}
+                    options={sortOptions.filter(
+                      option=>option.value !=='position' && option.value !== "Sort By"
+                    )}
+                    placeholder='Sort By'
+                  />
         </div>
       </div>
 
