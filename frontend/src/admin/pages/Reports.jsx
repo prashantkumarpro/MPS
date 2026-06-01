@@ -354,86 +354,67 @@ const Reports = () => {
     shadow-sm
 
     p-4
+    sm:p-5
+
+    grid
+    grid-cols-2
+    lg:grid-cols-4
+
+    gap-4
   '
       >
-        <div
-          className='
-      flex
+        <SelectBox
+          label='CLASS'
+          value={selectedClass}
+          onChange={value => {
+            setFormState(prev => ({
+              ...prev,
+              selectedClass: value.target.value
+            }))
+            setPage(1)
+          }}
+          options={classOptions}
+          placeholder='Class'
+        />
 
-      gap-3
+        <SelectBox
+          label='SORT BY'
+          value={sortBy}
+          onChange={value => {
+            setFormState(prev => ({
+              ...prev,
+              sortBy: value.target.value
+            }))
+          }}
+          options={sortOptions.filter(option => option.value !== 'position')}
+          placeholder='Sort'
+        />
 
-      overflow-x-auto
+        <SelectBox
+          label='TERM'
+          value={term}
+          onChange={value => {
+            setFormState(prev => ({
+              ...prev,
+              term: value.target.value
+            }))
+          }}
+          options={termOptions}
+          placeholder='Term'
+        />
 
-      scrollbar-none
-      [-ms-overflow-style:none]
-      [scrollbar-width:none]
-
-      [&::-webkit-scrollbar]:hidden
-    '
-        >
-          <div className='min-w-[140px]'>
-            <SelectBox
-              label='CLASS'
-              value={selectedClass}
-              onChange={value => {
-                setFormState(prev => ({
-                  ...prev,
-                  selectedClass: value.target.value
-                }))
-                setPage(1)
-              }}
-              options={classOptions}
-              placeholder='Class'
-            />
-          </div>
-
-          <div className='min-w-[140px]'>
-            <SelectBox
-              label='SORT BY'
-              value={sortBy}
-              onChange={value => {
-                setFormState(prev => ({
-                  ...prev,
-                  sortBy: value.target.value
-                }))
-              }}
-              options={sortOptions.filter(
-                option => option.value !== 'position'
-              )}
-              placeholder='Sort'
-            />
-          </div>
-
-          <div className='min-w-[140px]'>
-            <SelectBox
-              label='TERM'
-              value={term}
-              onChange={value => {
-                setFormState(prev => ({
-                  ...prev,
-                  term: value.target.value
-                }))
-              }}
-              options={termOptions}
-              placeholder='Term'
-            />
-          </div>
-
-          <div className='min-w-[140px]'>
-            <SelectBox
-              label='YEAR'
-              value={academicYear}
-              onChange={value => {
-                setFormState(prev => ({
-                  ...prev,
-                  academicYear: value.target.value
-                }))
-              }}
-              options={yearOptions}
-              placeholder='Year'
-            />
-          </div>
-        </div>
+        <SelectBox
+          label='YEAR'
+          value={academicYear}
+          onChange={value => {
+            setFormState(prev => ({
+              ...prev,
+              academicYear: value.target.value
+            }))
+          }}
+          options={yearOptions}
+          placeholder='Year'
+        />
       </div>
       <br />
 
