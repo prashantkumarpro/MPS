@@ -246,11 +246,22 @@ export async function addReport(data) {
 // ===============================
 // GET REPORTS
 // ===============================
-export async function getReports() {
+export async function getReports({ className, term, academicYear }) {
 
-  const res = await fetch(
-    `${API_BASE}/api/report`
-  )
+   const query = new URLSearchParams({
+      term,
+      academicYear
+    }).toString()
+
+    const res = await fetch(
+      `${API_BASE}/api/report/class/${className}?${query}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
 
   return await res.json()
 }

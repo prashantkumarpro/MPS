@@ -8,14 +8,14 @@ export const classOptions = [
 
   { label: 'NURSERY', value: 'NURSERY' },
 
-  { label: 'Class I', value: 'I' },
-  { label: 'Class II', value: 'II' },
-  { label: 'Class III', value: 'III' },
-  { label: 'Class IV', value: 'IV' },
-  { label: 'Class V', value: 'V' },
-  { label: 'Class VI', value: 'VI' },
-  { label: 'Class VII', value: 'VII' },
-  { label: 'Class VIII', value: 'VIII' },
+  { label: 'I', value: 'I' },
+  { label: 'II', value: 'II' },
+  { label: 'III', value: 'III' },
+  { label: 'IV', value: 'IV' },
+  { label: 'V', value: 'V' },
+  { label: 'VI', value: 'VI' },
+  { label: 'VII', value: 'VII' },
+  { label: 'VIII', value: 'VIII' },
 ]
 
 export const termOptions = [

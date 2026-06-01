@@ -25,31 +25,40 @@ export default function SelectBox({
       )}
 
       <select
-        name={name}
-        value={value}
-        onChange={onChange}
-        className="
-          w-full
-          h-12
-          rounded-xl
-          border
-          border-gray-200
-          bg-white
-          px-4
-          text-sm
-          text-gray-700
-          shadow-sm
-          outline-none
-          transition-all
-          duration-200
+  name={name}
+  value={value}
+  onChange={onChange}
+  className='
+    w-full
 
-          focus:border-blue-500
-          focus:ring-4
-          focus:ring-blue-100
+    h-11
 
-          hover:border-gray-300
-        "
-      >
+    rounded-xl
+
+    border
+    border-slate-200
+
+    bg-white
+
+    px-3
+
+    text-sm
+
+    text-slate-700
+
+    shadow-sm
+
+    outline-none
+
+    transition-all
+
+    focus:border-blue-500
+    focus:ring-4
+    focus:ring-blue-50
+
+    hover:border-slate-300
+  '
+>
 
         <option value="">
           {placeholder}

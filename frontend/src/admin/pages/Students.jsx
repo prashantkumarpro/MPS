@@ -191,7 +191,7 @@ export default function Students () {
                       setFormState(prev => ({ ...prev, sortBy: value.target.value }))
                     }}
                     options={sortOptions.filter(
-                      option=>option.value !=='position' && option.value !== "Sort By"
+                      option=>option.value !=='position'
                     )}
                     placeholder='Sort By'
                   />
