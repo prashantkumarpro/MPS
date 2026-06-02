@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
 import {
   LayoutGrid,
@@ -13,12 +13,17 @@ import {
 } from 'lucide-react'
 import { GrHome } from 'react-icons/gr'
 import SidebarLink from '../components/SidebarLink'
+import { useLocation } from 'react-router'
 
 export default function AdminLayout () {
   const [open, setOpen] = useState(false)
+  const location = useLocation()
 
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
   return (
-<div className='flex h-screen bg-slate-100 overflow-hidden'>
+    <div className='flex h-screen bg-slate-100 overflow-hidden'>
       {/* ================= MOBILE OVERLAY ================= */}
       {open && (
         <div
