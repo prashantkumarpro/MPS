@@ -1,4 +1,5 @@
-export default function SelectBox({
+import { ChevronDown } from 'lucide-react'
+export default function SelectBox ({
   label,
   value,
   onChange,
@@ -6,76 +7,75 @@ export default function SelectBox({
   placeholder = 'Select option',
   name
 }) {
-
   return (
-    <div className="w-full">
-
+    <div className='w-full'>
       {label && (
-        <label
-          className="
-            block
-            mb-2
-            text-sm
-            font-semibold
-            text-gray-700
-          "
-        >
+        <label className='block mb-2 text-sm font-semibold text-gray-700'>
           {label}
         </label>
       )}
 
-      <select
-  name={name}
-  value={value}
-  onChange={onChange}
-  className='
-    w-full
+      <div className='relative'>
+        <select
+          name={name}
+          value={value}
+          onChange={onChange}
+          className='
+            w-full
+            h-12
 
-    h-11
+            appearance-none
 
-    rounded-xl
+            rounded-xl
 
-    border
-    border-slate-200
+            border
+            border-slate-200
 
-    bg-white
+            bg-white
 
-    px-3
+            pl-4
+            pr-11
 
-    text-sm
+            text-sm
+            font-medium
 
-    text-slate-700
+            text-slate-700
 
-    shadow-sm
+            shadow-sm
 
-    outline-none
+            outline-none
 
-    transition-all
+            transition-all
+            duration-200
 
-    focus:border-blue-500
-    focus:ring-4
-    focus:ring-blue-50
+            focus:border-blue-500
+            focus:ring-4
+            focus:ring-blue-50
 
-    hover:border-slate-300
-  '
->
+            hover:border-slate-300
+          '
+        >
+          <option value=''>{placeholder}</option>
 
-        <option value="">
-          {placeholder}
-        </option>
+          {options.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
 
-        {options.map(option => (
-
-          <option
-            key={option.value}
-            value={option.value}
-          >
-            {option.label}
-          </option>
-
-        ))}
-
-      </select>
+        <ChevronDown
+          size={18}
+          className='
+            pointer-events-none
+            absolute
+            right-4
+            top-1/2
+            -translate-y-1/2
+            text-slate-500
+          '
+        />
+      </div>
     </div>
   )
 }
