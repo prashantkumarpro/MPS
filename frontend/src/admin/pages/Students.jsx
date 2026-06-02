@@ -220,10 +220,10 @@ export default function Students () {
       </div>
 
       {/* DESKTOP VIEW */}
-      <div className='hidden md:block bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden'>
+      <div className="hidden md:block bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <table className='w-full'>
           {/* Header */}
-          <thead className='bg-gray-50 border-b border-gray-100'>
+          <thead className="bg-slate-50 border-b border-slate-200">
             <tr>
               <th className='px-6 py-4 text-center text-xs font-semibold tracking-wider text-gray-500 uppercase'>
                 Roll No.
@@ -243,38 +243,45 @@ export default function Students () {
             </tr>
           </thead>
 
-          <tbody className='divide-y divide-gray-100'>
+          <tbody className='divide-y divide-slate-100'>
             {loading ? (
               Array.from({ length: 8 }).map((_, i) => (
                 <tr key={i} className='animate-pulse'>
                   {/* Roll */}
                   <td className='px-6 py-4'>
-                    <div className='h-4 w-10 mx-auto rounded bg-gray-200'></div>
+                    <div className='h-4 w-10 mx-auto rounded bg-slate-200'></div>
                   </td>
 
                   {/* Name */}
                   <td className='px-6 py-4'>
-                    <div className='h-4 w-40 rounded bg-gray-200'></div>
+                    <div className='flex items-center gap-3'>
+                      <div className='h-10 w-10 rounded-xl bg-slate-200'></div>
+
+                      <div>
+                        <div className='h-4 w-32 rounded bg-slate-200 mb-2'></div>
+                        <div className='h-3 w-20 rounded bg-slate-200'></div>
+                      </div>
+                    </div>
                   </td>
 
                   {/* Class */}
                   <td className='px-6 py-4'>
-                    <div className='h-6 w-16 mx-auto rounded-full bg-gray-200'></div>
+                    <div className='h-6 w-20 mx-auto rounded-full bg-slate-200'></div>
                   </td>
 
                   {/* Actions */}
                   <td className='px-6 py-4'>
                     <div className='flex justify-center gap-2'>
-                      <div className='h-9 w-9 rounded-full bg-gray-200'></div>
-                      <div className='h-9 w-9 rounded-full bg-gray-200'></div>
-                      <div className='h-9 w-9 rounded-full bg-gray-200'></div>
+                      <div className='h-9 w-9 rounded-xl bg-slate-200'></div>
+                      <div className='h-9 w-9 rounded-xl bg-slate-200'></div>
+                      <div className='h-9 w-9 rounded-xl bg-slate-200'></div>
                     </div>
                   </td>
                 </tr>
               ))
             ) : students.length === 0 ? (
               <tr>
-                <td colSpan='4' className='py-10 text-center text-gray-500'>
+                <td colSpan='4' className='py-12 text-center text-slate-500'>
                   No students found
                 </td>
               </tr>
@@ -283,22 +290,47 @@ export default function Students () {
                 <tr
                   key={student._id}
                   className='
-              transition-all
-              duration-200
-              hover:bg-gray-50
-            '
+          transition-all
+          duration-200
+          hover:bg-blue-50/40
+        '
                 >
                   {/* Roll Number */}
                   <td className='px-6 py-4 text-center'>
-                    <span className='font-semibold text-gray-700'>
+                    <span className='font-semibold text-slate-700'>
                       {student.rollNumber}
                     </span>
                   </td>
 
-                  {/* Name */}
+                  {/* Student Name */}
                   <td className='px-6 py-4'>
-                    <div className='font-medium text-gray-900'>
-                      {student.name}
+                    <div className='flex items-center gap-3'>
+                      <div
+                        className='
+                h-10
+                w-10
+                rounded-xl
+                bg-gradient-to-br
+                from-blue-100
+                to-indigo-100
+                text-blue-700
+                flex
+                items-center
+                justify-center
+                font-bold
+                shrink-0
+              '
+                      >
+                        {student.name?.charAt(0)?.toUpperCase()}
+                      </div>
+
+                      <div>
+                        <p className='font-semibold text-slate-900'>
+                          {student.name}
+                        </p>
+
+                        <p className='text-xs text-slate-500'>Student</p>
+                      </div>
                     </div>
                   </td>
 
@@ -306,17 +338,19 @@ export default function Students () {
                   <td className='px-6 py-4 text-center'>
                     <span
                       className='
-                  inline-flex
-                  items-center
-                  px-3
-                  py-1
-                  rounded-full
-                  text-xs
-                  font-semibold
-                  bg-blue-50
-                  text-blue-600
-                '
+              inline-flex
+              items-center
+              gap-1
+              px-3
+              py-1
+              rounded-full
+              text-xs
+              font-semibold
+              bg-blue-50
+              text-blue-600
+            '
                     >
+                      <GraduationCap size={12} />
                       {student.class}
                     </span>
                   </td>
@@ -335,21 +369,28 @@ export default function Students () {
                           }
                         }}
                         className='
-                    group
-                    p-2.5
-                    rounded-full
-                    bg-blue-50
-                    text-blue-600
-                    transition-all
-                    duration-200
-                    hover:bg-blue-100
-                    hover:scale-105
-                  '
+                group
+                h-9
+                w-9
+                rounded-xl
+                bg-blue-50
+                text-blue-600
+                flex
+                items-center
+                justify-center
+                transition-all
+                duration-200
+                hover:bg-blue-100
+                hover:scale-105
+              '
                       >
                         <Pencil
-                          size={16}
+                          size={15}
                           strokeWidth={2.25}
-                          className='group-hover:rotate-12 transition-transform'
+                          className='
+                  group-hover:rotate-12
+                  transition-transform
+                '
                         />
                       </button>
 
@@ -360,21 +401,28 @@ export default function Students () {
                           navigate(`/admin/students/${student._id}`)
                         }
                         className='
-                    group
-                    p-2.5
-                    rounded-full
-                    bg-emerald-50
-                    text-emerald-600
-                    transition-all
-                    duration-200
-                    hover:bg-emerald-100
-                    hover:scale-105
-                  '
+                group
+                h-9
+                w-9
+                rounded-xl
+                bg-emerald-50
+                text-emerald-600
+                flex
+                items-center
+                justify-center
+                transition-all
+                duration-200
+                hover:bg-emerald-100
+                hover:scale-105
+              '
                       >
                         <Eye
-                          size={16}
+                          size={15}
                           strokeWidth={2.25}
-                          className='group-hover:scale-110 transition-transform'
+                          className='
+                  group-hover:scale-110
+                  transition-transform
+                '
                         />
                       </button>
 
@@ -386,18 +434,22 @@ export default function Students () {
                           setIsModalOpen(true)
                         }}
                         className='
-                    group
-                    p-2.5
-                    rounded-full
-                    bg-red-50
-                    text-red-600
-                    transition-all
-                    duration-200
-                    hover:bg-red-100
-                    hover:scale-105
-                  '
+                group
+                h-9
+                w-9
+                rounded-xl
+                bg-red-50
+                text-red-600
+                flex
+                items-center
+                justify-center
+                transition-all
+                duration-200
+                hover:bg-red-100
+                hover:scale-105
+              '
                       >
-                        <Trash2 size={16} strokeWidth={2.25} />
+                        <Trash2 size={15} strokeWidth={2.25} />
                       </button>
                     </div>
                   </td>
