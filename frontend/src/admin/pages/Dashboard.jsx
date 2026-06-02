@@ -78,7 +78,7 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <div className='p-4 md:p-6 xl:p-8 space-y-8'>
+    <div className='space-y-4 md:space-y-6'>
       {/* Welcome Banner */}
       <div
         className='

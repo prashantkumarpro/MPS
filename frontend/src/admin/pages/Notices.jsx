@@ -105,7 +105,7 @@ const Notices = () => {
   }
 
   return (
-    <div className='p-6 space-y-8'>
+    <div className='space-y-4 md:space-y-6'>
       {/* 🔥 CREATE NOTICE FORM */}
       <div className='bg-white p-6 rounded-2xl shadow border'>
         <h2 className='text-xl font-semibold mb-4'>➕ Create Notice</h2>
