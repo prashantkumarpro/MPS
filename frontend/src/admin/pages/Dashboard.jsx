@@ -88,7 +88,9 @@ const Dashboard = () => {
     bg-gradient-to-r
     from-blue-600
     to-indigo-600
-    p-5 md:p-6
+    p-4
+    sm:p-6
+    lg:p-8
     text-white
     shadow-lg
   '
@@ -96,6 +98,7 @@ const Dashboard = () => {
         {/* Decorative Glow */}
         <div
           className='
+      hidden md:block
       absolute
       -top-10
       -right-10
@@ -115,71 +118,129 @@ const Dashboard = () => {
       lg:flex-row
       lg:items-center
       lg:justify-between
-      gap-5
+      gap-4
+      lg:gap-6
     '
         >
-          {/* Left */}
-          <div className='flex-1'>
-            <h1 className='text-2xl md:text-3xl font-bold'>
+          {/* ================= LEFT ================= */}
+          <div className='flex-1 min-w-0'>
+            <h1
+              className='
+          text-xl
+          sm:text-2xl
+          lg:text-4xl
+          font-bold
+          leading-tight
+        '
+            >
               Welcome Back, Admin 👋
             </h1>
 
-            <p className='mt-2 text-blue-100 text-sm md:text-base'>
+            <p
+              className='
+          mt-2
+          text-xs
+          sm:text-sm
+          lg:text-base
+          text-blue-100
+          max-w-2xl
+        '
+            >
               Manage students, notices, reports and school activities.
             </p>
 
             {/* Stats */}
-            <div
-              className='
-          mt-4
-          grid
-          grid-cols-1
-          sm:grid-cols-3
-          gap-2
-          text-sm
-          text-blue-100
-        '
-            >
-              <div className='flex items-center gap-2'>
-                <Users size={14} />
-                <span>{stats?.totalStudents || 0} Students</span>
+            <div className='mt-4 flex flex-wrap gap-2'>
+              <div
+                title={`${stats?.totalStudents || 0} Students`}
+                className='
+            flex items-center gap-1.5
+            px-3 py-1.5
+            rounded-lg
+            bg-white/10
+            backdrop-blur-sm
+            text-xs sm:text-sm
+          '
+              >
+                <Users size={12} />
+
+                <span className='font-semibold'>
+                  {stats?.totalStudents || 0}
+                </span>
+
+                <span className='md:hidden'>Std</span>
+                <span className='hidden md:inline'>Students</span>
               </div>
 
-              <div className='flex items-center gap-2'>
-                <UserCheck size={14} />
-                <span>{stats?.totalTeachers || 0} Teachers</span>
+              <div
+                title={`${stats?.totalTeachers || 0} Teachers`}
+                className='
+            flex items-center gap-1.5
+            px-3 py-1.5
+            rounded-lg
+            bg-white/10
+            backdrop-blur-sm
+            text-xs sm:text-sm
+          '
+              >
+                <UserCheck size={12} />
+
+                <span className='font-semibold'>
+                  {stats?.totalTeachers || 0}
+                </span>
+
+                <span className='md:hidden'>Tch</span>
+                <span className='hidden md:inline'>Teachers</span>
               </div>
 
-              <div className='flex items-center gap-2'>
-                <Bell size={14} />
-                <span>{stats?.totalNotices || 0} Notices</span>
+              <div
+                title={`${stats?.totalNotices || 0} Notices`}
+                className='
+            flex items-center gap-1.5
+            px-3 py-1.5
+            rounded-lg
+            bg-white/10
+            backdrop-blur-sm
+            text-xs sm:text-sm
+          '
+              >
+                <Bell size={12} />
+
+                <span className='font-semibold'>
+                  {stats?.totalNotices || 0}
+                </span>
+
+                <span className='md:hidden'>Ntc</span>
+                <span className='hidden md:inline'>Notices</span>
               </div>
             </div>
           </div>
 
-          {/* Actions */}
+          {/* ================= ACTIONS ================= */}
           <div
             className='
         flex
         flex-col
         sm:flex-row
-        gap-3
+        gap-2
         w-full
         lg:w-auto
       '
           >
             <button
+              onClick={() => navigate('/admin/students')}
               className='
-          inline-flex
+          flex
           items-center
           justify-center
           gap-2
           px-5
-          py-3
+          py-2.5
           rounded-xl
           bg-white
           text-blue-600
           font-semibold
+          text-sm
           shadow-sm
           hover:bg-blue-50
           transition-all
@@ -187,20 +248,20 @@ const Dashboard = () => {
           w-full
           sm:w-auto
         '
-              onClick={() => navigate('/admin/students')}
             >
               <Plus size={16} />
               Add Student
             </button>
 
             <button
+              onClick={() => navigate('/admin/notices')}
               className='
-          inline-flex
+          flex
           items-center
           justify-center
           gap-2
           px-5
-          py-3
+          py-2.5
           rounded-xl
           border
           border-white/20
@@ -208,13 +269,13 @@ const Dashboard = () => {
           backdrop-blur-sm
           text-white
           font-medium
+          text-sm
           hover:bg-white/20
           transition-all
           duration-200
           w-full
           sm:w-auto
         '
-              onClick={() => navigate('/admin/notices')}
             >
               <Bell size={16} />
               Add Notice
