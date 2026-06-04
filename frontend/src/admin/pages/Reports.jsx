@@ -4,9 +4,16 @@ import { getReports, deleteReport as deleteReportApi } from '../../api'
 import ConfirmModal from '../components/ConfirmModal'
 import { ReportContext } from '../../context/ReportContext'
 import { useNavigate } from 'react-router'
-import { ChevronsLeft, ChevronsRight } from 'lucide-react'
 import SelectBox from '../../components/SelectBox'
-import { Plus, Search } from 'lucide-react'
+import {
+  Plus,
+  Search,
+  ChevronsLeft,
+  ChevronsRight,
+  Eye,
+  Pencil,
+  Trash2
+} from 'lucide-react'
 import {
   classOptions,
   sortOptions,
@@ -371,7 +378,6 @@ const Reports = () => {
               ...prev,
               selectedClass: value.target.value
             }))
-            setPage(1)
           }}
           options={classOptions}
           placeholder='Class'
@@ -418,498 +424,575 @@ const Reports = () => {
       </div>
       <br />
 
-      {/* TABLE */}
-      <div
-        className='
-    overflow-hidden
-
-    rounded-xl
-
-    border
-    border-slate-200
-
-    bg-white
-  '
-      >
-        {/* DESKTOP HEADER */}
-        <div
-          className='
-      hidden
-      md:grid
-
-      grid-cols-[2fr_1fr_1fr_1fr_1fr_1.5fr]
-
-      gap-4
-
-      border-b
-      border-slate-200
-
-      bg-slate-50
-
-      px-5
-      py-3
-    '
-        >
-          {['Student', 'Class', 'Term', 'Percentage', 'Grade', 'Actions'].map(
-            item => (
-              <p
-                key={item}
-                className='
-          text-xs
-          font-semibold
-
-          uppercase
-
-          tracking-wide
-
-          text-slate-500
-        '
-              >
-                {item}
-              </p>
-            )
-          )}
-        </div>
-
-        {/* SKELETON */}
-        {loading && (
-          <>
-            {[...Array(6)].map((_, index) => (
-              <div
-                key={index}
-                className='
-            border-b
-            border-slate-100
-
-            animate-pulse
-          '
-              >
-                {/* DESKTOP */}
-                <div
-                  className='
-              hidden
-              md:grid
-
-              grid-cols-[2fr_1fr_1fr_1fr_1fr_1.5fr]
-
-              gap-4
-
-              items-center
-
-              px-5
-              py-4
-            '
-                >
-                  <div>
-                    <div className='h-4 w-32 rounded bg-slate-200'></div>
-
-                    <div className='h-3 w-20 rounded bg-slate-100 mt-2'></div>
-                  </div>
-
-                  <div className='h-4 w-16 rounded bg-slate-200'></div>
-
-                  <div className='h-4 w-20 rounded bg-slate-200'></div>
-
-                  <div className='h-4 w-14 rounded bg-slate-200'></div>
-
-                  <div className='h-6 w-10 rounded-md bg-slate-200'></div>
-
-                  <div className='flex items-center gap-2'>
-                    <div className='h-4 w-10 rounded bg-slate-200'></div>
-
-                    <div className='h-4 w-10 rounded bg-slate-200'></div>
-
-                    <div className='h-4 w-12 rounded bg-slate-200'></div>
-                  </div>
-                </div>
-
-                {/* MOBILE */}
-                <div
-                  className='
-              md:hidden
-
-              px-4
-              py-4
-            '
-                >
-                  <div className='flex items-start justify-between'>
-                    <div>
-                      <div className='h-4 w-28 rounded bg-slate-200'></div>
-
-                      <div className='h-3 w-24 rounded bg-slate-100 mt-2'></div>
-                    </div>
-
-                    <div>
-                      <div className='h-4 w-12 rounded bg-slate-200'></div>
-
-                      <div className='h-3 w-6 rounded bg-slate-100 mt-2'></div>
-                    </div>
-                  </div>
-
-                  <div className='flex items-center justify-between mt-4'>
-                    <div className='h-3 w-20 rounded bg-slate-100'></div>
-
-                    <div className='flex items-center gap-3'>
-                      <div className='h-3 w-8 rounded bg-slate-200'></div>
-
-                      <div className='h-3 w-8 rounded bg-slate-200'></div>
-
-                      <div className='h-3 w-10 rounded bg-slate-200'></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </>
-        )}
-
-        {/* EMPTY */}
-        {!loading && currentReports.length === 0 && (
-          <div
-            className='
-        py-20
-
-        text-center
-      '
-          >
-            <p
-              className='
-          text-sm
-          text-slate-500
-        '
-            >
-              No reports found
-            </p>
-          </div>
-        )}
-
-        {/* REPORTS */}
-        {!loading &&
-          currentReports.map(report => (
+      {loading ? (
+        <div className='overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm'>
+          {Array.from({ length: 8 }).map((_, index) => (
             <div
-              key={report._id}
+              key={index}
               className='
+          animate-pulse
+
           border-b
           border-slate-100
 
-          last:border-b-0
-
-          hover:bg-slate-50
-
-          transition-colors
+          px-6
+          py-5
         '
             >
-              {/* DESKTOP */}
-              <div
-                className='
-            hidden
-            md:grid
+              <div className='hidden md:grid grid-cols-[2.5fr_1fr_1fr_1fr_0.8fr_1fr] gap-4 items-center'>
+                {/* Student */}
+                <div className='flex items-center gap-3'>
+                  <div className='h-10 w-10 rounded-xl bg-slate-200' />
 
-            grid-cols-[2fr_1fr_1fr_1fr_1fr_1.5fr]
-
-            gap-4
-
-            items-center
-
-            px-5
-            py-4
-          '
-              >
-                {/* STUDENT */}
-                <div>
-                  <h3
-                    className='
-                text-sm
-                font-medium
-
-                text-slate-900
-              '
-                  >
-                    {report.studentId?.name}
-                  </h3>
-
-                  <p
-                    className='
-                text-xs
-                text-slate-500
-
-                mt-1
-              '
-                  >
-                    Roll: {report.studentId?.rollNumber}
-                  </p>
+                  <div>
+                    <div className='h-4 w-32 rounded bg-slate-200' />
+                    <div className='h-3 w-20 rounded bg-slate-100 mt-2' />
+                  </div>
                 </div>
 
-                {/* CLASS */}
-                <p
-                  className='
-              text-sm
-              text-slate-700
-            '
-                >
-                  {report.studentId?.class}
-                </p>
+                <div className='h-4 w-16 rounded bg-slate-200' />
+                <div className='h-4 w-20 rounded bg-slate-200' />
+                <div className='h-4 w-16 rounded bg-slate-200' />
+                <div className='h-8 w-10 rounded-full bg-slate-200' />
 
-                {/* TERM */}
-                <p
-                  className='
-              text-sm
-              text-slate-700
-            '
-                >
-                  {report.term?.replace('_', ' ')}
-                </p>
-
-                {/* PERCENT */}
-                <p
-                  className='
-              text-sm
-              font-medium
-
-              text-slate-900
-            '
-                >
-                  {report.percentage?.toFixed(1)}%
-                </p>
-
-                {/* GRADE */}
-                <div>
-                  <span
-                    className={`
-                inline-flex
-                items-center
-
-                rounded-md
-
-                px-2
-                py-1
-
-                text-xs
-                font-medium
-
-                ${
-                  report.grade === 'A'
-                    ? `
-                      bg-green-100
-                      text-green-700
-                    `
-                    : report.grade === 'B'
-                    ? `
-                      bg-blue-100
-                      text-blue-700
-                    `
-                    : `
-                      bg-red-100
-                      text-red-700
-                    `
-                }
-              `}
-                  >
-                    {report.grade}
-                  </span>
-                </div>
-
-                {/* ACTIONS */}
-                <div
-                  className='
-              flex
-              items-center
-
-              gap-2
-            '
-                >
-                  <button
-                    className='
-                text-xs
-                font-medium
-
-                text-slate-600
-
-                hover:text-slate-900
-              '
-                    onClick={() => viewHandler(report)}
-                  >
-                    View
-                  </button>
-
-                  <button
-                    className='
-                text-xs
-                font-medium
-
-                text-blue-600
-
-                hover:text-blue-800
-              '
-                    onClick={() => {
-                      editHandler(report)
-                    }}
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setSelectedId(report._id)
-
-                      setIsDeleteModalOpen(true)
-                    }}
-                    className='
-                text-xs
-                font-medium
-
-                text-red-600
-
-                hover:text-red-800
-              '
-                  >
-                    Delete
-                  </button>
+                <div className='flex gap-2'>
+                  <div className='h-9 w-9 rounded-lg bg-slate-200' />
+                  <div className='h-9 w-9 rounded-lg bg-slate-200' />
+                  <div className='h-9 w-9 rounded-lg bg-slate-200' />
                 </div>
               </div>
 
-              {/* MOBILE */}
-              <div
-                className='
-            md:hidden
-
-            px-4
-            py-4
-          '
-              >
-                {/* TOP */}
+              {/* Mobile */}
+              <div className='md:hidden p-3'>
                 <div
                   className='
-              flex
-              items-start
-              justify-between
-            '
+      animate-pulse
+
+      rounded-2xl
+
+      border
+      border-slate-200
+
+      bg-white
+
+      p-4
+    '
                 >
-                  {/* LEFT */}
-                  <div>
-                    <h3
-                      className='
-                  text-sm
-                  font-medium
+                  {/* Header */}
+                  <div className='flex items-start justify-between gap-3'>
+                    <div className='flex items-center gap-3 flex-1'>
+                      <div className='h-11 w-11 rounded-xl bg-slate-200' />
 
-                  text-slate-900
-                '
-                    >
-                      {report.studentId?.name}
-                    </h3>
+                      <div className='flex-1'>
+                        <div className='h-4 w-32 rounded bg-slate-200' />
 
-                    <p
-                      className='
-                  text-xs
-                  text-slate-500
+                        <div className='h-3 w-24 rounded bg-slate-100 mt-2' />
+                      </div>
+                    </div>
 
-                  mt-1
-                '
-                    >
-                      {report.studentId?.class} • Roll:{' '}
-                      {report.studentId?.rollNumber}
-                    </p>
+                    <div className='h-8 w-10 rounded-full bg-slate-200' />
                   </div>
 
-                  {/* PERCENT */}
+                  {/* Term + Score */}
                   <div
                     className='
-                text-right
-              '
+        mt-4
+
+        py-3
+
+        border-y
+        border-slate-100
+
+        flex
+        items-center
+        justify-between
+      '
                   >
-                    <p
-                      className='
-                  text-sm
-                  font-semibold
+                    <div>
+                      <div className='h-3 w-10 rounded bg-slate-100' />
+                      <div className='h-4 w-16 rounded bg-slate-200 mt-2' />
+                    </div>
 
-                  text-slate-900
-                '
-                    >
-                      {report.percentage?.toFixed(0)}%
-                    </p>
-
-                    <p
-                      className='
-                  text-[11px]
-                  text-slate-500
-                '
-                    >
-                      {report.grade}
-                    </p>
+                    <div className='text-right'>
+                      <div className='h-3 w-12 rounded bg-slate-100 ml-auto' />
+                      <div className='h-5 w-16 rounded bg-slate-200 mt-2 ml-auto' />
+                    </div>
                   </div>
-                </div>
 
-                {/* BOTTOM */}
-                <div
-                  className='
-              flex
-              items-center
-              justify-between
-
-              mt-3
-            '
-                >
-                  <p
-                    className='
-                text-xs
-                text-slate-500
-              '
-                  >
-                    {report.term?.replace('_', ' ')}
-                  </p>
-
-                  {/* ACTIONS */}
-                  <div
-                    className='
-                flex
-                items-center
-
-                gap-3
-              '
-                  >
-                    <button
-                      className='
-                  text-xs
-                  font-medium
-
-                  text-slate-600
-                '
-                      onClick={() => viewHandler(report)}
-                    >
-                      View
-                    </button>
-
-                    <button
-                      className='
-                  text-xs
-                  font-medium
-
-                  text-blue-600
-                '
-                      onClick={() => {
-                        editHandler(report)
-                      }}
-                    >
-                      Edit
-                    </button>
-
-                    <button
-                      onClick={() => deleteReport(report._id)}
-                      className='
-                  text-xs
-                  font-medium
-
-                  text-red-600
-                '
-                    >
-                      Delete
-                    </button>
+                  {/* Actions */}
+                  <div className='flex justify-end gap-2 mt-3'>
+                    <div className='h-9 w-9 rounded-lg bg-slate-200' />
+                    <div className='h-9 w-9 rounded-lg bg-slate-200' />
+                    <div className='h-9 w-9 rounded-lg bg-slate-200' />
                   </div>
                 </div>
               </div>
             </div>
           ))}
-      </div>
+        </div>
+      ) : (
+        <div
+          className='
+    overflow-hidden
+
+    rounded-3xl
+
+    border
+    border-slate-200
+
+    bg-white
+
+    shadow-sm
+  '
+        >
+          {/* TABLE HEADER */}
+          <div
+            className='
+      hidden
+      md:grid
+
+      grid-cols-[2.5fr_1fr_1fr_1fr_0.8fr_1fr]
+
+      gap-4
+
+      px-6
+      py-4
+
+      bg-slate-50
+
+      border-b
+      border-slate-200
+
+      text-xs
+      font-semibold
+
+      uppercase
+
+      tracking-wider
+
+      text-slate-500
+    '
+          >
+            <div>Student</div>
+            <div>Class</div>
+            <div>Term</div>
+            <div>Percentage</div>
+            <div>Grade</div>
+            <div>Actions</div>
+          </div>
+
+          {/* REPORTS */}
+          {!loading &&
+            currentReports.map(report => {
+              const initials =
+                report.studentId?.name
+                  ?.split(' ')
+                  ?.map(word => word[0])
+                  ?.slice(0, 2)
+                  ?.join('')
+                  ?.toUpperCase() || 'S'
+
+              return (
+                <div
+                  key={report._id}
+                  className='
+          border-b
+          border-slate-100
+          last:border-b-0
+          hover:bg-slate-50
+          transition-colors
+        '
+                >
+                  {/* DESKTOP */}
+                  <div
+                    className='
+            hidden
+            md:grid
+            grid-cols-[2.5fr_1fr_1fr_1fr_0.8fr_1fr]
+            gap-4
+            items-center
+            px-6
+            py-5
+          '
+                  >
+                    {/* STUDENT */}
+                    <div className='flex items-center gap-3'>
+                      <div
+                        className='
+                h-9
+                w-9
+                rounded-full
+                bg-blue-100
+                text-blue-700
+                flex
+                items-center
+                justify-center
+                text-xs
+                font-semibold
+              '
+                      >
+                        {initials}
+                      </div>
+
+                      <div>
+                        <h3 className='text-sm font-medium text-slate-900'>
+                          {report.studentId?.name}
+                        </h3>
+
+                        <p className='text-xs text-slate-500 mt-1'>
+                          Roll #{report.studentId?.rollNumber}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* CLASS */}
+                    <p className='text-sm text-slate-700'>
+                      {report.studentId?.class}
+                    </p>
+
+                    {/* TERM */}
+                    <p className='text-sm text-slate-700'>
+                      {report.term?.replace('_', ' ')}
+                    </p>
+
+                    {/* PERCENTAGE */}
+                    <p className='text-sm font-semibold text-slate-900'>
+                      {report.percentage?.toFixed(1)}%
+                    </p>
+
+                    {/* GRADE */}
+                    <div>
+                      <span
+                        className={`
+                inline-flex
+                items-center
+                justify-center
+                min-w-[36px]
+                h-8
+                rounded-full
+                text-xs
+                font-semibold
+
+                ${
+                  report.grade === 'A'
+                    ? 'bg-green-100 text-green-700'
+                    : report.grade === 'B'
+                    ? 'bg-blue-100 text-blue-700'
+                    : report.grade === 'C'
+                    ? 'bg-yellow-100 text-yellow-700'
+                    : 'bg-red-100 text-red-700'
+                }
+              `}
+                      >
+                        {report.grade}
+                      </span>
+                    </div>
+
+                    {/* ACTIONS */}
+                    <div className='flex items-center gap-4'>
+                      <button
+                        onClick={() => viewHandler(report)}
+                        className='
+                text-slate-500
+                hover:text-slate-900
+                transition-colors
+              '
+                      >
+                        <Eye size={18} />
+                      </button>
+
+                      <button
+                        onClick={() => editHandler(report)}
+                        className='
+                text-blue-600
+                hover:text-blue-700
+                transition-colors
+              '
+                      >
+                        <Pencil size={18} />
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setSelectedId(report._id)
+                          setIsDeleteModalOpen(true)
+                        }}
+                        className='
+                text-red-500
+                hover:text-red-600
+                transition-colors
+              '
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* MOBILE */}
+                  {/* MOBILE */}
+                  <div className='md:hidden p-3'>
+                    <div
+                      className='
+      bg-white
+
+      rounded-2xl
+
+      border
+      border-slate-200
+
+      p-4
+
+      shadow-sm
+    '
+                    >
+                      {/* TOP */}
+                      <div className='flex items-start justify-between gap-3'>
+                        <div className='flex items-center gap-3 min-w-0'>
+                          <div
+                            className='
+            h-11
+            w-11
+
+            shrink-0
+
+            rounded-xl
+
+            bg-gradient-to-br
+            from-blue-600
+            to-indigo-600
+
+            text-white
+
+            flex
+            items-center
+            justify-center
+
+            text-sm
+            font-bold
+          '
+                          >
+                            {initials}
+                          </div>
+
+                          <div className='min-w-0'>
+                            <h3
+                              className='
+              text-sm
+              font-semibold
+
+              text-slate-900
+
+              truncate
+            '
+                            >
+                              {report.studentId?.name}
+                            </h3>
+
+                            <p
+                              className='
+              text-xs
+
+              text-slate-500
+
+              mt-1
+            '
+                            >
+                              Roll #{report.studentId?.rollNumber}
+                              {' • '}
+                              {report.studentId?.class}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Grade */}
+                        <span
+                          className={`
+          flex
+          items-center
+          justify-center
+
+          h-8
+          min-w-[32px]
+
+          px-2
+
+          rounded-full
+
+          text-xs
+          font-bold
+
+          ${
+            report.grade === 'A'
+              ? 'bg-green-100 text-green-700'
+              : report.grade === 'B'
+              ? 'bg-blue-100 text-blue-700'
+              : report.grade === 'C'
+              ? 'bg-yellow-100 text-yellow-700'
+              : 'bg-red-100 text-red-700'
+          }
+        `}
+                        >
+                          {report.grade}
+                        </span>
+                      </div>
+
+                      {/* TERM + SCORE */}
+                      <div
+                        className='
+        flex
+        items-center
+        justify-between
+
+        mt-4
+
+        py-3
+
+        border-y
+        border-slate-100
+      '
+                      >
+                        <div>
+                          <p
+                            className='
+            text-[11px]
+
+            uppercase
+
+            tracking-wider
+
+            text-slate-400
+          '
+                          >
+                            Term
+                          </p>
+
+                          <p
+                            className='
+            mt-1
+
+            text-sm
+
+            font-semibold
+
+            text-slate-800
+          '
+                          >
+                            {report.term?.replace('_', ' ')}
+                          </p>
+                        </div>
+
+                        <div className='text-right'>
+                          <p
+                            className='
+            text-[11px]
+
+            uppercase
+
+            tracking-wider
+
+            text-slate-400
+          '
+                          >
+                            Score
+                          </p>
+
+                          <p
+                            className='
+            mt-1
+
+            text-lg
+
+            font-bold
+
+            text-slate-900
+          '
+                          >
+                            {report.percentage?.toFixed(1)}%
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* ACTIONS */}
+                      <div className='flex items-center justify-end gap-2 mt-3'>
+                        <button
+                          onClick={() => viewHandler(report)}
+                          className='
+          h-9
+          w-9
+
+          rounded-lg
+
+          flex
+          items-center
+          justify-center
+
+          text-slate-500
+
+          hover:bg-slate-100
+          hover:text-blue-600
+
+          transition-all
+        '
+                        >
+                          <Eye size={17} />
+                        </button>
+
+                        <button
+                          onClick={() => editHandler(report)}
+                          className='
+          h-9
+          w-9
+
+          rounded-lg
+
+          flex
+          items-center
+          justify-center
+
+          text-slate-500
+
+          hover:bg-amber-50
+          hover:text-amber-600
+
+          transition-all
+        '
+                        >
+                          <Pencil size={17} />
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            setSelectedId(report._id)
+                            setIsDeleteModalOpen(true)
+                          }}
+                          className='
+          h-9
+          w-9
+
+          rounded-lg
+
+          flex
+          items-center
+          justify-center
+
+          text-slate-500
+
+          hover:bg-red-50
+          hover:text-red-600
+
+          transition-all
+        '
+                        >
+                          <Trash2 size={17} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+        </div>
+      )}
 
       {/* PAGINATION */}
       {reports.length > reportsPerPage && (
