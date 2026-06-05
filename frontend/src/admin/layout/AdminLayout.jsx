@@ -78,7 +78,7 @@ export default function AdminLayout () {
             Reports
           </SidebarLink>
 
-          <SidebarLink to='/admin/bulk-upload' icon={<Upload size={20} />}>
+          <SidebarLink  to='/admin/bulk-upload' icon={<Upload size={20} />}>
             Bulk Upload
           </SidebarLink>
 
