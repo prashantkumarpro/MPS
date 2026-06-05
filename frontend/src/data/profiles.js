@@ -22,9 +22,9 @@ const profiles = [
   },
   {
     id: 8,
-    name: 'Tribhuvan Malakar',
+    name: 'Nitin Tamang',
     role: 'Teacher',
-    image: '/teachers/Amanpreet.webp'
+    image: '/teachers/Imran_khan.webp'
   },
   {
     id: 9,
@@ -43,6 +43,18 @@ const profiles = [
     name: 'Meena Kumari',
     role: 'Teacher',
     image: '/teachers/Meena_kumari.webp'
+  },
+  {
+    id: 14,
+    name: 'Puja Tamang',
+    role: 'Teacher',
+    image: '/teachers/kanchan.webp'
+  },
+  {
+    id: 7,
+    name: 'Switi Kumari',
+    role: 'Teacher',
+    image: '/teachers/kanchan.webp'
   },
   {
     id: 3,
@@ -71,19 +83,16 @@ const profiles = [
   },
   {
     id: 11,
-    name: 'Ashish Kumar',
+    name: 'Tamang',
     role: 'Teacher',
-    image: '/teachers/Ashish_kumar.webp'
+    image: '/teachers/Imran_khan.webp'
   },
   {
-    id: 7,
+    id: 15,
     name: 'Prashant Kumar',
     role: 'Teacher',
     image: '/teachers/Imran_khan.webp'
   }
- 
 ]
-
-
 
 export default profiles
