@@ -1,4 +1,6 @@
-export default function EditStudentModal ({
+import { UserPen, X } from 'lucide-react'
+
+export default function EditStudentModal({
   open,
   student,
   onClose,
@@ -8,71 +10,328 @@ export default function EditStudentModal ({
   if (!open || !student) return null
 
   return (
-    <div className='fixed inset-0 bg-black/40 flex justify-center items-center z-50'>
-      <div className='bg-white p-6 rounded-lg w-[500px]'>
-        <h2 className='text-xl font-bold mb-4'>✏️ Edit Student</h2>
+    <div
+      className="
+        fixed
+        inset-0
+        z-50
 
-        <form onSubmit={onSubmit} className='space-y-3'>
-          <input
-            defaultValue={student.name}
-            name='name'
-            className='w-full border p-2'
-            placeholder='Student Name'
-          />
+        flex
+        items-center
+        justify-center
 
-          <input
-            defaultValue={student.parents?.fatherName || ''}
-            name='fatherName'
-            className='w-full border p-2'
-            placeholder="Father's Name"
-          />
+        bg-black/50
+        backdrop-blur-sm
 
-          <input
-            defaultValue={student.parents?.motherName || ''}
-            name='motherName'
-            className='w-full border p-2'
-            placeholder="Mother's Name"
-          />
+        p-4
+      "
+    >
+      <div
+        className="
+          w-full
+          max-w-2xl
 
-          <input
-            type='date'
-            defaultValue={
-              student.personal?.dob ? student.personal.dob.split('T')[0] : ''
-            }
-            name='dob'
-            className='w-full border p-2'
-          />
+          overflow-hidden
 
-          <input
-            defaultValue={student.parents?.mobile || ''}
-            name='mobile'
-            className='w-full border p-2'
-            placeholder='Parent Mobile'
-          />
+          rounded-3xl
 
-          <textarea
-            defaultValue={student.personal?.address || ''}
-            name='address'
-            className='w-full border p-2'
-            placeholder='Address'
-          />
+          bg-white
 
-          <div className='flex justify-end gap-3 mt-4'>
+          shadow-[0_25px_80px_-12px_rgba(0,0,0,0.25)]
+        "
+      >
+        {/* Header */}
+        <div className="border-b border-slate-100 px-6 py-5">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="flex items-center gap-3">
+                <div
+                  className="
+                    flex
+                    h-10
+                    w-10
+                    items-center
+                    justify-center
+
+                    rounded-2xl
+
+                    bg-amber-50
+
+                    text-amber-600
+                  "
+                >
+                  <UserPen size={20} />
+                </div>
+
+                <div>
+                  <h2 className="text-xl font-bold text-slate-900">
+                    Edit Student
+                  </h2>
+
+                  <p className="mt-1 text-sm text-slate-500">
+                    Update student information
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <button
-              type='button'
               onClick={onClose}
-              className='px-4 py-2 bg-gray-200 rounded'
-            >
-              Cancel
-            </button>
+              className="
+                h-10
+                w-10
 
-            <button
-              type='submit'
-              disabled={loading}
-              className='px-4 py-2 bg-blue-600 text-white rounded'
+                rounded-xl
+
+                flex
+                items-center
+                justify-center
+
+                text-slate-400
+
+                hover:bg-slate-100
+                hover:text-slate-700
+
+                transition-all
+              "
             >
-              {loading ? 'Saving...' : 'Save Changes'}
+              <X size={18} />
             </button>
+          </div>
+        </div>
+
+        <form onSubmit={onSubmit}>
+          <div className="max-h-[70vh] overflow-y-auto p-6">
+            {/* Student Section */}
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-4">
+                Student Information
+              </h3>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Student Name
+                  </label>
+
+                  <input
+                    defaultValue={student.name}
+                    name="name"
+                    className="
+                      h-12
+                      w-full
+
+                      rounded-2xl
+
+                      border
+                      border-slate-200
+
+                      bg-slate-50
+
+                      px-4
+
+                      outline-none
+
+                      focus:border-blue-500
+                      focus:ring-4
+                      focus:ring-blue-100
+                    "
+                  />
+                </div>
+
+                <div>
+                  <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Date of Birth
+                  </label>
+
+                  <input
+                    type="date"
+                    defaultValue={
+                      student.personal?.dob
+                        ? student.personal.dob.split('T')[0]
+                        : ''
+                    }
+                    name="dob"
+                    className="
+                      h-12
+                      w-full
+
+                      rounded-2xl
+
+                      border
+                      border-slate-200
+
+                      bg-slate-50
+
+                      px-4
+
+                      outline-none
+
+                      focus:border-blue-500
+                      focus:ring-4
+                      focus:ring-blue-100
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Parent Section */}
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-4">
+                Parent Information
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  defaultValue={student.parents?.fatherName || ''}
+                  name="fatherName"
+                  placeholder="Father's Name"
+                  className="
+                    h-12
+                    rounded-2xl
+
+                    border
+                    border-slate-200
+
+                    bg-slate-50
+
+                    px-4
+
+                    outline-none
+
+                    focus:border-blue-500
+                    focus:ring-4
+                    focus:ring-blue-100
+                  "
+                />
+
+                <input
+                  defaultValue={student.parents?.motherName || ''}
+                  name="motherName"
+                  placeholder="Mother's Name"
+                  className="
+                    h-12
+                    rounded-2xl
+
+                    border
+                    border-slate-200
+
+                    bg-slate-50
+
+                    px-4
+
+                    outline-none
+
+                    focus:border-blue-500
+                    focus:ring-4
+                    focus:ring-blue-100
+                  "
+                />
+
+                <input
+                  defaultValue={student.parents?.mobile || ''}
+                  name="mobile"
+                  placeholder="Parent Mobile"
+                  className="
+                    h-12
+                    rounded-2xl
+
+                    border
+                    border-slate-200
+
+                    bg-slate-50
+
+                    px-4
+
+                    outline-none
+
+                    focus:border-blue-500
+                    focus:ring-4
+                    focus:ring-blue-100
+                  "
+                />
+              </div>
+            </div>
+
+            {/* Address */}
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-4">
+                Address
+              </h3>
+
+              <textarea
+                rows={4}
+                defaultValue={student.personal?.address || ''}
+                name="address"
+                placeholder="Enter address"
+                className="
+                  w-full
+
+                  rounded-2xl
+
+                  border
+                  border-slate-200
+
+                  bg-slate-50
+
+                  p-4
+
+                  outline-none
+
+                  focus:border-blue-500
+                  focus:ring-4
+                  focus:ring-blue-100
+                "
+              />
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="border-t border-slate-100 px-6 py-5">
+            <div className="flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={onClose}
+                className="
+                  px-5
+                  py-2.5
+
+                  rounded-xl
+
+                  bg-slate-100
+
+                  text-slate-700
+                  font-medium
+
+                  hover:bg-slate-200
+                "
+              >
+                Cancel
+              </button>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="
+                  px-5
+                  py-2.5
+
+                  rounded-xl
+
+                  bg-blue-600
+
+                  text-white
+                  font-medium
+
+                  hover:bg-blue-700
+
+                  disabled:opacity-60
+                "
+              >
+                {loading ? 'Saving...' : 'Save Changes'}
+              </button>
+            </div>
           </div>
         </form>
       </div>
