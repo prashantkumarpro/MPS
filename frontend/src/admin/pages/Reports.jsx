@@ -12,7 +12,8 @@ import {
   ChevronsRight,
   Eye,
   Pencil,
-  Trash2
+  Trash2,
+  FileText
 } from 'lucide-react'
 import {
   classOptions,
@@ -189,14 +190,7 @@ const Reports = () => {
 
   return (
     <div
-      className='
-      min-h-screen
-
-      bg-slate-50
-
-      p-4
-      md:p-6
-    '
+     className='space-y-4 md:space-y-6'
     >
       {/* TOP */}
       <div
@@ -468,67 +462,172 @@ const Reports = () => {
                   className='
       animate-pulse
 
-      rounded-2xl
+      bg-white
+      rounded-3xl
 
       border
       border-slate-200
 
-      bg-white
+      shadow-sm
 
-      p-4
+      overflow-hidden
     '
                 >
                   {/* Header */}
-                  <div className='flex items-start justify-between gap-3'>
-                    <div className='flex items-center gap-3 flex-1'>
-                      <div className='h-11 w-11 rounded-xl bg-slate-200' />
+                  <div className='p-4 pb-3'>
+                    <div className='flex items-center justify-between'>
+                      <div className='flex items-center gap-3 flex-1'>
+                        {/* Avatar */}
+                        <div className='h-14 w-14 rounded-2xl bg-slate-200 shrink-0' />
 
-                      <div className='flex-1'>
-                        <div className='h-4 w-32 rounded bg-slate-200' />
+                        {/* Name */}
+                        <div className='flex-1'>
+                          <div className='h-4 w-36 rounded bg-slate-200' />
 
-                        <div className='h-3 w-24 rounded bg-slate-100 mt-2' />
+                          <div className='h-3 w-20 rounded bg-slate-100 mt-2' />
+
+                          <div className='h-3 w-16 rounded bg-slate-100 mt-2' />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className='h-8 w-10 rounded-full bg-slate-200' />
+                      {/* Grade */}
+                      <div className='h-8 w-12 rounded-xl bg-slate-200' />
+                    </div>
                   </div>
 
-                  {/* Term + Score */}
-                  <div
-                    className='
-        mt-4
+                  {/* Score Card */}
+                  <div className='px-4'>
+                    <div
+                      className='
+          rounded-2xl
 
-        py-3
+          border
+          border-slate-100
 
-        border-y
-        border-slate-100
+          bg-slate-50
 
-        flex
-        items-center
-        justify-between
-      '
-                  >
-                    <div>
-                      <div className='h-3 w-10 rounded bg-slate-100' />
-                      <div className='h-4 w-16 rounded bg-slate-200 mt-2' />
-                    </div>
+          p-4
+        '
+                    >
+                      <div className='flex items-center justify-between'>
+                        {/* Term */}
+                        <div>
+                          <div className='h-3 w-20 rounded bg-slate-100' />
 
-                    <div className='text-right'>
-                      <div className='h-3 w-12 rounded bg-slate-100 ml-auto' />
-                      <div className='h-5 w-16 rounded bg-slate-200 mt-2 ml-auto' />
+                          <div className='h-4 w-24 rounded bg-slate-200 mt-2' />
+                        </div>
+
+                        {/* Score */}
+                        <div className='text-right'>
+                          <div className='h-8 w-20 rounded bg-slate-200 ml-auto' />
+
+                          <div className='h-3 w-16 rounded bg-slate-100 mt-2 ml-auto' />
+                        </div>
+                      </div>
+
+                      {/* Progress Bar */}
+                      <div className='mt-4'>
+                        <div className='h-2 rounded-full bg-slate-200 overflow-hidden'>
+                          <div className='h-full w-3/4 rounded-full bg-slate-300' />
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   {/* Actions */}
-                  <div className='flex justify-end gap-2 mt-3'>
-                    <div className='h-9 w-9 rounded-lg bg-slate-200' />
-                    <div className='h-9 w-9 rounded-lg bg-slate-200' />
-                    <div className='h-9 w-9 rounded-lg bg-slate-200' />
+                  <div className='p-4 pt-3'>
+                    <div className='grid grid-cols-3 gap-2'>
+                      <div className='h-11 rounded-xl bg-slate-200' />
+
+                      <div className='h-11 rounded-xl bg-slate-200' />
+
+                      <div className='h-11 rounded-xl bg-slate-200' />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+      ) : currentReports.length === 0 ? (
+        <div className='bg-white rounded-3xl border border-slate-200 shadow-sm'>
+          <div className='flex flex-col items-center justify-center py-20 px-6 text-center'>
+            <div
+              className='
+          h-20
+          w-20
+
+          rounded-3xl
+
+          bg-slate-100
+
+          flex
+          items-center
+          justify-center
+        '
+            >
+              <FileText size={36} className='text-slate-400' />
+            </div>
+
+            <h3
+              className='
+          mt-6
+
+          text-xl
+          font-bold
+
+          text-slate-900
+        '
+            >
+              No Reports Found
+            </h3>
+
+            <p
+              className='
+          mt-2
+
+          max-w-sm
+
+          text-sm
+
+          text-slate-500
+        '
+            >
+              No report cards match your current filters. Try changing the
+              class, term, or search criteria.
+            </p>
+
+            <button
+              onClick={() =>
+                setFormState(prev => ({
+                  ...prev,
+                  selectedClass: '',
+                  term: '',
+                  academicYear: '',
+                  sortBy: ''
+                }))
+              }
+              className='
+          mt-6
+
+          px-5
+          py-2.5
+
+          rounded-xl
+
+          bg-blue-600
+          hover:bg-blue-700
+
+          text-white
+          text-sm
+          font-medium
+
+          transition-colors
+        '
+            >
+              Clear Filters
+            </button>
+          </div>
         </div>
       ) : (
         <div
@@ -729,262 +828,219 @@ const Reports = () => {
                   </div>
 
                   {/* MOBILE */}
-                  {/* MOBILE */}
                   <div className='md:hidden p-3'>
                     <div
                       className='
       bg-white
-
-      rounded-2xl
-
-      border
-      border-slate-200
-
-      p-4
-
+      rounded-3xl
+      border border-slate-200
       shadow-sm
+      overflow-hidden
+      transition-all
+      duration-300
     '
                     >
-                      {/* TOP */}
-                      <div className='flex items-start justify-between gap-3'>
-                        <div className='flex items-center gap-3 min-w-0'>
+                      {/* Header */}
+                      <div className='p-4 pb-3'>
+                        <div className='flex items-center justify-between'>
+                          <div className='flex items-center gap-3 min-w-0'>
+                            <div
+                              className='
+              h-14 w-14
+              rounded-2xl
+              shrink-0
+
+              bg-gradient-to-br
+              from-blue-600
+              via-indigo-600
+              to-violet-600
+
+              text-white
+              flex
+              items-center
+              justify-center
+
+              text-lg
+              font-bold
+
+              shadow-lg
+              shadow-blue-200
+            '
+                            >
+                              {initials}
+                            </div>
+
+                            <div className='min-w-0'>
+                              <h3 className='text-base font-bold text-slate-900 truncate'>
+                                {report.studentId?.name}
+                              </h3>
+
+                              <p className='text-sm text-slate-500 mt-1'>
+                                Roll #{report.studentId?.rollNumber}
+                              </p>
+
+                              <p className='text-xs text-slate-400'>
+                                {report.studentId?.class}
+                              </p>
+                            </div>
+                          </div>
+
                           <div
+                            className={`
+            px-3
+            py-1.5
+            rounded-xl
+            text-sm
+            font-bold
+
+            ${
+              report.grade === 'A'
+                ? 'bg-green-100 text-green-700'
+                : report.grade === 'B'
+                ? 'bg-blue-100 text-blue-700'
+                : report.grade === 'C'
+                ? 'bg-yellow-100 text-yellow-700'
+                : 'bg-red-100 text-red-700'
+            }
+          `}
+                          >
+                            {report.grade}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Score Section */}
+                      <div className='px-4'>
+                        <div
+                          className='
+          rounded-2xl
+          bg-gradient-to-r
+          from-slate-50
+          to-blue-50
+
+          border
+          border-slate-100
+
+          p-4
+        '
+                        >
+                          <div className='flex items-center justify-between'>
+                            <div>
+                              <p className='text-xs uppercase tracking-wider text-slate-400'>
+                                Current Term
+                              </p>
+
+                              <p className='text-sm font-semibold text-slate-800 mt-1'>
+                                {report.term?.replace('_', ' ')}
+                              </p>
+                            </div>
+
+                            <div className='text-right'>
+                              <p className='text-3xl font-black text-slate-900'>
+                                {report.percentage?.toFixed(1)}%
+                              </p>
+
+                              <p className='text-xs text-slate-500'>
+                                Overall Score
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Progress */}
+                          <div className='mt-4'>
+                            <div className='h-2 bg-slate-200 rounded-full overflow-hidden'>
+                              <div
+                                className='
+                h-full
+                rounded-full
+                bg-gradient-to-r
+                from-blue-600
+                to-indigo-600
+              '
+                                style={{
+                                  width: `${report.percentage}%`
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Footer */}
+                      <div className='p-4 pt-3'>
+                        <div className='grid grid-cols-3 gap-2'>
+                          <button
+                            onClick={() => viewHandler(report)}
                             className='
             h-11
-            w-11
-
-            shrink-0
-
             rounded-xl
 
-            bg-gradient-to-br
-            from-blue-600
-            to-indigo-600
-
-            text-white
+            bg-slate-100
+            hover:bg-slate-200
 
             flex
             items-center
             justify-center
+            gap-2
 
+            text-slate-700
             text-sm
-            font-bold
+            font-medium
           '
                           >
-                            {initials}
-                          </div>
+                            <Eye size={16} />
+                            View
+                          </button>
 
-                          <div className='min-w-0'>
-                            <h3
-                              className='
-              text-sm
-              font-semibold
-
-              text-slate-900
-
-              truncate
-            '
-                            >
-                              {report.studentId?.name}
-                            </h3>
-
-                            <p
-                              className='
-              text-xs
-
-              text-slate-500
-
-              mt-1
-            '
-                            >
-                              Roll #{report.studentId?.rollNumber}
-                              {' • '}
-                              {report.studentId?.class}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Grade */}
-                        <span
-                          className={`
-          flex
-          items-center
-          justify-center
-
-          h-8
-          min-w-[32px]
-
-          px-2
-
-          rounded-full
-
-          text-xs
-          font-bold
-
-          ${
-            report.grade === 'A'
-              ? 'bg-green-100 text-green-700'
-              : report.grade === 'B'
-              ? 'bg-blue-100 text-blue-700'
-              : report.grade === 'C'
-              ? 'bg-yellow-100 text-yellow-700'
-              : 'bg-red-100 text-red-700'
-          }
-        `}
-                        >
-                          {report.grade}
-                        </span>
-                      </div>
-
-                      {/* TERM + SCORE */}
-                      <div
-                        className='
-        flex
-        items-center
-        justify-between
-
-        mt-4
-
-        py-3
-
-        border-y
-        border-slate-100
-      '
-                      >
-                        <div>
-                          <p
+                          <button
+                            onClick={() => editHandler(report)}
                             className='
-            text-[11px]
+            h-11
+            rounded-xl
 
-            uppercase
+            bg-amber-50
+            hover:bg-amber-100
 
-            tracking-wider
+            flex
+            items-center
+            justify-center
+            gap-2
 
-            text-slate-400
-          '
-                          >
-                            Term
-                          </p>
-
-                          <p
-                            className='
-            mt-1
-
+            text-amber-700
             text-sm
-
-            font-semibold
-
-            text-slate-800
+            font-medium
           '
                           >
-                            {report.term?.replace('_', ' ')}
-                          </p>
-                        </div>
+                            <Pencil size={16} />
+                            Edit
+                          </button>
 
-                        <div className='text-right'>
-                          <p
+                          <button
+                            onClick={() => {
+                              setSelectedId(report._id)
+                              setIsDeleteModalOpen(true)
+                            }}
                             className='
-            text-[11px]
+            h-11
+            rounded-xl
 
-            uppercase
+            bg-red-50
+            hover:bg-red-100
 
-            tracking-wider
+            flex
+            items-center
+            justify-center
+            gap-2
 
-            text-slate-400
+            text-red-600
+            text-sm
+            font-medium
           '
                           >
-                            Score
-                          </p>
-
-                          <p
-                            className='
-            mt-1
-
-            text-lg
-
-            font-bold
-
-            text-slate-900
-          '
-                          >
-                            {report.percentage?.toFixed(1)}%
-                          </p>
+                            <Trash2 size={16} />
+                            Delete
+                          </button>
                         </div>
-                      </div>
-
-                      {/* ACTIONS */}
-                      <div className='flex items-center justify-end gap-2 mt-3'>
-                        <button
-                          onClick={() => viewHandler(report)}
-                          className='
-          h-9
-          w-9
-
-          rounded-lg
-
-          flex
-          items-center
-          justify-center
-
-          text-slate-500
-
-          hover:bg-slate-100
-          hover:text-blue-600
-
-          transition-all
-        '
-                        >
-                          <Eye size={17} />
-                        </button>
-
-                        <button
-                          onClick={() => editHandler(report)}
-                          className='
-          h-9
-          w-9
-
-          rounded-lg
-
-          flex
-          items-center
-          justify-center
-
-          text-slate-500
-
-          hover:bg-amber-50
-          hover:text-amber-600
-
-          transition-all
-        '
-                        >
-                          <Pencil size={17} />
-                        </button>
-
-                        <button
-                          onClick={() => {
-                            setSelectedId(report._id)
-                            setIsDeleteModalOpen(true)
-                          }}
-                          className='
-          h-9
-          w-9
-
-          rounded-lg
-
-          flex
-          items-center
-          justify-center
-
-          text-slate-500
-
-          hover:bg-red-50
-          hover:text-red-600
-
-          transition-all
-        '
-                        >
-                          <Trash2 size={17} />
-                        </button>
                       </div>
                     </div>
                   </div>
