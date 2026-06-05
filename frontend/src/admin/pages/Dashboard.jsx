@@ -55,6 +55,7 @@ const quickActions = [
   }
 ]
 
+
 const Dashboard = () => {
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -65,7 +66,6 @@ const Dashboard = () => {
     const loadStats = async () => {
       try {
         const data = await fetchStats()
-        console.log(data)
         setStats(data)
       } catch (error) {
         console.log(error)

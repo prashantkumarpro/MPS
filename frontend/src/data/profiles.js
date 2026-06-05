@@ -5,7 +5,7 @@ const profiles = [
   {
     id: 13,
     name: 'Alok Ratn',
-    role: 'Mnaging Director',
+    role: 'Managing Director',
     image: '/teachers/Alok_Ratn.webp'
   },
   {
@@ -66,7 +66,7 @@ const profiles = [
   {
     id: 10,
     name: 'Bittu Kumar',
-    role: 'Accountent',
+    role: 'Accountant',
     image: '/teachers/bittu.enc'
   },
   {
