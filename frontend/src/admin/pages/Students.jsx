@@ -463,43 +463,142 @@ export default function Students () {
       {/* MOBILE VIEW */}
       <div className='md:hidden space-y-3'>
         {loading ? (
-          Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className='
-          bg-white
-          rounded-2xl
-          border
-          border-gray-100
-          shadow-sm
-          overflow-hidden
-          animate-pulse
-        '
-            >
-              <div className='h-1 bg-gray-200' />
+         Array.from({ length: 6 }).map((_, i) => (
+  <div
+    key={i}
+    className="
+      bg-white
+      rounded-2xl
+      border
+      border-slate-200
+      shadow-sm
 
-              <div className='p-4'>
-                <div className='flex items-center gap-3'>
-                  <div className='h-12 w-12 rounded-2xl bg-gray-200' />
+      px-4
+      py-4
 
-                  <div className='flex-1'>
-                    <div className='h-4 w-36 rounded bg-gray-200 mb-3' />
+      animate-pulse
+    "
+  >
+    {/* Header */}
+    <div className="flex items-center gap-3">
+      {/* Avatar */}
+      <div
+        className="
+          h-14
+          w-14
 
-                    <div className='flex items-center gap-2'>
-                      <div className='h-5 w-14 rounded-full bg-gray-200' />
-                      <div className='h-4 w-12 rounded bg-gray-200' />
-                    </div>
-                  </div>
-                </div>
+          rounded-xl
 
-                <div className='mt-4 grid grid-cols-3 gap-2'>
-                  <div className='h-9 rounded-xl bg-gray-200' />
-                  <div className='h-9 rounded-xl bg-gray-200' />
-                  <div className='h-9 rounded-xl bg-gray-200' />
-                </div>
-              </div>
-            </div>
-          ))
+          bg-slate-200
+
+          shrink-0
+        "
+      />
+
+      {/* Info */}
+      <div className="flex-1">
+        <div
+          className="
+            h-4
+            w-36
+
+            rounded-md
+
+            bg-slate-200
+          "
+        />
+
+        <div className="flex items-center gap-2 mt-3">
+          <div
+            className="
+              h-3
+              w-16
+
+              rounded
+
+              bg-slate-100
+            "
+          />
+
+          <div
+            className="
+              h-1
+              w-1
+
+              rounded-full
+
+              bg-slate-200
+            "
+          />
+
+          <div
+            className="
+              h-3
+              w-14
+
+              rounded
+
+              bg-slate-100
+            "
+          />
+        </div>
+      </div>
+
+      {/* View Button */}
+      <div
+        className="
+          h-10
+          w-10
+
+          rounded-xl
+
+          bg-slate-200
+
+          shrink-0
+        "
+      />
+    </div>
+
+    {/* Divider */}
+    <div
+      className="
+        mt-4
+
+        pt-4
+
+        border-t
+        border-slate-100
+      "
+    >
+      {/* Actions */}
+      <div className="flex gap-2">
+        <div
+          className="
+            flex-1
+
+            h-10
+
+            rounded-xl
+
+            bg-slate-200
+          "
+        />
+
+        <div
+          className="
+            flex-1
+
+            h-10
+
+            rounded-xl
+
+            bg-slate-200
+          "
+        />
+      </div>
+    </div>
+  </div>
+))
         ) : students.length === 0 ? (
           <div className='bg-white rounded-2xl shadow-sm p-6 text-center text-gray-500'>
             No students found
