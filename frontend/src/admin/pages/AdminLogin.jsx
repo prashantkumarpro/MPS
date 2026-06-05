@@ -1,87 +1,167 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { Eye, EyeOff, Lock, Mail } from 'lucide-react'
+import toast from 'react-hot-toast'
+
+import logo from '../../assets/logo.webp'
 import { loginUser } from '../../api/auth.api'
 import { useAuth } from '../../context/AuthContext'
 
-export default function AdminLogin () {
+export default function AdminLogin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
 
   const { login } = useAuth()
   const navigate = useNavigate()
 
   const handleSubmit = async e => {
     e.preventDefault()
-    setLoading(true)
-    setError('')
 
-    const res = await loginUser({ email, password })
-
-    if (!res.success) {
-      setError(res.message)
-      setLoading(false)
+    if (!email || !password) {
+      toast.error('Please fill all fields')
       return
     }
 
-    // 🚨 Only admin allowed here
-    if (res.user.role !== 'admin') {
-      setError('Access denied')
-      setLoading(false)
-      return
-    }
+    try {
+      setLoading(true)
 
-    login(res.user, res.token)
-    navigate('/admin')
+      const res = await loginUser({ email, password })
+
+      if (!res.success) {
+        toast.error(res.message || 'Login failed')
+        return
+      }
+
+      if (res.user.role !== 'admin') {
+        toast.error('Access denied')
+        return
+      }
+
+      login(res.user, res.token)
+
+      toast.success(`Welcome back, ${res.user.name}!`)
+
+      setTimeout(() => {
+        navigate('/admin')
+      }, 800)
+    } catch (error) {
+      toast.error('Something went wrong')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-100 px-4'>
-      <form
-        onSubmit={handleSubmit}
-        className='bg-white p-8 rounded-xl shadow-lg w-full max-w-md'
-      >
-        <h1 className='text-2xl font-bold text-center mb-6 text-blue-700'>
-          Admin Login
-        </h1>
+    <div className='relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center px-4'>
+      {/* Background Blur Effects */}
+      <div className='absolute top-0 left-0 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl' />
+      <div className='absolute bottom-0 right-0 w-72 h-72 bg-indigo-200/30 rounded-full blur-3xl' />
 
-        {error && (
-          <p className='bg-red-100 text-red-600 p-2 mb-4 rounded text-sm'>
-            {error}
-          </p>
-        )}
+      <div className='relative w-full max-w-md'>
+        <div className='bg-white/90 backdrop-blur-xl border border-slate-200 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-8'>
+          {/* Logo */}
+          <div className='flex items-center gap-3 mb-8'>
+            <img
+              src={logo}
+              alt='Max Public School'
+              className='w-16 h-16 object-contain flex-shrink-0'
+            />
 
-        <div className='mb-4'>
-          <label className='block text-sm mb-1'>Email</label>
-          <input
-            type='email'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            className='w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-            required
-          />
+            <div>
+              <h1 className='font-alkatra font-extrabold text-2xl leading-5 mt-3 text-sky-700'>
+                MAX PUBLIC SCHOOL
+              </h1>
+
+              <p className='text-sm text-slate-500 font-able font-normal leading-[100%]'>
+                School ERP Portal
+              </p>
+            </div>
+          </div>
+
+          {/* Heading */}
+          <div className='mb-8'>
+            <h2 className='text-2xl font-bold text-slate-900 font-able  leading-[100%]'>
+              Welcome Back
+            </h2>
+
+            <p className='mt-2  text-[#393E46] font-normal text-lg'>
+              Sign in to continue to your dashboard
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className='space-y-5'>
+            {/* Email */}
+            <div>
+              <label className='block text-sm font-medium text-slate-700 mb-2'>
+                Email Address
+              </label>
+
+              <div className='relative'>
+                <Mail className='absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400' />
+
+                <input
+                  type='email'
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder='Enter your email'
+                  className='w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all'
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className='block text-sm font-medium text-slate-700 mb-2'>
+                Password
+              </label>
+
+              <div className='relative'>
+                <Lock className='absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400' />
+
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder='Enter your password'
+                  className='w-full h-12 pl-11 pr-12 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all'
+                  required
+                />
+
+                <button
+                  type='button'
+                  onClick={() => setShowPassword(prev => !prev)}
+                  className='absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 transition-colors'
+                >
+                  {showPassword ? (
+                    <EyeOff className='h-5 w-5' />
+                  ) : (
+                    <Eye className='h-5 w-5' />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Button */}
+            <button
+              type='submit'
+              disabled={loading}
+              className='w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all duration-200 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 disabled:opacity-70 disabled:cursor-not-allowed'
+            >
+              {loading ? (
+                <div className='flex items-center justify-center gap-2'>
+                  <div className='h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin' />
+                  Signing In...
+                </div>
+              ) : (
+                'Sign In'
+              )}
+            </button>
+          </form>
         </div>
-
-        <div className='mb-6'>
-          <label className='block text-sm mb-1'>Password</label>
-          <input
-            type='password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            className='w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-            required
-          />
-        </div>
-
-        <button
-          type='submit'
-          disabled={loading}
-          className='w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold transition disabled:opacity-50'
-        >
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
+      </div>
     </div>
   )
 }

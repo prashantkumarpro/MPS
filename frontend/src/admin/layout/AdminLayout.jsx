@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router'
+import { Outlet, useNavigate } from 'react-router'
 import {
   LayoutGrid,
   Users,
@@ -14,10 +14,22 @@ import {
 import { GrHome } from 'react-icons/gr'
 import SidebarLink from '../components/SidebarLink'
 import { useLocation } from 'react-router'
+import toast from 'react-hot-toast'
 
 export default function AdminLayout () {
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    localStorage.removeItem('termYear')
+
+    toast.success('You have been logged out successfully.')
+
+    navigate('/admin/login', { replace: true })
+  }
 
   useEffect(() => {
     setOpen(false)
@@ -78,7 +90,7 @@ export default function AdminLayout () {
             Reports
           </SidebarLink>
 
-          <SidebarLink  to='/admin/bulk-upload' icon={<Upload size={20} />}>
+          <SidebarLink to='/admin/bulk-upload' icon={<Upload size={20} />}>
             Bulk Upload
           </SidebarLink>
 
@@ -93,10 +105,14 @@ export default function AdminLayout () {
 
         {/* Logout */}
         <div className='mt-auto pt-4 border-t border-gray-200'>
-          <SidebarLink to='/admin/logout' icon={<LogOut size={20} />}>
-            Logout
-          </SidebarLink>
-        </div>
+            <button
+              onClick={handleLogout}
+              className='w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 transition-all'
+            >
+              <LogOut size={20} />
+              <span>Logout</span>
+            </button>
+          </div>
       </aside>
 
       {/* ================= MAIN CONTENT ================= */}
