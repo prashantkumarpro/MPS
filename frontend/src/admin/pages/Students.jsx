@@ -9,7 +9,7 @@ import {
 } from '../../api/index.js'
 import EditStudentModal from '../components/EditStudentModal'
 import { useNavigate } from 'react-router'
-import { Pencil, Eye, Trash2, EyeIcon, GraduationCap } from 'lucide-react'
+import { Pencil, Eye, Trash2, GraduationCap } from 'lucide-react'
 import AddStudentModal from '../components/AddStudentModal.jsx'
 import { useLocalStorage } from '../../hooks/useLocalStorage.js'
 import ConfirmModal from '../components/ConfirmModal.jsx'
@@ -463,10 +463,10 @@ export default function Students () {
       {/* MOBILE VIEW */}
       <div className='md:hidden space-y-3'>
         {loading ? (
-         Array.from({ length: 6 }).map((_, i) => (
-  <div
-    key={i}
-    className="
+          Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className='
       bg-white
       rounded-2xl
       border
@@ -477,13 +477,13 @@ export default function Students () {
       py-4
 
       animate-pulse
-    "
-  >
-    {/* Header */}
-    <div className="flex items-center gap-3">
-      {/* Avatar */}
-      <div
-        className="
+    '
+            >
+              {/* Header */}
+              <div className='flex items-center gap-3'>
+                {/* Avatar */}
+                <div
+                  className='
           h-14
           w-14
 
@@ -492,61 +492,61 @@ export default function Students () {
           bg-slate-200
 
           shrink-0
-        "
-      />
+        '
+                />
 
-      {/* Info */}
-      <div className="flex-1">
-        <div
-          className="
+                {/* Info */}
+                <div className='flex-1'>
+                  <div
+                    className='
             h-4
             w-36
 
             rounded-md
 
             bg-slate-200
-          "
-        />
+          '
+                  />
 
-        <div className="flex items-center gap-2 mt-3">
-          <div
-            className="
+                  <div className='flex items-center gap-2 mt-3'>
+                    <div
+                      className='
               h-3
               w-16
 
               rounded
 
               bg-slate-100
-            "
-          />
+            '
+                    />
 
-          <div
-            className="
+                    <div
+                      className='
               h-1
               w-1
 
               rounded-full
 
               bg-slate-200
-            "
-          />
+            '
+                    />
 
-          <div
-            className="
+                    <div
+                      className='
               h-3
               w-14
 
               rounded
 
               bg-slate-100
-            "
-          />
-        </div>
-      </div>
+            '
+                    />
+                  </div>
+                </div>
 
-      {/* View Button */}
-      <div
-        className="
+                {/* View Button */}
+                <div
+                  className='
           h-10
           w-10
 
@@ -555,25 +555,25 @@ export default function Students () {
           bg-slate-200
 
           shrink-0
-        "
-      />
-    </div>
+        '
+                />
+              </div>
 
-    {/* Divider */}
-    <div
-      className="
+              {/* Divider */}
+              <div
+                className='
         mt-4
 
         pt-4
 
         border-t
         border-slate-100
-      "
-    >
-      {/* Actions */}
-      <div className="flex gap-2">
-        <div
-          className="
+      '
+              >
+                {/* Actions */}
+                <div className='flex gap-2'>
+                  <div
+                    className='
             flex-1
 
             h-10
@@ -581,11 +581,11 @@ export default function Students () {
             rounded-xl
 
             bg-slate-200
-          "
-        />
+          '
+                  />
 
-        <div
-          className="
+                  <div
+                    className='
             flex-1
 
             h-10
@@ -593,12 +593,12 @@ export default function Students () {
             rounded-xl
 
             bg-slate-200
-          "
-        />
-      </div>
-    </div>
-  </div>
-))
+          '
+                  />
+                </div>
+              </div>
+            </div>
+          ))
         ) : students.length === 0 ? (
           <div className='bg-white rounded-2xl shadow-sm p-6 text-center text-gray-500'>
             No students found
