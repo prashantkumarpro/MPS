@@ -220,10 +220,10 @@ export default function Students () {
       </div>
 
       {/* DESKTOP VIEW */}
-      <div className="hidden md:block bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className='hidden md:block bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden'>
         <table className='w-full'>
           {/* Header */}
-          <thead className="bg-slate-50 border-b border-slate-200">
+          <thead className='bg-slate-50 border-b border-slate-200'>
             <tr>
               <th className='px-6 py-4 text-center text-xs font-semibold tracking-wider text-gray-500 uppercase'>
                 Roll No.
@@ -509,157 +509,161 @@ export default function Students () {
             <div
               key={student._id}
               className='
-          bg-white
-          rounded-2xl
-          border
-          border-gray-100
-          shadow-sm
-          overflow-hidden
-          transition-all
-          duration-300
-          hover:shadow-md
-          active:scale-[0.99]
-        '
+    bg-white
+    rounded-2xl
+    border
+    border-slate-200
+    shadow-sm
+
+    px-4
+    py-4
+
+    transition-all
+    duration-200
+  '
             >
-              {/* Accent Line */}
-              <div className='h-1 bg-gradient-to-r from-blue-500 to-indigo-500' />
+              <div className='flex items-center gap-3'>
+                {/* Avatar */}
+                <div
+                  className='
+        h-14
+        w-14
 
-              <div className='p-4'>
-                {/* Header */}
-                <div className='flex items-center gap-3'>
-                  {/* Avatar */}
-                  <div
-                    className='
-                h-12
-                w-12
-                rounded-2xl
-                bg-gradient-to-br
-                from-blue-100
-                to-indigo-100
-                text-blue-700
-                flex
-                items-center
-                justify-center
-                font-bold
-                text-xl
-                shrink-0
-              '
-                  >
-                    {student.name?.charAt(0)?.toUpperCase()}
-                  </div>
+        shrink-0
 
-                  {/* Name + Meta */}
-                  <div className='flex-1 min-w-0'>
-                    <h3 className='font-semibold text-lg text-gray-900 truncate'>
-                      {student.name}
-                    </h3>
+        rounded-xl
 
-                    <div className='flex items-center gap-2 mt-1'>
-                      <span
-                        className='
-                    inline-flex
-                    items-center
-                    gap-1
-                    px-2.5
-                    py-0.5
-                    rounded-full
-                    bg-blue-50
-                    text-blue-600
-                    text-xs
-                    font-semibold
-                  '
-                      >
-                        <GraduationCap size={11} />
-                        {student.class}
-                      </span>
+        bg-gradient-to-br
+        from-blue-600
+        to-indigo-600
 
-                      <span
-                        className='
-                    text-xs
-                    font-medium
-                    text-gray-500
-                  '
-                      >
-                        Roll #{student.rollNumber}
-                      </span>
-                    </div>
+        flex
+        items-center
+        justify-center
+
+        text-white
+        text-xl
+        font-bold
+      '
+                >
+                  {student.name?.charAt(0)?.toUpperCase()}
+                </div>
+
+                {/* Info */}
+                <div className='flex-1 min-w-0'>
+                  <h3 className='text-base font-bold text-slate-900 truncate'>
+                    {student.name}
+                  </h3>
+
+                  <div className='flex items-center gap-2 mt-1'>
+                    <span className='text-sm text-slate-500'>
+                      {student.class}
+                    </span>
+
+                    <span className='text-slate-300'>•</span>
+
+                    <span className='text-sm text-slate-500'>
+                      Roll #{student.rollNumber}
+                    </span>
                   </div>
                 </div>
 
-                {/* Actions */}
-                <div className='mt-4 grid grid-cols-3 gap-2'>
-                  {/* Edit */}
-                  <button
-                    title='Edit Student'
-                    onClick={async () => {
-                      const res = await fetchStudentById(student._id)
+                {/* View */}
+                <button
+                  onClick={() => navigate(`/admin/students/${student._id}`)}
+                  className='
+        h-10
+        w-10
 
-                      if (res.success) {
-                        setEditStudent(res.data)
-                      }
-                    }}
-                    className='
-                flex
-                items-center
-                justify-center
-                h-9
-                rounded-xl
-                bg-blue-50
-                text-blue-600
-                transition-all
-                duration-200
-                hover:bg-blue-100
-                active:scale-95
-              '
-                  >
-                    <Pencil size={17} strokeWidth={2.25} />
-                  </button>
+        rounded-xl
 
-                  {/* View */}
-                  <button
-                    title='View Student'
-                    onClick={() => navigate(`/admin/students/${student._id}`)}
-                    className='
-                flex
-                items-center
-                justify-center
-                h-9
-                rounded-xl
-                bg-emerald-50
-                text-emerald-600
-                transition-all
-                duration-200
-                hover:bg-emerald-100
-                active:scale-95
-              '
-                  >
-                    <Eye size={17} strokeWidth={2.25} />
-                  </button>
+        bg-blue-50
+        text-blue-600
 
-                  {/* Delete */}
-                  <button
-                    title='Delete Student'
-                    onClick={() => {
-                      setSelectedId(student._id)
-                      setIsModalOpen(true)
-                    }}
-                    className='
-                flex
-                items-center
-                justify-center
-                h-9
-                rounded-xl
-                bg-red-50
-                text-red-600
-                transition-all
-                duration-200
-                hover:bg-red-100
-                active:scale-95
-              '
-                  >
-                    <Trash2 size={17} strokeWidth={2.25} />
-                  </button>
-                </div>
+        flex
+        items-center
+        justify-center
+      '
+                >
+                  <Eye size={18} />
+                </button>
+              </div>
+
+              {/* Actions */}
+              <div
+                className='
+      flex
+      items-center
+      gap-2
+
+      mt-4
+
+      pt-4
+
+      border-t
+      border-slate-100
+    '
+              >
+                <button
+                  onClick={async () => {
+                    const res = await fetchStudentById(student._id)
+
+                    if (res.success) {
+                      setEditStudent(res.data)
+                    }
+                  }}
+                  className='
+        flex-1
+
+        h-10
+
+        rounded-xl
+
+        border
+        border-slate-200
+
+        flex
+        items-center
+        justify-center
+        gap-2
+
+        text-slate-700
+        text-sm
+        font-medium
+      '
+                >
+                  <Pencil size={15} />
+                  Edit
+                </button>
+
+                <button
+                  onClick={() => {
+                    setSelectedId(student._id)
+                    setIsModalOpen(true)
+                  }}
+                  className='
+        flex-1
+
+        h-10
+
+        rounded-xl
+
+        border
+        border-red-200
+
+        flex
+        items-center
+        justify-center
+        gap-2
+
+        text-red-600
+        text-sm
+        font-medium
+      '
+                >
+                  <Trash2 size={15} />
+                  Delete
+                </button>
               </div>
             </div>
           ))
